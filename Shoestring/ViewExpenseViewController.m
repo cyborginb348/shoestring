@@ -1,0 +1,312 @@
+//
+//  ViewExpenseViewController.m
+//  Shoestring
+//
+//  Created by Mark Wigglesworth on 12/09/13.
+//  Copyright (c) 2013 mark. All rights reserved.
+//
+
+#import "ViewExpenseViewController.h"
+
+@interface ViewExpenseViewController ()
+
+@end
+
+@implementation ViewExpenseViewController
+
+@synthesize currentExpense;
+@synthesize categoryView;
+@synthesize currentCategory;
+@synthesize toggleIsOn;
+@synthesize toggleBtn;
+
+@synthesize ratingLabel = _ratingLabel;
+@synthesize ratingLabels = _ratingLabels;
+@synthesize starRatingControl = _starRatingControl;
+@synthesize setEditable;
+
+@synthesize autocompleteTableView;
+@synthesize autocompleteNames,itemNames;
+@synthesize itemNameField,placeNameField,amountField,savingTipField;
+@synthesize rate;
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    //add the categoryButton view for the buttons
+    CategoryButtons *btnView = [[CategoryButtons alloc] init];
+    CGRect bounds = [[self view] bounds];
+    [btnView setCenter: CGPointMake(bounds.size.width/2, 160)];
+    [categoryView addSubview:btnView];
+    [categoryView setDelegate:self];
+    
+    //assign category from segue
+    currentCategory = [currentExpense category];
+    [btnView setButtonSelected: [self categoryNumberFromString: currentCategory]];
+    
+    //place text from segue expense object in fields
+    [itemNameField setText: [[self currentExpense] itemName]];
+    [placeNameField setText: [[self currentExpense] placeName]];
+    [amountField setText: [NSString stringWithFormat:@"%@",[[self currentExpense] amount]]];
+    [savingTipField setText: [[self currentExpense] savingTip]];
+    
+    
+    //set delegates for keyboard dismissal
+    [itemNameField setDelegate:self];
+    [placeNameField setDelegate:self];
+    [amountField setDelegate:self];
+    [savingTipField setDelegate:self];
+    
+    //StarRating
+    _ratingLabels = [NSArray arrayWithObjects:@"Unrated", @"Hate it", @"Don't like it", @"It's OK", @"It's good", @"It's great", nil];
+	
+	
+    
+    
+    [[self starRatingControl] setRating:[[currentExpense rating]integerValue]];
+    [[self ratingLabel]setText: [_ratingLabels objectAtIndex:[[currentExpense rating]integerValue]]];
+    [self setSetEditable:NO];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - CategoryButton Actions
+
+-(void) buttonView: (CategoryButtons*) buttonView changedCategory: (NSString*)newCategory {
+    currentCategory = newCategory;
+}
+
+
+-(int) categoryNumberFromString: (NSString*) category {
+    
+    if([category isEqualToString:@"Accomodation"]){
+       return 0; 
+    } else if ([category isEqualToString:@"Food"]){
+        return 1;
+    } else if ([category isEqualToString:@"Travel"]){
+        return 2;
+    } else if ([category isEqualToString:@"Entertainment"]){
+        return 3;
+    } else {
+        return 4;
+    }
+}
+
+#pragma Editing
+
+- (IBAction)toggle:(id)sender {
+    
+    if (!toggleIsOn) {
+        [self startEditing];
+    } else {
+        [self doneEditing];
+    }
+    
+    toggleIsOn = !toggleIsOn;
+}
+
+
+- (void)startEditing {
+    
+    [itemNameField setEnabled:YES];
+    [placeNameField setEnabled:YES];
+    [amountField setEnabled:YES];
+    [savingTipField setEnabled:YES];
+    [self setSetEditable:YES];
+    [_starRatingControl setDelegate:self];
+    
+    [itemNameField setBorderStyle:UITextBorderStyleRoundedRect];
+    [placeNameField setBorderStyle:UITextBorderStyleRoundedRect];
+    [amountField setBorderStyle:UITextBorderStyleRoundedRect];
+    [savingTipField setBorderStyle:UITextBorderStyleRoundedRect];
+
+    [toggleBtn setTitle:@"Done"];
+    [toggleBtn setTintColor:[UIColor redColor]];
+    
+}
+
+
+- (void)doneEditing {
+    
+    [itemNameField setEnabled:NO];
+    [placeNameField setEnabled:NO];
+    [amountField setEnabled:NO];
+    [savingTipField setEnabled:NO];
+    
+    
+    [itemNameField setBorderStyle:UITextBorderStyleNone];
+    [placeNameField setBorderStyle:UITextBorderStyleNone];
+    [amountField setBorderStyle:UITextBorderStyleNone];
+    [savingTipField setBorderStyle:UITextBorderStyleNone];
+    
+
+//
+    [toggleBtn setTitle:@"Edit"];
+    [toggleBtn setTintColor: nil];
+  
+    //make updates
+    [[self currentExpense] setItemName:[itemNameField text]];
+    [[self currentExpense] setPlaceName:[placeNameField text]];
+    NSNumber *amt = [NSNumber numberWithInteger:[[amountField text] integerValue]];
+    [[self currentExpense] setAmount:amt];
+    [[self currentExpense] setSavingTip:[savingTipField text]];
+    [[self currentExpense] setRating:[NSNumber numberWithInt: rate]];
+
+    //create AppDelegate reference to call saveContext method
+    AppDelegate *myApp = (AppDelegate*) [[UIApplication sharedApplication]delegate];
+    [myApp saveContext];
+}
+
+
+
+#pragma mark - date method
+-(NSDate*) getTodaysDate {
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
+    return[calendar dateFromComponents:components];
+}
+
+
+#pragma mark - Dismiss keyboard
+
+- (IBAction)dismissKeyboard:(id)sender {
+    [[self view] endEditing:YES];
+    [autocompleteTableView setHidden:YES];
+}
+
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    [autocompleteTableView setHidden:YES];
+    return YES;
+}
+
+
+#pragma mark AutoComplete and UITextFieldDelegate methods
+
+-(void)initialiseAutocomplete {
+    autocompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, 320, 120) style:UITableViewStylePlain];
+    autocompleteTableView.delegate = self;
+    autocompleteTableView.dataSource = self;
+    autocompleteTableView.scrollEnabled = YES;
+    [autocompleteTableView setHidden:YES];
+    [self.view addSubview:autocompleteTableView];
+    
+    self.itemNames = [[NSMutableArray alloc] initWithObjects:@"lunch",@"train",@"bus", @"dorm", @"rooom",@"burger",@"breakfast", @"dinner",@"beers", @"drinks", nil];
+    self.autocompleteNames = [[NSMutableArray alloc] init];
+}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    autocompleteTableView.hidden = NO;
+    NSString *substring = [NSString stringWithString:textField.text];
+    substring = [substring stringByReplacingCharactersInRange:range withString:string];
+    [self searchAutocompleteEntriesWithSubstring:substring];
+    return YES;
+}
+
+- (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
+    
+    // Put anything that starts with this substring into the autocompleteUrls array
+    // The items in this array is what will show up in the table view
+    [autocompleteNames removeAllObjects];
+    for(NSString *curString in itemNames) {
+        NSRange substringRange = [curString rangeOfString:substring];
+        if (substringRange.location == 0) {
+            [autocompleteNames addObject:curString];
+        }
+    }
+    [autocompleteTableView reloadData];
+    
+}
+
+#pragma mark UITableViewDataSource methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger) section {
+    return autocompleteNames.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = nil;
+    static NSString *AutoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
+    cell = [tableView dequeueReusableCellWithIdentifier:AutoCompleteRowIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]
+                initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AutoCompleteRowIdentifier] ;
+    }
+    
+    cell.textLabel.text = [autocompleteNames objectAtIndex:indexPath.row];
+    return cell;
+}
+
+#pragma mark UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    itemNameField.text = selectedCell.textLabel.text;
+    autocompleteTableView.hidden = YES;
+}
+
+-(IBAction) slideFrameUp;
+{
+    [self slideFrame:YES];
+}
+
+-(IBAction) slideFrameDown;
+{
+    [self slideFrame:NO];
+}
+
+-(void) slideFrame:(BOOL) up
+{
+    const int movementDistance = 125; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
+
+#pragma mark - starRating delegates
+
+- (void)starRatingControl:(StarRatingControl *)control didUpdateRating:(NSUInteger)rating {
+    
+    NSLog(@"edit: %i", setEditable);
+	
+    if(setEditable) {
+    _ratingLabel.text = [_ratingLabels objectAtIndex:rating];
+    [self setRate:rating];
+    }
+}
+
+- (void)starRatingControl:(StarRatingControl *)control willUpdateRating:(NSUInteger)rating {
+    
+    if(setEditable) {
+	_ratingLabel.text = [_ratingLabels objectAtIndex:rating];
+    [self setRate:rating];
+    }
+}
+
+@end
