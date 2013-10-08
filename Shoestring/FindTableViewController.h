@@ -17,14 +17,24 @@
 
 @interface FindTableViewController : UITableViewController
 <MBProgressHUDDelegate> {
- 
+    
     MBProgressHUD  *HUD;
     NSMutableData *_responseData;
+    NSMutableArray *businessObjectList;
     
 }
 
 @property (nonatomic, strong) NSString *oauthToken;
 @property (nonatomic, strong) NSString *oauthTokenSecret;
+
+@property (nonatomic, strong) NSString *selectedDistance;
+@property (nonatomic, strong) NSString *selectedCat;
+@property (nonatomic, strong) NSString *userLong;
+@property (nonatomic, strong) NSString *userLat;
+
+
+//array of each business item, e.g. [0]name, address, imageurl;
+@property (nonatomic, strong) NSMutableArray *businessObjectList;
 
 
 @end

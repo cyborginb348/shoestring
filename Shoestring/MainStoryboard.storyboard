@@ -1036,7 +1036,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Vsb-ZB-m3w" kind="push" id="w85-wX-pSf"/>
+                                    <segue destination="Vsb-ZB-m3w" kind="push" identifier="FindVCSegue" id="w85-wX-pSf"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="distance from you" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gg6-EW-e2R">
@@ -1072,20 +1072,31 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggV-wf-Sza">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="500m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9c-m6-2Ta">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="0gD-aN-aNM"/>
+                                    <constraint firstAttribute="height" constant="24" id="QoB-eL-KEZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ggV-wf-Sza" firstAttribute="trailing" secondItem="RwF-hW-alq" secondAttribute="trailing" type="default" id="5Y7-13-1sG"/>
+                            <constraint firstItem="uAT-RQ-DlS" firstAttribute="centerX" secondItem="ggV-wf-Sza" secondAttribute="centerX" type="default" id="5zK-lt-8SR"/>
                             <constraint firstItem="ggV-wf-Sza" firstAttribute="leading" secondItem="RwF-hW-alq" secondAttribute="leading" type="default" id="6pl-pb-Vvr"/>
+                            <constraint firstItem="Y9c-m6-2Ta" firstAttribute="centerX" secondItem="gg6-EW-e2R" secondAttribute="centerX" type="default" id="Dbm-fj-TAa"/>
                             <constraint firstAttribute="bottom" secondItem="ggV-wf-Sza" secondAttribute="bottom" constant="243" id="Drw-E0-RlH"/>
+                            <constraint firstAttribute="bottom" secondItem="Y9c-m6-2Ta" secondAttribute="bottom" constant="47" id="L4B-3q-Dvc"/>
                             <constraint firstItem="K4Q-cR-o9U" firstAttribute="top" secondItem="QS6-zx-d6k" secondAttribute="top" type="default" id="LZI-a4-uSv"/>
                             <constraint firstItem="QS6-zx-d6k" firstAttribute="leading" secondItem="RU6-cG-iUT" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Mfd-0q-WgZ"/>
                             <constraint firstItem="K4Q-cR-o9U" firstAttribute="baseline" secondItem="QS6-zx-d6k" secondAttribute="baseline" type="default" id="N2m-a1-FQg"/>
                             <constraint firstItem="RU6-cG-iUT" firstAttribute="leading" secondItem="K4Q-cR-o9U" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="P2U-8R-IFn"/>
                             <constraint firstAttribute="bottom" secondItem="K4Q-cR-o9U" secondAttribute="bottom" constant="92" id="P47-N2-zyi"/>
                             <constraint firstItem="RU6-cG-iUT" firstAttribute="top" secondItem="gg6-EW-e2R" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Sc5-ZI-uqN"/>
-                            <constraint firstItem="RU6-cG-iUT" firstAttribute="centerX" secondItem="ggV-wf-Sza" secondAttribute="centerX" type="default" id="ZRT-GI-x06"/>
-                            <constraint firstItem="uAT-RQ-DlS" firstAttribute="leading" secondItem="RwF-hW-alq" secondAttribute="leading" constant="81" id="h8D-nz-87A"/>
+                            <constraint firstItem="uAT-RQ-DlS" firstAttribute="centerX" secondItem="RU6-cG-iUT" secondAttribute="centerX" type="default" id="ctk-vc-hvj"/>
                             <constraint firstItem="gg6-EW-e2R" firstAttribute="leading" secondItem="RU6-cG-iUT" secondAttribute="leading" type="default" id="i07-Et-X22"/>
                             <constraint firstItem="ggV-wf-Sza" firstAttribute="top" secondItem="RwF-hW-alq" secondAttribute="top" type="default" id="jL5-4j-Om9"/>
                             <constraint firstItem="uAT-RQ-DlS" firstAttribute="centerY" secondItem="RwF-hW-alq" secondAttribute="centerY" type="default" id="sR6-tU-k0G"/>
@@ -1095,6 +1106,7 @@
                     <navigationItem key="navigationItem" title="Find Places" id="4Qa-sV-v5B"/>
                     <connections>
                         <outlet property="categoryView" destination="ggV-wf-Sza" id="J1k-wR-Lmx"/>
+                        <outlet property="selectedDistance" destination="Y9c-m6-2Ta" id="HT2-ti-hWA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5B-lE-NJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1105,94 +1117,41 @@
         <scene sceneID="BhL-ua-0hJ">
             <objects>
                 <tableViewController id="Vsb-ZB-m3w" customClass="FindTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5N8-QY-jHU">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5N8-QY-jHU">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <sections>
-                            <tableViewSection id="qZI-42-4xR">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Rk1-sQ-75d" detailTextLabel="fz2-ur-d4T" style="IBUITableViewCellStyleSubtitle" id="Pgg-97-RSE">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellIdentifier" textLabel="Rk1-sQ-75d" detailTextLabel="fz2-ur-d4T" style="IBUITableViewCellStyleSubtitle" id="Pgg-97-RSE">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="El Cheapo Lodge" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rk1-sQ-75d">
+                                            <rect key="frame" x="10" y="2" width="148" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="El Cheapo Lodge" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rk1-sQ-75d">
-                                                    <rect key="frame" x="10" y="2" width="148" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="52 Lodge St  Petrie Tce" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fz2-ur-d4T">
-                                                    <rect key="frame" x="10" y="24" width="148" height="18"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <connections>
-                                            <segue destination="9hW-1E-H8r" kind="push" id="Gz6-HF-PI7"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="nJ2-K5-cgm" detailTextLabel="4LC-dz-y1h" style="IBUITableViewCellStyleSubtitle" id="Zce-Y4-tDP">
-                                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="52 Lodge St  Petrie Tce" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fz2-ur-d4T">
+                                            <rect key="frame" x="10" y="24" width="148" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Budget Palace" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nJ2-K5-cgm">
-                                                    <rect key="frame" x="10" y="2" width="125" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="12 Crown St  Petrie Tce" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4LC-dz-y1h">
-                                                    <rect key="frame" x="10" y="24" width="149" height="18"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="mg5-JG-lwE" detailTextLabel="OGZ-xw-jmw" style="IBUITableViewCellStyleSubtitle" id="A5w-Kf-xTv">
-                                        <rect key="frame" x="0.0" y="88" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Grub and Sleep" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mg5-JG-lwE">
-                                                    <rect key="frame" x="10" y="2" width="134" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="231 Caxton St Paddington" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OGZ-xw-jmw">
-                                                    <rect key="frame" x="10" y="24" width="164" height="18"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="9hW-1E-H8r" kind="push" id="Gz6-HF-PI7"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="Vsb-ZB-m3w" id="IF8-ok-I7K"/>
                             <outlet property="delegate" destination="Vsb-ZB-m3w" id="iyK-Q5-oup"/>
@@ -1434,6 +1393,105 @@
         <image name="mapRecord.png" width="319" height="479"/>
         <image name="shoestring_logo.png" width="278" height="57"/>
     </resources>
+    <classes>
+        <class className="AddExpenseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddExpenseViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="dismissKeyboard:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="outlet" name="amountField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="categoryView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="itemNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="placeNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="ratingLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="savingTipField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="starRatingControl" candidateClass="StarRatingControl"/>
+            </relationships>
+        </class>
+        <class className="AddMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddMapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="save:"/>
+            </relationships>
+        </class>
+        <class className="CPTGraphHostingView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPTGraphHostingView.h"/>
+        </class>
+        <class className="CategoryButtons" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryButtons.h"/>
+        </class>
+        <class className="FindMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FindMapViewController.h"/>
+        </class>
+        <class className="FindTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FindTableViewController.h"/>
+        </class>
+        <class className="FindViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FindViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnFindPlaces:"/>
+                <relationship kind="action" name="distanceSlider:"/>
+                <relationship kind="outlet" name="categoryView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="distanceValue" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="selectedDistance" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="GraphCompareViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphCompareViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="hostView" candidateClass="CPTGraphHostingView"/>
+            </relationships>
+        </class>
+        <class className="GraphMyExpensesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphMyExpensesViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="hostView" candidateClass="CPTGraphHostingView"/>
+            </relationships>
+        </class>
+        <class className="HistoryDetailViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HistoryDetailViewController.h"/>
+        </class>
+        <class className="HistoryViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HistoryViewController.h"/>
+        </class>
+        <class className="HomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="StarRatingControl" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StarRatingControl.h"/>
+            <relationships>
+                <relationship kind="outlet" name="delegate" candidateClass="NSObject"/>
+            </relationships>
+        </class>
+        <class className="TodayViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TodayViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="total" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ViewExpenseMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewExpenseMapViewController.h"/>
+        </class>
+        <class className="ViewExpenseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewExpenseViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dismissKeyboard:"/>
+                <relationship kind="action" name="toggle:"/>
+                <relationship kind="outlet" name="amountField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="categoryView" candidateClass="CategoryButtons"/>
+                <relationship kind="outlet" name="itemNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="placeNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="ratingLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="savingTipField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="starRatingControl" candidateClass="StarRatingControl"/>
+                <relationship kind="outlet" name="toggleBtn" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
