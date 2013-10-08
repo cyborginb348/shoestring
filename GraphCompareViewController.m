@@ -7,6 +7,7 @@
 //
 
 #import "GraphCompareViewController.h"
+#import "CloudService.h"
 #import "Categories.h"
 
 @interface GraphCompareViewController ()
@@ -14,6 +15,9 @@
 @property (nonatomic, strong) CPTBarPlot *myPlot;
 @property (nonatomic, strong) CPTBarPlot *avgPlot;
 
+@property (nonatomic, weak) NSDictionary *cloudValues;
+
+-(void)getAverageData;
 -(void)initPlot;
 -(void)configureGraph;
 -(void)configurePlots;
@@ -36,19 +40,44 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.HUD = [[MBProgressHUD alloc] initWithView:[self view]];
+    [[self view] addSubview:self.HUD];
+    [self.HUD setDelegate:self];
+    [self.HUD setLabelText:@"Loading..."];
+    [self getAverageData];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    [self initPlot];
+    //[self initPlot];
 }
 
 -(void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)getAverageData
+{
+    [self.HUD show:YES];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:-27.48331 longitude:153.00947]; // REPLACE WITH ACTUAL LOCATION
+    [[CloudService getInstance] getAverageFor:location completion:^(NSDictionary *result, NSString *place, NSError *error)
+     {
+         [self.HUD hide:YES];
+         if (!error)
+         {
+             self.cloudValues = [NSDictionary dictionaryWithDictionary:result];
+             NSLog(@"%@", self.cloudValues);
+             [self initPlot];
+         }
+         else
+         {
+             // HANDLE ERROR
+         }
+     }];
 }
 
 #pragma mark - Chart behaviour

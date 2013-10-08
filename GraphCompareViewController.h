@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
-@interface GraphCompareViewController : UIViewController <CPTBarPlotDataSource>
+@interface GraphCompareViewController : UIViewController <CPTBarPlotDataSource, MBProgressHUDDelegate>
 
 @property (weak, nonatomic) IBOutlet CPTGraphHostingView *hostView;
+@property (strong, nonatomic) MBProgressHUD *HUD;
 
 @end
