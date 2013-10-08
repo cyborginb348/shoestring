@@ -1060,6 +1060,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="114" id="enX-UO-s6f"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="distanceSlider:" destination="6Ql-mS-lXu" eventType="valueChanged" id="gfh-b3-9V2"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="5km" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QS6-zx-d6k">
                                 <constraints>
@@ -1072,10 +1075,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggV-wf-Sza">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="500m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9c-m6-2Ta">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="500m" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9c-m6-2Ta">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="0gD-aN-aNM"/>
                                     <constraint firstAttribute="height" constant="24" id="QoB-eL-KEZ"/>
+                                    <constraint firstAttribute="width" constant="68" id="yTC-pP-aX3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1087,10 +1090,9 @@
                             <constraint firstItem="ggV-wf-Sza" firstAttribute="trailing" secondItem="RwF-hW-alq" secondAttribute="trailing" type="default" id="5Y7-13-1sG"/>
                             <constraint firstItem="uAT-RQ-DlS" firstAttribute="centerX" secondItem="ggV-wf-Sza" secondAttribute="centerX" type="default" id="5zK-lt-8SR"/>
                             <constraint firstItem="ggV-wf-Sza" firstAttribute="leading" secondItem="RwF-hW-alq" secondAttribute="leading" type="default" id="6pl-pb-Vvr"/>
-                            <constraint firstItem="Y9c-m6-2Ta" firstAttribute="centerX" secondItem="gg6-EW-e2R" secondAttribute="centerX" type="default" id="Dbm-fj-TAa"/>
                             <constraint firstAttribute="bottom" secondItem="ggV-wf-Sza" secondAttribute="bottom" constant="243" id="Drw-E0-RlH"/>
-                            <constraint firstAttribute="bottom" secondItem="Y9c-m6-2Ta" secondAttribute="bottom" constant="47" id="L4B-3q-Dvc"/>
                             <constraint firstItem="K4Q-cR-o9U" firstAttribute="top" secondItem="QS6-zx-d6k" secondAttribute="top" type="default" id="LZI-a4-uSv"/>
+                            <constraint firstItem="Y9c-m6-2Ta" firstAttribute="centerX" secondItem="gg6-EW-e2R" secondAttribute="centerX" type="default" id="LfK-jI-5VX"/>
                             <constraint firstItem="QS6-zx-d6k" firstAttribute="leading" secondItem="RU6-cG-iUT" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Mfd-0q-WgZ"/>
                             <constraint firstItem="K4Q-cR-o9U" firstAttribute="baseline" secondItem="QS6-zx-d6k" secondAttribute="baseline" type="default" id="N2m-a1-FQg"/>
                             <constraint firstItem="RU6-cG-iUT" firstAttribute="leading" secondItem="K4Q-cR-o9U" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="P2U-8R-IFn"/>
@@ -1101,12 +1103,14 @@
                             <constraint firstItem="ggV-wf-Sza" firstAttribute="top" secondItem="RwF-hW-alq" secondAttribute="top" type="default" id="jL5-4j-Om9"/>
                             <constraint firstItem="uAT-RQ-DlS" firstAttribute="centerY" secondItem="RwF-hW-alq" secondAttribute="centerY" type="default" id="sR6-tU-k0G"/>
                             <constraint firstAttribute="bottom" secondItem="RU6-cG-iUT" secondAttribute="bottom" constant="93" id="sbe-d2-RWc"/>
+                            <constraint firstAttribute="bottom" secondItem="Y9c-m6-2Ta" secondAttribute="bottom" constant="46" id="v4d-Qo-vGa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Find Places" id="4Qa-sV-v5B"/>
                     <connections>
                         <outlet property="categoryView" destination="ggV-wf-Sza" id="J1k-wR-Lmx"/>
-                        <outlet property="selectedDistance" destination="Y9c-m6-2Ta" id="HT2-ti-hWA"/>
+                        <outlet property="distanceValue" destination="RU6-cG-iUT" id="cQB-19-PPT"/>
+                        <outlet property="selectedDistance" destination="Y9c-m6-2Ta" id="X0X-fB-xcF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5B-lE-NJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1479,7 +1483,6 @@
         <class className="ViewExpenseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewExpenseViewController.h"/>
             <relationships>
-                <relationship kind="action" name="dismissKeyboard:"/>
                 <relationship kind="action" name="toggle:"/>
                 <relationship kind="outlet" name="amountField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="categoryView" candidateClass="CategoryButtons"/>

@@ -69,7 +69,7 @@
     
     if(sliDis < 1000)
     {
-        NSString *disText = [NSString stringWithFormat:@"%.2fm", sliDis];
+        NSString *disText = [NSString stringWithFormat:@"%.0fm", sliDis];
         [selectedDistance setText:disText];
     }else{
         double sliDisCount = sliDis / 1000;
