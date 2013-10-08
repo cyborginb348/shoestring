@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GraphCompareViewController : UIViewController
+@interface GraphCompareViewController : UIViewController <CPTBarPlotDataSource>
+
+@property (weak, nonatomic) IBOutlet CPTGraphHostingView *hostView;
 
 @end
