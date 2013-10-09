@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface GraphMyExpensesViewController : UIViewController
-<NSFetchedResultsControllerDelegate>
+<CPTPlotDataSource, CPTPieChartDataSource, NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
+@property (weak, nonatomic) IBOutlet CPTGraphHostingView *hostView;
 
 @end
