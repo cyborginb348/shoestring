@@ -17,6 +17,8 @@
 
 @property (nonatomic, weak) NSDictionary *cloudValues;
 
+@property (nonatomic, strong) NSMutableArray *averageDailyValues;
+
 -(void)getAverageData;
 -(void)initPlot;
 -(void)configureGraph;
@@ -80,9 +82,85 @@
      }];
 }
 
+-(void)getAverageValues:(NSInteger)days
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expense" inManagedObjectContext:self.managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entity];
+    
+    NSExpressionDescription* ex = [[NSExpressionDescription alloc] init];
+    [ex setExpression:[NSExpression expressionWithFormat:@"@sum.amount"]];
+    [ex setExpressionResultType:NSDecimalAttributeType];
+    [ex setName:@"sum"];
+    
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObjects:@"category", @"date", ex, nil]];
+    [fetchRequest setPropertiesToGroupBy:[NSArray arrayWithObjects:@"category", @"date", nil]];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    
+    NSDate *date = [[NSDate date] dateByAddingTimeInterval:-60*60*24*days];
+    NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+    NSLog(@"%@", date);
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date > %@)", date];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error;
+    NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error)
+        NSLog(@"%@", [error localizedDescription]);
+    else
+    {
+        float sums[5] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+        int counts[5] = {0, 0, 0, 0, 0};
+        
+        for (NSDictionary *record in result)
+        {
+            NSString *category = [record objectForKey:@"category"];
+            NSNumber *sum = [record objectForKey:@"sum"];
+            if ([category isEqualToString:@"Accomodation"])
+            {
+                sums[0] += [sum floatValue];
+                ++counts[0];
+            }
+            else if ([category isEqualToString:@"Food"])
+            {
+                sums[1] += [sum floatValue];
+                ++counts[1];
+            }
+            else if ([category isEqualToString:@"Travel"])
+            {
+                sums[2] += [sum floatValue];
+                ++counts[2];
+            }
+            else if ([category isEqualToString:@"Entertainment"])
+            {
+                sums[3] += [sum floatValue];
+                ++counts[3];
+            }
+            else if ([category isEqualToString:@"Shopping"])
+            {
+                sums[4] += [sum floatValue];
+                ++counts[4];
+            }
+        }
+        
+        _averageDailyValues = [NSMutableArray array];
+        for (int i = 0; i < 5; ++i)
+        {
+            [_averageDailyValues addObject:[NSNumber numberWithFloat:sums[i]/counts[i]]];
+        }
+        NSLog(@"%@", result);
+        NSLog(@"Bla: %@", _averageDailyValues);
+    }
+}
+
 #pragma mark - Chart behaviour
 -(void)initPlot
 {
+    [self getAverageValues:15];
+    
     self.hostView.allowPinchScaling = NO;
     [self configureGraph];
     [self configurePlots];
@@ -175,6 +253,9 @@
     {
         if ([plot.identifier isEqual:@"my"])
         {
+            if (idx < 5)
+                return _averageDailyValues[idx];
+            
             float f = 0.0;
             switch (idx) {
                 case 0:
@@ -229,6 +310,14 @@
         return [CPTFill fillWithColor:[Categories getTransparentColorFor:idx]];
     else
         return [CPTFill fillWithColor:[Categories getColorFor:idx]];
+}
+
+- (IBAction)periodChanged:(id)sender
+{
+    UISlider *slider = sender;
+    int days = slider.value;
+    [self getAverageValues:days];
+    [self.hostView.hostedGraph reloadData];
 }
 
 @end

@@ -11,7 +11,12 @@
 
 @interface GraphCompareViewController : UIViewController <CPTBarPlotDataSource, MBProgressHUDDelegate>
 
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+
 @property (weak, nonatomic) IBOutlet CPTGraphHostingView *hostView;
 @property (strong, nonatomic) MBProgressHUD *HUD;
+
+- (IBAction)periodChanged:(id)sender;
 
 @end
