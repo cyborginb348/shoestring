@@ -7,6 +7,7 @@
 //
 
 #import "GraphMyExpensesViewController.h"
+#import "GraphCompareViewController.h"
 #import "CPTImageLayer.h"
 #import "Categories.h"
 
@@ -117,6 +118,16 @@
         }
         NSLog(@"%@", result);
         NSLog(@"Bla: %@", _averageDailyValues);
+    }
+}
+
+#pragma mark - Pass Managed Object Context to Compare View Controller
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"CompareSegue"])
+    {
+        GraphCompareViewController *compareVC = [segue destinationViewController];
+        compareVC.managedObjectContext = self.managedObjectContext;
     }
 }
 
