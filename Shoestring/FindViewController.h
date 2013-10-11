@@ -13,7 +13,6 @@
 
 @interface FindViewController : UIViewController
 <NSFetchedResultsControllerDelegate, CLLocationManagerDelegate, CategoryButtonsDelegate>{
-    //FindTableViewController *findTableVC;
     CLLocationManager *locationManager;
     
     NSString *passedCategory;

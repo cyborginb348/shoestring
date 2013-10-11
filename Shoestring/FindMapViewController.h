@@ -10,4 +10,6 @@
 
 @interface FindMapViewController : UIViewController
 
+@property (nonatomic, strong) NSString *addressFromFT; 
+
 @end
