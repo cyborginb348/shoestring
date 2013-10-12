@@ -99,6 +99,8 @@
 		7BC2F91D17D82C3300AAB3FE /* AddExpenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2F91C17D82C3300AAB3FE /* AddExpenseViewController.m */; };
 		ACC4CA2517F4688B00F04317 /* CloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC4CA2417F4688B00F04317 /* CloudService.m */; };
 		ACC4CA2717F468CD00F04317 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC4CA2617F468CD00F04317 /* CoreLocation.framework */; };
+		F5C768BF18091D4900C165E7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C768BE18091D4900C165E7 /* MapKit.framework */; };
+		F5C768CC1809569200C165E7 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C768CB1809569200C165E7 /* Annotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -317,6 +319,9 @@
 		ACC4CA2317F4688B00F04317 /* CloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudService.h; sourceTree = "<group>"; };
 		ACC4CA2417F4688B00F04317 /* CloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudService.m; sourceTree = "<group>"; };
 		ACC4CA2617F468CD00F04317 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F5C768BE18091D4900C165E7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F5C768CA1809569200C165E7 /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
+		F5C768CB1809569200C165E7 /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +329,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C768BF18091D4900C165E7 /* MapKit.framework in Frameworks */,
 				2B731FA51803E1380027E2F5 /* QuartzCore.framework in Frameworks */,
 				ACC4CA2717F468CD00F04317 /* CoreLocation.framework in Frameworks */,
 				4D479C5317D5D59500C565BD /* UIKit.framework in Frameworks */,
@@ -436,6 +442,7 @@
 		4D479C4617D5D59500C565BD = {
 			isa = PBXGroup;
 			children = (
+				F5C768BE18091D4900C165E7 /* MapKit.framework */,
 				4D5866B417EE7978000DF65F /* Libraries */,
 				4D479C5A17D5D59500C565BD /* Shoestring */,
 				4D479C5117D5D59500C565BD /* Frameworks */,
@@ -483,6 +490,7 @@
 		4D479C5B17D5D59500C565BD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F5C768C91809567100C165E7 /* Map */,
 				4DCCADB717D97D01000BCA6B /* icons */,
 				4DCCAD8617D8A7DA000BCA6B /* Buttons */,
 				4DBB58A417D6C3F400686605 /* PrototypeImgs */,
@@ -767,6 +775,15 @@
 			name = CustomClasses;
 			sourceTree = "<group>";
 		};
+		F5C768C91809567100C165E7 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				F5C768CA1809569200C165E7 /* Annotation.h */,
+				F5C768CB1809569200C165E7 /* Annotation.m */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -912,6 +929,7 @@
 				4DDC8EC217F7A23500F1BD90 /* CategoryButtons.m in Sources */,
 				2B731FA81803E1A30027E2F5 /* CPTImageLayer.m in Sources */,
 				2B731FAB1803E1F40027E2F5 /* Categories.m in Sources */,
+				F5C768CC1809569200C165E7 /* Annotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
