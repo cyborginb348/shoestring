@@ -56,6 +56,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -88,7 +89,7 @@
     
     // Configure the cell...
     cell.textLabel.text = [[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"name"];
-    cell.detailTextLabel.text = [[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"address"];
+    cell.detailTextLabel.text = [[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"phone"];
     cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"imageurl"]]]];
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
@@ -160,6 +161,10 @@
     
     //create the url for the request (with params)
     NSString *term = selectedCat;
+    if([term isEqual: @"Travel"])
+    {
+        term = @"transport";
+    }
     NSString *latLon = [NSString stringWithFormat:@"%@,%@", userLat, userLong];
     NSString *radius = selectedDistance;
     NSString *urlString = [NSString stringWithFormat:
@@ -209,7 +214,7 @@
                                NSString *name = @"";
                                NSString *address = @"";
                                NSString *imageURL = @"";
-                               
+                               NSString *phoneNo =@"";
                                
                                for (id business in businesses) {
                                    NSMutableDictionary *businessInfo = [NSMutableDictionary dictionary];
@@ -223,6 +228,13 @@
                                        imageURL = @"no photo";
                                    }
                                    //NSLog(@"url: %@", imageURL);
+                                  
+                                   //phone
+                                   phoneNo = business[@"display_phone"];
+                                   if(phoneNo.length == 0){
+                                       phoneNo = @"phone number not display";
+                                   }
+                                   //NSLog(@"phone no: %@", phoneNo);
                                    
                                    //address
                                    NSArray *tempAddress = business[@"location"][@"display_address"];
@@ -244,11 +256,13 @@
                                    
                                    //Add to dictionary
                                    [businessInfo setObject:name forKey:@"name"];
-                                   NSLog(@"dic name: %@ \n", [businessInfo objectForKey:@"name"]);
+                                   //NSLog(@"dic name: %@ \n", [businessInfo objectForKey:@"name"]);
                                    [businessInfo setObject:imageURL forKey:@"imageurl"];
-                                   NSLog(@"dic url: %@ \n", [businessInfo objectForKey:@"imageurl"]);
+                                   //NSLog(@"dic url: %@ \n", [businessInfo objectForKey:@"imageurl"]);
+                                   [businessInfo setObject:phoneNo forKey:@"phone"];
+                                   //NSLog(@"phone: %@ \n", [businessInfo objectForKey:@"display_phone"]);
                                    [businessInfo setObject:address forKey:@"address"];
-                                   NSLog(@"dic address: %@ \n", [businessInfo objectForKey:@"address"]);
+                                   //NSLog(@"dic address: %@ \n", [businessInfo objectForKey:@"address"]);
                                    
                                    //Add to ObjectList
                                    NSLog(@"business list:%@",businessInfo);

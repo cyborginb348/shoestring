@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "OAuthConsumer.h"
 #import "MBProgressHUD.h"
+#import "FindMapViewController.h"
+
 
 #define CONSUMER_KEY            @"bkBTx2-zuTtDyOdgwcy6hA"
 #define CONSUMER_SECRET         @"Zmf4EuQMwAuuJFkdbiLIGCzTp94"
@@ -21,7 +23,6 @@
     MBProgressHUD  *HUD;
     NSMutableData *_responseData;
     NSMutableArray *businessObjectList;
-    
 }
 
 @property (nonatomic, strong) NSString *oauthToken;

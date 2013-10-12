@@ -46,6 +46,7 @@
     [[self view] addSubview:self.HUD];
     [self.HUD setDelegate:self];
     [self.HUD setLabelText:@"Loading..."];
+    
     [self getAverageData];
 }
 

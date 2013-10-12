@@ -427,7 +427,7 @@
                     <navigationItem key="navigationItem" title="My Expenses" id="g2T-rp-vfn">
                         <barButtonItem key="rightBarButtonItem" title="compare" id="4h4-s0-nFp">
                             <connections>
-                                <segue destination="86d-Iq-Kxi" kind="push" id="9CW-Dp-WIL"/>
+                                <segue destination="86d-Iq-Kxi" kind="push" identifier="CompareSegue" id="9CW-Dp-WIL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1220,7 +1220,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="9hW-1E-H8r" kind="push" id="Gz6-HF-PI7"/>
+                                    <segue destination="9hW-1E-H8r" kind="push" identifier="cellToMapSegue" id="Gz6-HF-PI7"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1244,18 +1244,16 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="mapPlace.png" translatesAutoresizingMaskIntoConstraints="NO" id="CAo-e4-6tF">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j9w-bK-oMY">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="367" id="7bZ-pe-0Fx"/>
-                                </constraints>
-                            </imageView>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CAo-e4-6tF" firstAttribute="trailing" secondItem="yUc-Yn-IJm" secondAttribute="trailing" type="default" id="6aQ-Lp-iIM"/>
-                            <constraint firstItem="CAo-e4-6tF" firstAttribute="bottom" secondItem="yUc-Yn-IJm" secondAttribute="bottom" type="default" id="F7W-B6-LE2"/>
-                            <constraint firstItem="CAo-e4-6tF" firstAttribute="leading" secondItem="yUc-Yn-IJm" secondAttribute="leading" type="default" id="Zuz-gM-laO"/>
+                            <constraint firstItem="j9w-bK-oMY" firstAttribute="bottom" secondItem="yUc-Yn-IJm" secondAttribute="bottom" type="default" id="Puy-ni-DXO"/>
+                            <constraint firstItem="j9w-bK-oMY" firstAttribute="trailing" secondItem="yUc-Yn-IJm" secondAttribute="trailing" type="default" id="QlO-PM-cKm"/>
+                            <constraint firstItem="j9w-bK-oMY" firstAttribute="leading" secondItem="yUc-Yn-IJm" secondAttribute="leading" type="default" id="Re4-qI-ApS"/>
+                            <constraint firstItem="j9w-bK-oMY" firstAttribute="top" secondItem="yUc-Yn-IJm" secondAttribute="top" type="default" id="mcB-oF-BQ2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Nearby" id="Uve-F6-MhS">

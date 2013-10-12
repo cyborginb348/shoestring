@@ -103,7 +103,7 @@
         
         
         
-        [locationManager stopUpdatingLocation];
+        //[locationManager stopUpdatingLocation];
         
         NSLog(@"selectedCat %@", passedCategory);
         NSLog(@"selectedDistance %@", passedDistance);
