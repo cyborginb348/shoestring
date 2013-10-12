@@ -436,7 +436,6 @@
 		4D479C4617D5D59500C565BD = {
 			isa = PBXGroup;
 			children = (
-				2B731FA41803E1380027E2F5 /* QuartzCore.framework */,
 				4D5866B417EE7978000DF65F /* Libraries */,
 				4D479C5A17D5D59500C565BD /* Shoestring */,
 				4D479C5117D5D59500C565BD /* Frameworks */,
@@ -455,6 +454,7 @@
 		4D479C5117D5D59500C565BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B731FA41803E1380027E2F5 /* QuartzCore.framework */,
 				ACC4CA2617F468CD00F04317 /* CoreLocation.framework */,
 				ACC4CA2117F4687200F04317 /* WindowsAzureMobileServices.framework */,
 				4D479C5217D5D59500C565BD /* UIKit.framework */,
