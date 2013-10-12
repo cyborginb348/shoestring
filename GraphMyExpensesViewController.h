@@ -16,4 +16,6 @@
 
 @property (weak, nonatomic) IBOutlet CPTGraphHostingView *hostView;
 
+- (IBAction)periodChanged:(id)sender;
+
 @end

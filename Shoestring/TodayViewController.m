@@ -260,14 +260,13 @@
             [self showTotal];
             break;
             
-        case NSFetchedResultsChangeUpdate:{
+        case NSFetchedResultsChangeUpdate: {
             Expense *changedExpense = [[self fetchedResultsController] objectAtIndexPath:indexPath];
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             [[cell textLabel]setText:[NSString stringWithFormat:@"$%@  %@",[changedExpense amount],[changedExpense itemName]]];
             [[cell detailTextLabel] setText:[changedExpense placeName]];
-        }
             [self showTotal];
-        
+        }
             break;
             
         case NSFetchedResultsChangeMove:

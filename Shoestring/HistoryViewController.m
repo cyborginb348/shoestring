@@ -44,27 +44,64 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return [[[self fetchedResultsController]sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    id <NSFetchedResultsSectionInfo> secInfo = [[[self fetchedResultsController]sections]objectAtIndex:section];
+    
+    return [secInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *cellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    // Configure the cell with the name of the item expense
+    Expense *expense = [[self fetchedResultsController]objectAtIndexPath:indexPath];
+    
+    [[cell textLabel]setText:[NSString stringWithFormat:@"$%@  %@",[expense amount],[expense itemName]]];
+    [[cell detailTextLabel] setText:[expense placeName]];
     
     return cell;
 }
+
+#pragma mark -
+#pragma mark Fetched Results Controller
+
+-(NSFetchedResultsController*) fetchedResultsController {
+    
+    if(_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expense"
+                                              inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"category"
+                                                                   ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                    managedObjectContext:[self managedObjectContext] sectionNameKeyPath: @"category"
+                                                                               cacheName:nil];
+    
+    //set this class as the delegate for the fetchedResults controller
+    [_fetchedResultsController setDelegate:self];
+    
+    return _fetchedResultsController;
+}
+
+
+
+
 
 /*
 // Override to support conditional editing of the table view.
