@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Expense.h"
+#import "DayViewController.h"
 
 @interface HistoryViewController : UITableViewController
 <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+
+@property (strong, nonatomic) NSDate *selectedDate;
+
+-(NSString*) formatDate: (NSDate*) date;
 
 @end

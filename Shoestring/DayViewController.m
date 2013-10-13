@@ -6,39 +6,57 @@
 //  Copyright (c) 2013 mark. All rights reserved.
 //
 
-#import "TodayViewController.h"
-#import "AddExpenseViewController.h"
-#import "AppDelegate.h"
+#import "DayViewController.h"
 
-@interface TodayViewController ()
+
+
+@interface DayViewController ()
 
 @end
 
-@implementation TodayViewController
+@implementation DayViewController
 
 //internal instance variable
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize total;
+@synthesize displayDate;
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-      
-    NSError *error = nil;
-    if(![[self fetchedResultsController] performFetch:&error]) {
-        NSLog(@"Error! %@", error);
-        abort();
-    }
+   
 
-    [self showTotal];
     
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    
+    //assign today to current dat (if Today tabBar item selected)
+    AddExpenseViewController *aevc = [[AddExpenseViewController alloc]init];
+    
+    NSLog(@"Initial Date %@)", [self displayDate]);
+    
+    //query the request as the required date
+    if([self displayDate] == NULL) {
+        [self setDisplayDate:[aevc getTodaysDate]];
+    }
+
+    NSLog(@"AFter set Date %@)", [self displayDate]);
+    
+    
+    NSError *error = nil;
+    if(![[self fetchedResultsController] performFetch:&error]) {
+        NSLog(@"Error! %@", error);
+        abort();
+    }
+    
+    [self showTotal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,7 +90,7 @@
 
 #pragma mark - View Control save and cancel
 
-//Method: if cancelled in NewLocationViewController, then delete context and dismiss controller
+//Method: if cancelled in AddExpenseViewController, then delete context and dismiss controller
 -(void)addExpenseViewControllerDidCancel: (Expense*) expenseToDelete {
     
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -205,6 +223,13 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expense"
                                           inManagedObjectContext:[self managedObjectContext]];
     [fetchRequest setEntity:entity];
+    
+    //set the query predicate to select the correct display date
+   
+    NSLog(@"predicate DAte: %@", displayDate);
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date == %@",displayDate];
+    [fetchRequest setPredicate:predicate];
 
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"category"
                                                                    ascending:YES];
@@ -300,10 +325,15 @@
 }
 
 //Method: calculates and diplays the total of the expenses recored so far.
-- (void)showTotal
-{
+-(NSNumber*)calculateTotal: (NSDate*) date forManagedObjectContext: (NSManagedObjectContext*) managedObjectContext {
+    
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Expense"];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expense" inManagedObjectContext:self.managedObjectContext];
+    
+    //query the request as the required date
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date == %@",date];
+    [fetchRequest setPredicate:predicate];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expense" inManagedObjectContext:managedObjectContext];
     
     // Required! Unless you set the resultType to NSDictionaryResultType, distinct can't work.
     // All objects in the backing store are implicitly distinct, but two dictionaries can be duplicates.
@@ -313,18 +343,25 @@
     fetchRequest.returnsDistinctResults = NO;
     
     // Now it should yield an NSArray of distinct values in dictionaries.
-    NSArray *dictionaries = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
-  
-    if ([dictionaries count] > 0) {
+    NSArray *dictionaries = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    
     int sum = 0;
     
-    for(id amt in dictionaries) {
-        NSNumber *amount = [amt objectForKey:@"amount"];
-        int number = [amount intValue];
-        sum += number;
+    if ([dictionaries count] > 0) {
+        
+        for(id amt in dictionaries) {
+            NSNumber *amount = [amt objectForKey:@"amount"];
+            int number = [amount intValue];
+            sum += number;
+        }
     }
-    [total setText:[NSString stringWithFormat:@"$%i",sum]];
-    }
+    return [NSNumber numberWithInt:sum];
 }
+
+-(void) showTotal {
+    AddExpenseViewController *aevc = [[AddExpenseViewController alloc]init];
+    [total setText:[NSString stringWithFormat:@"$%@",[self calculateTotal:[aevc getTodaysDate] forManagedObjectContext:[self managedObjectContext]]]];
+}
+
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "AddExpenseViewController.h"
-#import "TodayViewController.h"
+#import "DayViewController.h"
 
 
 
@@ -18,6 +18,7 @@
 
 @implementation AddExpenseViewController
 
+@synthesize managedObjectContext;
 
 @synthesize categoryView;
 @synthesize currentCategory;
@@ -104,6 +105,11 @@
     NSDate *now = [NSDate date];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
+    
+    //set date components so that we have just the day date
+    [components setHour:0];
+    [components setMinute:0];
+    [components setSecond:0];
     return[calendar dateFromComponents:components];
 }
 
@@ -133,7 +139,7 @@
     [autocompleteTableView setHidden:YES];
     [self.view addSubview:autocompleteTableView];
     
-    self.itemNames = [[NSMutableArray alloc] initWithObjects:@"lunch",@"train",@"bus", @"dorm", @"rooom",@"burger",@"breakfast", @"dinner",@"beers", @"drinks", nil];
+    self.itemNames = [[NSMutableArray alloc] initWithObjects:@"lunch",@"train",@"bus", @"dorm", @"room",@"burger",@"breakfast", @"dinner",@"beers", @"drinks", nil];
     self.autocompleteNames = [[NSMutableArray alloc] init];
 }
 
@@ -225,5 +231,6 @@
 	_ratingLabel.text = [_ratingLabels objectAtIndex:rating];
     [self setRate:rating];
 }
+
 
 @end

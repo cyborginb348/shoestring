@@ -7,17 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 #import "AddExpenseViewController.h"
 #import "ViewExpenseViewController.h"
+#import "HistoryViewController.h"
 #import "Expense.h"
 
-@interface TodayViewController : UITableViewController
+@interface DayViewController : UITableViewController
 <AddExpenseViewControllerDelegate, NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
+@property (strong, nonatomic) NSDate *displayDate;
+
 @property (weak, nonatomic) IBOutlet UILabel *total;
+
+- (NSNumber*)calculateTotal: (NSDate*) date forManagedObjectContext: (NSManagedObjectContext*) managedObjectContext;
+
 
 
 @end

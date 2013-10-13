@@ -85,6 +85,7 @@
 		4DCCADC017D97D01000BCA6B /* glyphicons_045_calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCADBB17D97D01000BCA6B /* glyphicons_045_calendar.png */; };
 		4DCCADC117D97D01000BCA6B /* glyphicons_057_history.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCADBC17D97D01000BCA6B /* glyphicons_057_history.png */; };
 		4DDC8EC217F7A23500F1BD90 /* CategoryButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDC8EC117F7A23500F1BD90 /* CategoryButtons.m */; };
+		4DDFA4041809258B0013AE5D /* Expense.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDFA4031809258B0013AE5D /* Expense.m */; };
 		7B37EC6717E14C9A003AFCA2 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC6617E14C9A003AFCA2 /* HomeViewController.m */; };
 		7B37EC6A17E14D16003AFCA2 /* ViewExpenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC6917E14D16003AFCA2 /* ViewExpenseViewController.m */; };
 		7B37EC6D17E14DBA003AFCA2 /* ViewExpenseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC6C17E14DBA003AFCA2 /* ViewExpenseMapViewController.m */; };
@@ -94,8 +95,7 @@
 		7B7A5A9D17E1606B00E6BC58 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A5A9C17E1606B00E6BC58 /* HistoryViewController.m */; };
 		7B7A5AA017E160A000E6BC58 /* HistoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A5A9F17E160A000E6BC58 /* HistoryDetailViewController.m */; };
 		7BC1DE5F17F500F8001930DC /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC4CA2117F4687200F04317 /* WindowsAzureMobileServices.framework */; };
-		7BC1DE7317F695EE001930DC /* Expense.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC1DE7217F695EE001930DC /* Expense.m */; };
-		7BC2F91A17D82B8C00AAB3FE /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2F91917D82B8C00AAB3FE /* TodayViewController.m */; };
+		7BC2F91A17D82B8C00AAB3FE /* DayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2F91917D82B8C00AAB3FE /* DayViewController.m */; };
 		7BC2F91D17D82C3300AAB3FE /* AddExpenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2F91C17D82C3300AAB3FE /* AddExpenseViewController.m */; };
 		ACC4CA2517F4688B00F04317 /* CloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC4CA2417F4688B00F04317 /* CloudService.m */; };
 		ACC4CA2717F468CD00F04317 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC4CA2617F468CD00F04317 /* CoreLocation.framework */; };
@@ -291,6 +291,8 @@
 		4DCCADBC17D97D01000BCA6B /* glyphicons_057_history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_057_history.png; sourceTree = "<group>"; };
 		4DDC8EC017F7A23500F1BD90 /* CategoryButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryButtons.h; sourceTree = "<group>"; };
 		4DDC8EC117F7A23500F1BD90 /* CategoryButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryButtons.m; sourceTree = "<group>"; };
+		4DDFA4021809258B0013AE5D /* Expense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Expense.h; path = ../Expense.h; sourceTree = "<group>"; };
+		4DDFA4031809258B0013AE5D /* Expense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Expense.m; path = ../Expense.m; sourceTree = "<group>"; };
 		7B37EC6517E14C9A003AFCA2 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		7B37EC6617E14C9A003AFCA2 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		7B37EC6817E14D16003AFCA2 /* ViewExpenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewExpenseViewController.h; sourceTree = "<group>"; };
@@ -307,10 +309,8 @@
 		7B7A5A9C17E1606B00E6BC58 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		7B7A5A9E17E160A000E6BC58 /* HistoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailViewController.h; sourceTree = "<group>"; };
 		7B7A5A9F17E160A000E6BC58 /* HistoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailViewController.m; sourceTree = "<group>"; };
-		7BC1DE7117F695EE001930DC /* Expense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Expense.h; path = ../Expense.h; sourceTree = "<group>"; };
-		7BC1DE7217F695EE001930DC /* Expense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Expense.m; path = ../Expense.m; sourceTree = "<group>"; };
-		7BC2F91817D82B8C00AAB3FE /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
-		7BC2F91917D82B8C00AAB3FE /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		7BC2F91817D82B8C00AAB3FE /* DayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayViewController.h; sourceTree = "<group>"; };
+		7BC2F91917D82B8C00AAB3FE /* DayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayViewController.m; sourceTree = "<group>"; };
 		7BC2F91B17D82C3300AAB3FE /* AddExpenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddExpenseViewController.h; path = ../AddExpenseViewController.h; sourceTree = "<group>"; };
 		7BC2F91C17D82C3300AAB3FE /* AddExpenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddExpenseViewController.m; path = ../AddExpenseViewController.m; sourceTree = "<group>"; };
 		ACC4CA2117F4687200F04317 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
@@ -582,8 +582,8 @@
 		4D5866F217EE7C50000DF65F /* Today */ = {
 			isa = PBXGroup;
 			children = (
-				7BC2F91817D82B8C00AAB3FE /* TodayViewController.h */,
-				7BC2F91917D82B8C00AAB3FE /* TodayViewController.m */,
+				7BC2F91817D82B8C00AAB3FE /* DayViewController.h */,
+				7BC2F91917D82B8C00AAB3FE /* DayViewController.m */,
 				7BC2F91B17D82C3300AAB3FE /* AddExpenseViewController.h */,
 				7BC2F91C17D82C3300AAB3FE /* AddExpenseViewController.m */,
 				4DCCADB417D94C0F000BCA6B /* AddMapViewController.h */,
@@ -669,8 +669,8 @@
 			isa = PBXGroup;
 			children = (
 				4D479C6C17D5D59500C565BD /* Shoestring.xcdatamodeld */,
-				7BC1DE7117F695EE001930DC /* Expense.h */,
-				7BC1DE7217F695EE001930DC /* Expense.m */,
+				4DDFA4021809258B0013AE5D /* Expense.h */,
+				4DDFA4031809258B0013AE5D /* Expense.m */,
 				ACC4CA2317F4688B00F04317 /* CloudService.h */,
 				ACC4CA2417F4688B00F04317 /* CloudService.m */,
 				4D1338B117E67E210047308B /* CloudAverage.h */,
@@ -872,7 +872,7 @@
 				4D479C6117D5D59500C565BD /* main.m in Sources */,
 				4D479C6517D5D59500C565BD /* AppDelegate.m in Sources */,
 				4D479C6E17D5D59500C565BD /* Shoestring.xcdatamodeld in Sources */,
-				7BC2F91A17D82B8C00AAB3FE /* TodayViewController.m in Sources */,
+				7BC2F91A17D82B8C00AAB3FE /* DayViewController.m in Sources */,
 				7BC2F91D17D82C3300AAB3FE /* AddExpenseViewController.m in Sources */,
 				4DCCADA317D8B0D9000BCA6B /* GraphMyExpensesViewController.m in Sources */,
 				4DCCADA617D8B0EC000BCA6B /* GraphCompareViewController.m in Sources */,
@@ -887,6 +887,7 @@
 				7B7A5AA017E160A000E6BC58 /* HistoryDetailViewController.m in Sources */,
 				4D1338B017E67DCE0047308B /* Favourite.m in Sources */,
 				4D1338B317E67E210047308B /* CloudAverage.m in Sources */,
+				4DDFA4041809258B0013AE5D /* Expense.m in Sources */,
 				4D5866DF17EE7979000DF65F /* MBProgressHUD.m in Sources */,
 				4D5866E017EE7979000DF65F /* NSMutableURLRequest+Parameters.m in Sources */,
 				4D8F4DF617F9BCFE00FD90AB /* TFAppDelegate.m in Sources */,
@@ -907,7 +908,6 @@
 				4D5866EE17EE7979000DF65F /* OAServiceTicket.m in Sources */,
 				4D5866EF17EE7979000DF65F /* OAToken.m in Sources */,
 				4D5866F017EE7979000DF65F /* OATokenManager.m in Sources */,
-				7BC1DE7317F695EE001930DC /* Expense.m in Sources */,
 				4D8F4DF517F9BCFE00FD90AB /* StarRatingControl.m in Sources */,
 				4DDC8EC217F7A23500F1BD90 /* CategoryButtons.m in Sources */,
 				2B731FA81803E1A30027E2F5 /* CPTImageLayer.m in Sources */,

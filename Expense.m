@@ -2,7 +2,7 @@
 //  Expense.m
 //  Shoestring
 //
-//  Created by Mark Wigglesworth on 28/09/13.
+//  Created by mark on 12/10/13.
 //  Copyright (c) 2013 mark. All rights reserved.
 //
 
@@ -13,12 +13,12 @@
 
 @dynamic amount;
 @dynamic category;
+@dynamic date;
 @dynamic itemName;
 @dynamic latitude;
 @dynamic longitude;
 @dynamic placeName;
 @dynamic rating;
 @dynamic savingTip;
-@dynamic date;
 
 @end

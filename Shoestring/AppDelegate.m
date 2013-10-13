@@ -14,29 +14,31 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+@synthesize tabBarController;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //create a reference to the tabbar view controller
-    UITabBarController *tab = (UITabBarController*) [[self window] rootViewController];
+    tabBarController = (UITabBarController*) [[self window] rootViewController];
     
     
     //set a color for the tab bar - note use mac OS Digitalcolor meter
-    UITabBar *tb = [tab tabBar];
+    UITabBar *tb = [tabBarController tabBar];
     [tb setTintColor: [UIColor colorWithRed:10.0f/255 green:28.0f/255 blue:47.0f/255 alpha:1]];
     
     
     //create references to the navigation controllers for each tab
-    UIView *home = (UIView*) [[tab viewControllers]objectAtIndex:0];
-    UINavigationController *today = (UINavigationController*)[[tab viewControllers]objectAtIndex:1];
-    UINavigationController *find = (UINavigationController*) [[tab viewControllers]objectAtIndex:2];
-    UINavigationController *history = (UINavigationController*) [[tab viewControllers]objectAtIndex:3];
-    UINavigationController *graphs = (UINavigationController*)[[tab viewControllers]objectAtIndex:4];
+    UIView *home = (UIView*) [[tabBarController viewControllers]objectAtIndex:0];
+    UINavigationController *today = (UINavigationController*)[[tabBarController viewControllers]objectAtIndex:1];
+    UINavigationController *find = (UINavigationController*) [[tabBarController viewControllers]objectAtIndex:2];
+    UINavigationController *history = (UINavigationController*) [[tabBarController viewControllers]objectAtIndex:3];
+    UINavigationController *graphs = (UINavigationController*)[[tabBarController viewControllers]objectAtIndex:4];
     
     
     //create references to first views
     HomeViewController *homeView = (HomeViewController*) home;
-    TodayViewController *todayView = (TodayViewController*)[today topViewController];
+    DayViewController *todayView = (DayViewController*)[today topViewController];
     FindViewController  *findView = (FindViewController*)[find topViewController];
     HistoryViewController  *historyView = (HistoryViewController*)[history topViewController];
     GraphMyExpensesViewController  *graphView = (GraphMyExpensesViewController*)[graphs topViewController];
@@ -78,6 +80,9 @@
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
+
+
+
 
 - (void)saveContext
 {

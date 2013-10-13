@@ -16,11 +16,13 @@
 @interface AddExpenseViewController : UIViewController
 <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CategoryButtonsDelegate, StarRatingDelegate>
 
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
 - (IBAction)dismissKeyboard:(id)sender;
 
-
+-(NSDate*) getTodaysDate;
 
 @property (weak, nonatomic) IBOutlet UIView *categoryView;
 
@@ -52,5 +54,6 @@
 
 -(void) addExpenseViewControllerDidSave;
 -(void) addExpenseViewControllerDidCancel: (Expense*) expenseToDelete;
+
 
 @end
