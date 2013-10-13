@@ -56,6 +56,13 @@
         abort();
     }
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"EEE MMM d"];
+    NSString *date = [dateFormatter stringFromDate:[self displayDate]];
+    NSLog(@"%@",date);
+    
+    [self setTitle:date];
+    
     [self showTotal];
 }
 
