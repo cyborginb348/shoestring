@@ -213,7 +213,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="K4h-ne-h1E">
-                                <rect key="frame" x="11" y="387" width="302" height="44"/>
+                                <rect key="frame" x="11" y="388" width="302" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="302" id="S8k-JY-5km"/>
@@ -222,18 +222,22 @@
                                     <segment title="use this location"/>
                                     <segment title="find on map"/>
                                 </segments>
+                                <connections>
+                                    <action selector="locationSegmentControl:" destination="Kyj-bf-pXN" eventType="valueChanged" id="XC9-QN-I3J"/>
+                                    <segue destination="Chu-Bi-w9k" kind="modal" identifier="viewExpenseMap" id="IzC-KM-5dH"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ecj-da-uam" secondAttribute="bottom" constant="99" id="5Gz-2S-lH5"/>
+                            <constraint firstAttribute="bottom" secondItem="K4h-ne-h1E" secondAttribute="bottom" constant="29" id="5I1-jV-1di"/>
                             <constraint firstItem="GnR-Bx-w7V" firstAttribute="top" secondItem="cHD-2H-8aM" secondAttribute="top" constant="270" id="91w-05-Fae"/>
                             <constraint firstAttribute="trailing" secondItem="kbH-VJ-1gT" secondAttribute="trailing" constant="42" id="Aey-39-3df"/>
                             <constraint firstItem="KIP-hy-hC2" firstAttribute="trailing" secondItem="Hj3-ix-BNF" secondAttribute="trailing" type="default" id="CF8-xa-bJY"/>
                             <constraint firstItem="KIP-hy-hC2" firstAttribute="leading" secondItem="Hj3-ix-BNF" secondAttribute="leading" type="default" id="Dhg-ey-pbG"/>
                             <constraint firstAttribute="bottom" secondItem="KMa-1A-5wg" secondAttribute="bottom" constant="162" id="DvM-tu-Qio"/>
                             <constraint firstItem="x0R-hd-fTt" firstAttribute="leading" secondItem="cHD-2H-8aM" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Glv-i1-LI3"/>
-                            <constraint firstAttribute="bottom" secondItem="K4h-ne-h1E" secondAttribute="bottom" constant="30" id="GnI-9F-IpF"/>
                             <constraint firstItem="V92-iy-b9i" firstAttribute="leading" secondItem="58x-zI-K0x" secondAttribute="leading" type="default" id="IL0-sk-ktZ"/>
                             <constraint firstItem="KMa-1A-5wg" firstAttribute="leading" secondItem="x0R-hd-fTt" secondAttribute="leading" type="default" id="LNa-Nx-WDM"/>
                             <constraint firstAttribute="trailing" secondItem="GnR-Bx-w7V" secondAttribute="trailing" constant="27" id="MpG-ms-vic"/>
@@ -268,6 +272,7 @@
                         <outlet property="categoryView" destination="KIP-hy-hC2" id="I9g-JR-zJs"/>
                         <outlet property="currentCategory" destination="58x-zI-K0x" id="knc-qv-pp8"/>
                         <outlet property="itemNameField" destination="V92-iy-b9i" id="2SI-lh-ety"/>
+                        <outlet property="locationSegmentControl" destination="K4h-ne-h1E" id="M2d-gI-2WV"/>
                         <outlet property="placeNameField" destination="x0R-hd-fTt" id="KT3-bc-Y1v"/>
                         <outlet property="ratingLabel" destination="kbH-VJ-1gT" id="AnG-jP-8sa"/>
                         <outlet property="savingTipField" destination="ecj-da-uam" id="pRP-3I-mkF"/>
@@ -288,11 +293,13 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VNc-zw-bf9">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="1rv-en-Ajz"/>
-                                </constraints>
                                 <items>
-                                    <navigationItem title="Save your location" id="NnV-GD-NNb">
+                                    <navigationItem title="Location" id="NnV-GD-NNb">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XRf-E9-iep">
+                                            <connections>
+                                                <action selector="cancel:" destination="Chu-Bi-w9k" id="3W2-qE-HDF"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="QkA-5n-RZB">
                                             <connections>
                                                 <action selector="save:" destination="Chu-Bi-w9k" id="jXb-lQ-Jkc"/>
@@ -301,22 +308,26 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="mapRecord.png" translatesAutoresizingMaskIntoConstraints="NO" id="FJO-Cb-tu5">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MTN-bf-W5J">
                                 <rect key="frame" x="0.0" y="44" width="320" height="416"/>
-                            </imageView>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="VNc-zw-bf9" firstAttribute="trailing" secondItem="1gI-mX-khn" secondAttribute="trailing" type="default" id="4Mz-e0-kt8"/>
-                            <constraint firstItem="VNc-zw-bf9" firstAttribute="leading" secondItem="1gI-mX-khn" secondAttribute="leading" type="default" id="9Ey-m4-2n1"/>
-                            <constraint firstItem="FJO-Cb-tu5" firstAttribute="leading" secondItem="1gI-mX-khn" secondAttribute="leading" type="default" id="OzC-IF-yAX"/>
-                            <constraint firstItem="FJO-Cb-tu5" firstAttribute="trailing" secondItem="1gI-mX-khn" secondAttribute="trailing" type="default" id="PGA-3K-WSA"/>
-                            <constraint firstItem="FJO-Cb-tu5" firstAttribute="top" secondItem="VNc-zw-bf9" secondAttribute="bottom" type="default" id="R2c-ek-Zgs"/>
-                            <constraint firstItem="FJO-Cb-tu5" firstAttribute="bottom" secondItem="1gI-mX-khn" secondAttribute="bottom" type="default" id="htn-IL-qZe"/>
+                            <constraint firstItem="MTN-bf-W5J" firstAttribute="trailing" secondItem="VNc-zw-bf9" secondAttribute="trailing" type="default" id="WHA-z6-Eqx"/>
+                            <constraint firstItem="MTN-bf-W5J" firstAttribute="leading" secondItem="1gI-mX-khn" secondAttribute="leading" type="default" id="Zhw-v7-0Oh"/>
+                            <constraint firstAttribute="bottom" secondItem="MTN-bf-W5J" secondAttribute="bottom" type="default" id="aTK-iL-hSF"/>
+                            <constraint firstItem="MTN-bf-W5J" firstAttribute="top" secondItem="VNc-zw-bf9" secondAttribute="bottom" type="default" id="dBz-Bn-PCJ"/>
                             <constraint firstItem="VNc-zw-bf9" firstAttribute="top" secondItem="1gI-mX-khn" secondAttribute="top" type="default" id="qoE-wc-jvn"/>
+                            <constraint firstItem="MTN-bf-W5J" firstAttribute="leading" secondItem="VNc-zw-bf9" secondAttribute="leading" type="default" id="xgK-XM-E1O"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="JhP-EF-vTh"/>
+                    <connections>
+                        <outlet property="mapView" destination="MTN-bf-W5J" id="HPZ-rz-SS3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wft-ct-HAo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1148,7 +1159,6 @@
         <image name="glyphicons_045_calendar.png" width="23" height="24"/>
         <image name="glyphicons_057_history.png" width="25" height="26"/>
         <image name="mapPlace.png" width="379" height="629"/>
-        <image name="mapRecord.png" width="319" height="479"/>
         <image name="shoestring_logo.png" width="278" height="57"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

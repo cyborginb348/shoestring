@@ -29,6 +29,10 @@
 @synthesize ratingLabel = _ratingLabel;
 @synthesize ratingLabels = _ratingLabels;
 
+@synthesize currentLatitude, currentLongitude;
+@synthesize locationManager = _locationManager;
+@synthesize locationSegmentControl;
+
 @synthesize autocompleteTableView, autocompleteNames,itemNames;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,8 +49,9 @@
     [super viewDidLoad];
     
     [self initialiseAutocomplete];
-	
     
+    [self startLocationManager];
+
     //set delegates for keyboard dismissal
     [itemNameField setDelegate:self];
     [placeNameField setDelegate:self];
@@ -61,7 +66,7 @@
     [categoryView addSubview:btnView];
     
     //starRatings
-    _ratingLabels = [NSArray arrayWithObjects:@"Unrated", @"Hate it", @"Don't like it", @"It's OK", @"It's good", @"It's great", nil];
+    _ratingLabels = [NSArray arrayWithObjects:@"Unrated", @"not great", @"Ok", @"not bad", @"really good", @"great deal!", nil];
 	
 	[[self starRatingControl] setDelegate:self];
 }
@@ -78,6 +83,8 @@
 }
 
 - (IBAction)save:(id)sender {
+    
+    //assigns values to the current expense object and calls the delegate method to save the context (in DayViewController)
     
     [[self currentExpense]setCategory:currentCategory];
     [[self currentExpense]setItemName:[itemNameField text]];
@@ -232,5 +239,52 @@
     [self setRate:rating];
 }
 
+#pragma mark - segment control and location manager
+
+- (IBAction)locationSegmentControl:(id)sender {
+    
+    if([[self locationSegmentControl] selectedSegmentIndex] == 1) {
+    
+        [self performSegueWithIdentifier:@"viewExpenseMap" sender:self];
+        
+    } else {
+        //store location as current
+        //[[self currentExpense]setLatitude:<#(NSNumber *)#>:[]];
+    }
+}
+
+-(void) startLocationManager {
+    
+    [self setLocationManager: [CLLocationManager new]];
+    
+    [[self locationManager]setDelegate:self];
+    [[self locationManager] setDesiredAccuracy: kCLLocationAccuracyBest];
+    [[self locationManager] setDistanceFilter:kCLDistanceFilterNone];
+    [[self locationManager] startUpdatingLocation];
+    NSLog(@"start");
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation *newLocation = [locations lastObject];
+    CLLocation *oldLocation;
+    
+    NSLog(@"lm");
+    
+    if([locations count] > 1) {
+        oldLocation = [locations objectAtIndex:[locations count] - 1];
+    } else {
+        oldLocation = nil;
+    }
+    
+    CLLocationCoordinate2D coord = [newLocation coordinate];
+    [self setCurrentLatitude: [NSNumber numberWithFloat: coord.latitude]];
+    [self setCurrentLongitude: [NSNumber numberWithFloat: coord.longitude]];
+    
+    NSLog(@"lat %@", [self currentLatitude]);
+    
+    NSLog(@"didUpdateToLocation %@ from %@", newLocation, oldLocation);
+  
+  
+}
 
 @end

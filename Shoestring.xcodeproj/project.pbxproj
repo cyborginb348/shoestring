@@ -55,6 +55,7 @@
 		4D8F4DF017F9BCEC00FD90AB /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F4DEB17F9BCEC00FD90AB /* star@2x.png */; };
 		4D8F4DF517F9BCFE00FD90AB /* StarRatingControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F4DF217F9BCFE00FD90AB /* StarRatingControl.m */; };
 		4D8F4DF617F9BCFE00FD90AB /* TFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F4DF417F9BCFE00FD90AB /* TFAppDelegate.m */; };
+		4DA86813180A917B00A5C671 /* VBAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA86812180A917B00A5C671 /* VBAnnotation.m */; };
 		4DBB58AB17D6C43100686605 /* barChart.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DBB58A517D6C43100686605 /* barChart.png */; };
 		4DBB58AC17D6C43100686605 /* dailyExpenses.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DBB58A617D6C43100686605 /* dailyExpenses.png */; };
 		4DBB58AE17D6C43100686605 /* mapPlace.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DBB58A817D6C43100686605 /* mapPlace.png */; };
@@ -259,6 +260,8 @@
 		4D8F4DF217F9BCFE00FD90AB /* StarRatingControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarRatingControl.m; sourceTree = "<group>"; };
 		4D8F4DF317F9BCFE00FD90AB /* TFAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFAppDelegate.h; sourceTree = "<group>"; };
 		4D8F4DF417F9BCFE00FD90AB /* TFAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFAppDelegate.m; sourceTree = "<group>"; };
+		4DA86811180A917B00A5C671 /* VBAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VBAnnotation.h; sourceTree = "<group>"; };
+		4DA86812180A917B00A5C671 /* VBAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VBAnnotation.m; sourceTree = "<group>"; };
 		4DBB58A517D6C43100686605 /* barChart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barChart.png; sourceTree = "<group>"; };
 		4DBB58A617D6C43100686605 /* dailyExpenses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dailyExpenses.png; sourceTree = "<group>"; };
 		4DBB58A817D6C43100686605 /* mapPlace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapPlace.png; sourceTree = "<group>"; };
@@ -590,6 +593,7 @@
 		4D5866F217EE7C50000DF65F /* Today */ = {
 			isa = PBXGroup;
 			children = (
+				4DA86810180A915900A5C671 /* Annotation */,
 				7BC2F91817D82B8C00AAB3FE /* DayViewController.h */,
 				7BC2F91917D82B8C00AAB3FE /* DayViewController.m */,
 				7BC2F91B17D82C3300AAB3FE /* AddExpenseViewController.h */,
@@ -661,6 +665,15 @@
 				4D8F4DEB17F9BCEC00FD90AB /* star@2x.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		4DA86810180A915900A5C671 /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				4DA86811180A917B00A5C671 /* VBAnnotation.h */,
+				4DA86812180A917B00A5C671 /* VBAnnotation.m */,
+			);
+			name = Annotation;
 			sourceTree = "<group>";
 		};
 		4DBB589E17D69BB200686605 /* ScreenImages */ = {
@@ -908,6 +921,7 @@
 				4D5866DF17EE7979000DF65F /* MBProgressHUD.m in Sources */,
 				4D5866E017EE7979000DF65F /* NSMutableURLRequest+Parameters.m in Sources */,
 				4D8F4DF617F9BCFE00FD90AB /* TFAppDelegate.m in Sources */,
+				4DA86813180A917B00A5C671 /* VBAnnotation.m in Sources */,
 				4D5866E117EE7979000DF65F /* NSString+URLEncoding.m in Sources */,
 				4D5866E217EE7979000DF65F /* NSURL+Base.m in Sources */,
 				4D5866E317EE7979000DF65F /* Base64Transcoder.c in Sources */,

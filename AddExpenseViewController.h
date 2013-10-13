@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "AddMapViewController.h"
 #import "Expense.h"
 #import "CategoryButtons.h"
 #import "StarRatingControl.h"
@@ -14,7 +16,7 @@
 @protocol AddExpenseViewControllerDelegate;
 
 @interface AddExpenseViewController : UIViewController
-<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CategoryButtonsDelegate, StarRatingDelegate>
+<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CategoryButtonsDelegate, StarRatingDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
@@ -38,6 +40,14 @@
 @property (weak, nonatomic) IBOutlet UITextField *amountField;
 @property (weak, nonatomic) IBOutlet UITextField *savingTipField;
 @property  NSUInteger rate;
+@property (strong, nonatomic) NSNumber *currentLatitude;
+@property (strong, nonatomic) NSNumber *currentLongitude;
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *locationSegmentControl;
+- (IBAction)locationSegmentControl:(id)sender;
+-(void) startLocationManager;
 
 
 @property (nonatomic, weak) id <AddExpenseViewControllerDelegate> delegate;
