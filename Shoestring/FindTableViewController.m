@@ -31,10 +31,10 @@
 {
     [super viewDidLoad];
     
-    NSLog(@"passedCat %@", selectedCat);
-    NSLog(@"passedDistance %@", selectedDistance);
-    NSLog(@"passeduserLat %@", userLat);
-    NSLog(@"passeduserLong %@", userLong);
+    //NSLog(@"passedCat %@", selectedCat);
+    //NSLog(@"passedDistance %@", selectedDistance);
+    //NSLog(@"passeduserLat %@", userLat);
+    //NSLog(@"passeduserLong %@", userLong);
     
     [self setTitle:selectedCat];
     
@@ -63,6 +63,35 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([[segue identifier] isEqualToString:@"cellToMapSegue"]) {
+        
+        // Get destination view
+        FindMapViewController *findMapVC = [segue destinationViewController];
+        
+        // perpare passing data
+        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+        
+        NSString *passedName = [[businessObjectList objectAtIndex:path.row] objectForKey:@"name"];
+        NSString *passedAddress = [[businessObjectList objectAtIndex:path.row] objectForKey:@"address"];
+        NSString *passedRating = [[businessObjectList objectAtIndex:path.row] objectForKey:@"rating"];
+        NSString *passedPhone = [[businessObjectList objectAtIndex:path.row] objectForKey:@"phone"];
+               
+        //passing data here
+        [findMapVC setAddressFromFT:passedAddress];
+        [findMapVC setNameFromFT:passedName];
+        [findMapVC setRatingFromFT:passedRating];
+        [findMapVC setPhoneFromFT:passedPhone];
+        
+       
+        //NSLog(@"nameFromFT %@", passedName);
+        //NSLog(@"addressFromFT %@", passedAddress);
+        //NSLog(@"phoneFromFT %@", passedPhone);
+        //NSLog(@"ratingFromFT %@", passedRating);
+        
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -89,7 +118,7 @@
     
     // Configure the cell...
     cell.textLabel.text = [[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"name"];
-    cell.detailTextLabel.text = [[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"phone"];
+    cell.detailTextLabel.text = [[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"address"];
     cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"imageurl"]]]];
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
@@ -171,7 +200,7 @@
                            @"http://api.yelp.com/v2/search?%@=%@&%@=%@&%@=%@",
                            @"term",term, @"ll",latLon, @"radius_filter", radius];
     
-    NSLog(@"url: %@", urlString);
+    //NSLog(@"url: %@", urlString);
     
     
     
@@ -205,7 +234,7 @@
                                //result form parsedData, pull this to arrays.
                                
                                NSArray *businesses = parsedData[@"businesses"];
-                               NSLog(@"businesses: %@", businesses);
+                               //NSLog(@"businesses: %@", businesses);
                                
                                
                                
@@ -215,6 +244,7 @@
                                NSString *address = @"";
                                NSString *imageURL = @"";
                                NSString *phoneNo =@"";
+                               NSString *rating =@"";
                                
                                for (id business in businesses) {
                                    NSMutableDictionary *businessInfo = [NSMutableDictionary dictionary];
@@ -235,6 +265,11 @@
                                        phoneNo = @"phone number not display";
                                    }
                                    //NSLog(@"phone no: %@", phoneNo);
+                                   
+                                   //rating
+                                   rating = business[@"rating"];
+                                   //NSLog(@"rating: %@", rating);
+
                                    
                                    //address
                                    NSArray *tempAddress = business[@"location"][@"display_address"];
@@ -261,16 +296,16 @@
                                    //NSLog(@"dic url: %@ \n", [businessInfo objectForKey:@"imageurl"]);
                                    [businessInfo setObject:phoneNo forKey:@"phone"];
                                    //NSLog(@"phone: %@ \n", [businessInfo objectForKey:@"display_phone"]);
+                                   [businessInfo setObject:rating forKey:@"rating"];
+                                   //NSLog(@"rating: %@ \n", [businessInfo objectForKey:@"rating"]);
                                    [businessInfo setObject:address forKey:@"address"];
                                    //NSLog(@"dic address: %@ \n", [businessInfo objectForKey:@"address"]);
                                    
                                    //Add to ObjectList
-                                   NSLog(@"business list:%@",businessInfo);
-                                   //[tempArray addObject:businessInfo];
+                                   //NSLog(@"business list:%@",businessInfo);
                                    [businessObjectList addObject:businessInfo];
                                }
                                dispatch_async(dispatch_get_main_queue(), ^{
-                                   //[businessObjectList addObjectsFromArray:tempArray];
                                    //NSLog(@"business list:%@",businessObjectList);
                                    [self.tableView reloadData];
                                    [HUD hide:YES];

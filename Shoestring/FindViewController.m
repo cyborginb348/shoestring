@@ -9,6 +9,7 @@
 #import "FindViewController.h"
 #import "FindTableViewController.h"
 
+
 @interface FindViewController ()
 
 @end
@@ -95,6 +96,8 @@
         passedUserLats = userCurrentLat;
         passedUserLong = userCurrentLong;
         
+        
+        
         //passing data here
         [findTableVC setSelectedCat:passedCategory];
         [findTableVC setSelectedDistance:passedDistance];
@@ -103,12 +106,12 @@
         
         
         
-        //[locationManager stopUpdatingLocation];
+        [locationManager stopUpdatingLocation];
         
-        NSLog(@"selectedCat %@", passedCategory);
-        NSLog(@"selectedDistance %@", passedDistance);
-        NSLog(@"userLat %@", passedUserLats);
-        NSLog(@"userLong %@", passedUserLong);
+        //NSLog(@"selectedCat %@", passedCategory);
+        //NSLog(@"selectedDistance %@", passedDistance);
+        //NSLog(@"userLat %@", passedUserLats);
+        //NSLog(@"userLong %@", passedUserLong);
     }
 }
 
