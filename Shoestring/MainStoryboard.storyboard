@@ -318,7 +318,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="84m-Q2-jqN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-975" y="-1892"/>
+            <point key="canvasLocation" x="-1039" y="-1893"/>
         </scene>
         <!--Add Map View Controller - AddLocation-->
         <scene sceneID="MlJ-EM-cSO">
@@ -332,14 +332,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Location" id="NnV-GD-NNb">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XRf-E9-iep">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="XRf-E9-iep">
                                             <connections>
                                                 <action selector="cancel:" destination="Chu-Bi-w9k" id="3W2-qE-HDF"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="QkA-5n-RZB">
-                                            <connections>
-                                                <action selector="save:" destination="Chu-Bi-w9k" id="jXb-lQ-Jkc"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -1228,6 +1223,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="vmz-0g-pT5"/>
-        <segue reference="J90-uY-kfb"/>
+        <segue reference="P8i-h3-C08"/>
     </inferredMetricsTieBreakers>
 </document>
