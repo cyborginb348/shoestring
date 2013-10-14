@@ -12,13 +12,11 @@
 
 @end
 
-#define BRIS_LAT -27.395703
-#define BRIS_LNG 153.053472
 #define SPAN_VALUE 0.02f;
 
 @implementation AddMapViewController
 
-@synthesize mapView;
+@synthesize mapView = _mapView;
 @synthesize locationManager = _locationManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,34 +31,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSLog(@"%@", [self currentLongitude]);
 	
     //set delegate for mapview as this controller
     [[self mapView] setDelegate:self];
     
-    //set the location from the device
-    //[self.mapView setShowsUserLocation:YES];
-    
-    //go to Brisbane location
-    [self gotoLocation];
+    MKCoordinateRegion region;
+    region.center.latitude = [[self currentLatitude] doubleValue];
+    region.center.longitude = [[self currentLongitude] doubleValue];
+    region.span.latitudeDelta = SPAN_VALUE;
+    region.span.longitudeDelta = SPAN_VALUE;
+    [[self mapView] setRegion:region animated:NO];
     
     //coordinate
     CLLocationCoordinate2D location;
-    location.latitude = BRIS_LAT;
-    location.longitude = BRIS_LNG;
+    location.latitude = [[self currentLatitude] doubleValue];
+    location.longitude = [[self currentLongitude] doubleValue];
+    
     //annotation
     VBAnnotation *annotation = [[VBAnnotation alloc]initWithPosition:location];
-    annotation.title = @"My House";
-    annotation.subTitle = @"it's up";
+    annotation.title = @"drag to new location";
+    annotation.subTitle = @"touch and drag";
     //add to map
     [[self mapView] addAnnotation:annotation];
-    
-    //LocationManager
-    [self setLocationManager:[CLLocationManager new]];
-    [[self locationManager]setDelegate:self];
-    [[self locationManager]setDesiredAccuracy:kCLLocationAccuracyBest];
-    [[self locationManager]setDistanceFilter:kCLDistanceFilterNone];
-    //start
-    [[self locationManager] startUpdatingLocation];
 
 }
 
@@ -92,55 +86,38 @@
     [view setDraggable:YES];
     [view setAnimatesDrop:YES];
     [view setCanShowCallout:YES];
-    //image button
-    UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"user-icon.png" ]];
-    [view setLeftCalloutAccessoryView:imageView];
-    [view setRightCalloutAccessoryView:[UIButton buttonWithType:UIButtonTypeDetailDisclosure]];
     return view;
 }
-
-/*
- Method to provide action when annotation view pressed*/
-
--(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"MESSAGE" message:@"you rang" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alert show];
-}
-
--(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    
-    NSLog(@"showing");
-    
-    CLLocationCoordinate2D location = [userLocation coordinate];
-    
-    [[self mapView] setCenterCoordinate:location];
-    
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location, 100000, 100000);
-    [[self mapView] setRegion:region animated:YES];
-}
+//
+//
+//-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+//    
+//    NSLog(@"showing");
+//    
+//    CLLocationCoordinate2D location = [userLocation coordinate];
+//    [[self mapView] setCenterCoordinate:location];
+//    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location, 100000, 100000);
+//    [[self mapView] setRegion:region animated:YES];
+//}
 
 //allows draggable pin
--(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
-    
-}
-
--(void)gotoLocation {
-    
-    MKCoordinateRegion region;
-    
-    CLLocationCoordinate2D center;
-    center.latitude = BRIS_LAT;
-    center.longitude = BRIS_LNG;
-    MKCoordinateSpan span;
-    span.latitudeDelta = SPAN_VALUE;
-    span.longitudeDelta = SPAN_VALUE;
-    
-    region.center = center;
-    region.span = span;
-    
-    [mapView setRegion:region animated:YES];
-    
-}
+//-(void)mapView:(MKMapView *)mapView
+//annotationView:(MKAnnotationView *) viewdidChangeDragState:(MKAnnotationViewDragState)newState
+//  fromOldState:(MKAnnotationViewDragState)oldState {
+//    
+//}
+//
+//-(void)gotoLocation {
+//    MKCoordinateRegion region;
+//    CLLocationCoordinate2D center;
+//    center.latitude = [[self currentLatitude] doubleValue];
+//    center.longitude = [[self currentLongitude] doubleValue];
+//    MKCoordinateSpan span;
+//    span.latitudeDelta = SPAN_VALUE;
+//    span.longitudeDelta = SPAN_VALUE;
+//    region.center = center;
+//    region.span = span;
+//    [mapView setRegion:region animated:YES];
+//}
 
 @end

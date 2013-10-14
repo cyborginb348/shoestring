@@ -56,10 +56,12 @@
     
     if([[segue identifier] isEqualToString:@"historyDetail"]) {
         DayViewController *tvc= (DayViewController*) [segue destinationViewController];
+
+        //set the date in the DayViewController to the history date
+        [tvc setCurrentDate:[self selectedDate]];
+        NSLog(@"prepare for segue");
         //[tvc setDelegate:self];
         [tvc setManagedObjectContext:[self managedObjectContext]];
-        
-        [tvc setDisplayDate:selectedDate];
     }
 }
 

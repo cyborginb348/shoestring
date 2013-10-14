@@ -19,7 +19,8 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
-@property (strong, nonatomic) NSDate *displayDate;
+@property (strong, nonatomic) NSDate *currentDate;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *total;
 

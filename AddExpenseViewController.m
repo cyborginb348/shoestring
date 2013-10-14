@@ -10,8 +10,6 @@
 #import "DayViewController.h"
 
 
-
-
 @interface AddExpenseViewController ()
 
 @end
@@ -31,7 +29,6 @@
 
 @synthesize currentLatitude, currentLongitude;
 @synthesize locationManager = _locationManager;
-@synthesize locationSegmentControl;
 
 @synthesize autocompleteTableView, autocompleteNames,itemNames;
 
@@ -50,8 +47,6 @@
     
     [self initialiseAutocomplete];
     
-    [self startLocationManager];
-
     //set delegates for keyboard dismissal
     [itemNameField setDelegate:self];
     [placeNameField setDelegate:self];
@@ -71,10 +66,28 @@
 	[[self starRatingControl] setDelegate:self];
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+    [self startLocationManager];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+//Method: prepare to Segue - either addExpense or viewExpense
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if([[segue identifier] isEqualToString:@"addMapLocation"]) {
+        AddMapViewController *amvc = (AddMapViewController*)[segue destinationViewController];
+
+        [amvc setCurrentLatitude:[self currentLatitude]];
+        [amvc setCurrentLongitude:[self currentLongitude]];
+        
+        [[self locationManager] stopUpdatingLocation];
+    }
 }
 
 
@@ -96,6 +109,9 @@
     [[self currentExpense]setSavingTip:[savingTipField text]];
     [[self currentExpense]setRating: [NSNumber numberWithInt: rate]];
     [[self currentExpense]setDate:[self getTodaysDate]];
+    [[self currentExpense]setLatitude:[self currentLatitude]];
+    [[self currentExpense]setLatitude:[self currentLongitude]];
+    
     
     [[self delegate] addExpenseViewControllerDidSave];
 }
@@ -239,18 +255,14 @@
     [self setRate:rating];
 }
 
-#pragma mark - segment control and location manager
+#pragma mark - Location manager
 
-- (IBAction)locationSegmentControl:(id)sender {
-    
-    if([[self locationSegmentControl] selectedSegmentIndex] == 1) {
-    
-        [self performSegueWithIdentifier:@"viewExpenseMap" sender:self];
-        
-    } else {
-        //store location as current
-        //[[self currentExpense]setLatitude:<#(NSNumber *)#>:[]];
-    }
+
+- (IBAction)findLocation:(id)sender {
+}
+
+- (IBAction)useCurrentLocation:(id)sender {
+        [self startLocationManager];
 }
 
 -(void) startLocationManager {
@@ -282,9 +294,8 @@
     
     NSLog(@"lat %@", [self currentLatitude]);
     
+    
     NSLog(@"didUpdateToLocation %@ from %@", newLocation, oldLocation);
-  
-  
 }
 
 @end
