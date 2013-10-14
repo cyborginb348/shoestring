@@ -44,14 +44,15 @@
                         </prototypes>
                         <sections/>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Today" id="tRX-XA-rYc">
+                    <navigationItem key="navigationItem" id="tRX-XA-rYc">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" style="plain" id="oKV-jz-Dvd">
                             <view key="customView" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ecj-ZC-rlV">
-                                <rect key="frame" x="5" y="5" width="110" height="33"/>
+                                <rect key="frame" x="5" y="5" width="60" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="_____" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUU-ih-eWo">
-                                        <rect key="frame" x="0.0" y="-15" width="68" height="23"/>
+                                        <rect key="frame" x="0.0" y="10" width="68" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="Xae-gb-rhF"/>
                                             <constraint firstAttribute="width" constant="68" id="efE-Z0-eLj"/>
@@ -60,8 +61,8 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="$100" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84X-rt-uHg">
-                                        <rect key="frame" x="4" y="8" width="48" height="18"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84X-rt-uHg">
+                                        <rect key="frame" x="6" y="8" width="48" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="Ugv-Vy-TUp"/>
                                             <constraint firstAttribute="height" constant="18" id="bab-4e-Y62"/>
@@ -72,9 +73,6 @@
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="_____" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4S-gl-kLe">
                                         <rect key="frame" x="0.0" y="10" width="68" height="23"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="23" id="gtz-ad-gc2"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -82,16 +80,37 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="E4S-gl-kLe" firstAttribute="bottom" secondItem="ecj-ZC-rlV" secondAttribute="bottom" type="default" id="5wT-MD-c0E"/>
-                                    <constraint firstItem="bUU-ih-eWo" firstAttribute="top" secondItem="ecj-ZC-rlV" secondAttribute="top" constant="-15" id="IXt-MN-XPJ"/>
+                                    <constraint firstItem="bUU-ih-eWo" firstAttribute="baseline" secondItem="E4S-gl-kLe" secondAttribute="baseline" type="default" id="6Uh-wi-vHb"/>
+                                    <constraint firstItem="bUU-ih-eWo" firstAttribute="top" secondItem="E4S-gl-kLe" secondAttribute="top" type="default" id="NZc-F8-4QT"/>
                                     <constraint firstItem="84X-rt-uHg" firstAttribute="top" secondItem="ecj-ZC-rlV" secondAttribute="top" constant="8" id="Rjv-SV-Zju"/>
+                                    <constraint firstItem="84X-rt-uHg" firstAttribute="centerX" secondItem="ecj-ZC-rlV" secondAttribute="centerX" type="default" id="YG2-QE-xW4"/>
+                                    <constraint firstAttribute="bottom" secondItem="bUU-ih-eWo" secondAttribute="bottom" type="default" id="d03-g2-3GV"/>
                                     <constraint firstItem="E4S-gl-kLe" firstAttribute="trailing" secondItem="bUU-ih-eWo" secondAttribute="trailing" type="default" id="j7y-PY-LsC"/>
-                                    <constraint firstItem="E4S-gl-kLe" firstAttribute="leading" secondItem="ecj-ZC-rlV" secondAttribute="leading" type="default" id="jg8-hQ-zuh"/>
-                                    <constraint firstItem="84X-rt-uHg" firstAttribute="leading" secondItem="ecj-ZC-rlV" secondAttribute="leading" constant="4" id="lui-XR-TnV"/>
+                                    <constraint firstItem="bUU-ih-eWo" firstAttribute="leading" secondItem="E4S-gl-kLe" secondAttribute="leading" type="default" id="m0r-cy-Umi"/>
                                     <constraint firstItem="bUU-ih-eWo" firstAttribute="leading" secondItem="ecj-ZC-rlV" secondAttribute="leading" type="default" id="nKQ-tA-2Qm"/>
                                 </constraints>
                             </view>
                         </barButtonItem>
+                        <view key="titleView" contentMode="scaleToFill" id="zpU-ik-O1i">
+                            <rect key="frame" x="95" y="6" width="129" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vl-yN-JZu">
+                                    <rect key="frame" x="20" y="0.0" width="109" height="33"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="8Vl-yN-JZu" firstAttribute="top" secondItem="zpU-ik-O1i" secondAttribute="top" type="default" id="Gtv-Ko-e8z"/>
+                                <constraint firstItem="8Vl-yN-JZu" firstAttribute="leading" secondItem="zpU-ik-O1i" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="IMu-zJ-vFi"/>
+                                <constraint firstAttribute="trailing" secondItem="8Vl-yN-JZu" secondAttribute="trailing" type="default" id="epN-li-Jcz"/>
+                                <constraint firstAttribute="bottom" secondItem="8Vl-yN-JZu" secondAttribute="bottom" type="default" id="pLG-BO-cGV"/>
+                            </constraints>
+                        </view>
                         <barButtonItem key="rightBarButtonItem" title="new item" style="plain" id="Buf-dY-Wy2">
                             <connections>
                                 <segue destination="Kyj-bf-pXN" kind="modal" identifier="addExpense" id="Qve-RX-7gx"/>
@@ -99,6 +118,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dateLabel" destination="8Vl-yN-JZu" id="l8b-JP-CQG"/>
                         <outlet property="total" destination="84X-rt-uHg" id="RPF-n1-JhE"/>
                     </connections>
                 </tableViewController>

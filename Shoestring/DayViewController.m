@@ -20,6 +20,7 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize total;
 @synthesize displayDate;
+@synthesize dateLabel;
 
 
 - (void)viewDidLoad
@@ -59,7 +60,7 @@
     NSString *date = [dateFormatter stringFromDate:[self displayDate]];
     NSLog(@"%@",date);
     
-    [self setTitle:date];
+    [[self dateLabel]setText:date];
     
     [self showTotal];
 }
@@ -364,8 +365,8 @@
 }
 
 -(void) showTotal {
-    AddExpenseViewController *aevc = [[AddExpenseViewController alloc]init];
-    [total setText:[NSString stringWithFormat:@"$%@",[self calculateTotal:[aevc getTodaysDate] forManagedObjectContext:[self managedObjectContext]]]];
+    
+    [total setText:[NSString stringWithFormat:@"$%@",[self calculateTotal:[self displayDate] forManagedObjectContext:[self managedObjectContext]]]];
 }
 
 
