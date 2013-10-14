@@ -23,6 +23,11 @@
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
 - (IBAction)dismissKeyboard:(id)sender;
+- (IBAction)findLocation:(id)sender;
+- (IBAction)useCurrentLocation:(id)sender;
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
+-(void) startLocationManager;
 
 -(NSDate*) getTodaysDate;
 
@@ -43,11 +48,7 @@
 @property (strong, nonatomic) NSNumber *currentLatitude;
 @property (strong, nonatomic) NSNumber *currentLongitude;
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *locationSegmentControl;
-- (IBAction)locationSegmentControl:(id)sender;
--(void) startLocationManager;
 
 
 @property (nonatomic, weak) id <AddExpenseViewControllerDelegate> delegate;

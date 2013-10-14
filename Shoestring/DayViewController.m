@@ -19,7 +19,7 @@
 //internal instance variable
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize total;
-@synthesize displayDate;
+@synthesize currentDate;
 @synthesize dateLabel;
 
 
@@ -39,14 +39,14 @@
     //assign today to current dat (if Today tabBar item selected)
     AddExpenseViewController *aevc = [[AddExpenseViewController alloc]init];
     
-    NSLog(@"Initial Date %@)", [self displayDate]);
+    NSLog(@"Initial Date %@)", [self currentDate]);
     
     //query the request as the required date
-    if([self displayDate] == NULL) {
-        [self setDisplayDate:[aevc getTodaysDate]];
+    if([self currentDate] == NULL) {
+        [self setCurrentDate:[aevc getTodaysDate]];
     }
 
-    NSLog(@"AFter set Date %@)", [self displayDate]);
+    NSLog(@"AFter set Date %@)", [self currentDate]);
     
     
     NSError *error = nil;
@@ -57,7 +57,7 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"EEE MMM d"];
-    NSString *date = [dateFormatter stringFromDate:[self displayDate]];
+    NSString *date = [dateFormatter stringFromDate:[self currentDate]];
     NSLog(@"%@",date);
     
     [[self dateLabel]setText:date];
@@ -232,9 +232,9 @@
     
     //set the query predicate to select the correct display date
    
-    NSLog(@"predicate DAte: %@", displayDate);
+    NSLog(@"predicate Date: %@", currentDate);
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date == %@",displayDate];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date == %@",currentDate];
     [fetchRequest setPredicate:predicate];
 
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"category"
@@ -366,7 +366,7 @@
 
 -(void) showTotal {
     
-    [total setText:[NSString stringWithFormat:@"$%@",[self calculateTotal:[self displayDate] forManagedObjectContext:[self managedObjectContext]]]];
+    [total setText:[NSString stringWithFormat:@"$%@",[self calculateTotal:[self currentDate] forManagedObjectContext:[self managedObjectContext]]]];
 }
 
 

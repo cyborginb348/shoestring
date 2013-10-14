@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "AddExpenseViewController.h"
 #import "VBAnnotation.h"
 
 @interface AddMapViewController : UIViewController
@@ -15,6 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) CLLocationManager *locationManager;
+@property (strong, nonatomic) NSNumber *currentLatitude;
+@property (strong, nonatomic) NSNumber *currentLongitude;
 
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;
