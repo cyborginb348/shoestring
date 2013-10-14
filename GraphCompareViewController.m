@@ -7,19 +7,21 @@
 //
 
 #import "GraphCompareViewController.h"
-#import "CloudService.h"
 #import "Categories.h"
 
 @interface GraphCompareViewController ()
 
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocation *location;
+
 @property (nonatomic, strong) CPTBarPlot *myPlot;
 @property (nonatomic, strong) CPTBarPlot *avgPlot;
 
-@property (nonatomic, weak) NSDictionary *cloudValues;
+@property (nonatomic, strong) NSDictionary *cloudValues;
 
 @property (nonatomic, strong) NSMutableArray *averageDailyValues;
 
--(void)getAverageData;
+-(void)getCloudData;
 -(void)initPlot;
 -(void)configureGraph;
 -(void)configurePlots;
@@ -47,7 +49,13 @@
     [self.HUD setDelegate:self];
     [self.HUD setLabelText:@"Loading..."];
     
-    [self getAverageData];
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.distanceFilter = kCLDistanceFilterNone;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    [_locationManager startUpdatingLocation];
+    
+    //[self getCloudData];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -63,17 +71,18 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)getAverageData
+-(void)getCloudData
 {
     [self.HUD show:YES];
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:-27.48331 longitude:153.00947]; // REPLACE WITH ACTUAL LOCATION
-    [[CloudService getInstance] getAverageFor:location completion:^(NSDictionary *result, NSString *place, NSError *error)
+    
+    //CLLocation *location = [[CLLocation alloc] initWithLatitude:-27.48331 longitude:153.00947]; // REPLACE WITH ACTUAL LOCATION
+    [[CloudService getInstance] getAverageFor:_location completion:^(NSDictionary *result, NSString *place, NSError *error)
      {
          [self.HUD hide:YES];
          if (!error)
          {
+             self.placeLabel.text = place;
              self.cloudValues = [NSDictionary dictionaryWithDictionary:result];
-             NSLog(@"%@", self.cloudValues);
              [self initPlot];
          }
          else
@@ -152,9 +161,26 @@
         {
             [_averageDailyValues addObject:[NSNumber numberWithFloat:sums[i]/counts[i]]];
         }
-        NSLog(@"%@", result);
-        NSLog(@"Bla: %@", _averageDailyValues);
     }
+}
+
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    [self.HUD hide:YES];
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"didUpdateToLocation: %@", newLocation);
+    [_locationManager stopUpdatingLocation];
+    _location = newLocation;
+    [self getCloudData];
 }
 
 #pragma mark - Chart behaviour
@@ -252,54 +278,13 @@
 {
     if ((fieldEnum == CPTBarPlotFieldBarTip) && (idx < 5))
     {
-        if ([plot.identifier isEqual:@"my"])
+        if ([plot.identifier isEqual:@"my"] && idx < 5)
         {
-            if (idx < 5)
-                return _averageDailyValues[idx];
-            
-            float f = 0.0;
-            switch (idx) {
-                case 0:
-                    f = 21.0;
-                    break;
-                case 1:
-                    f = 30.0;
-                    break;
-                case 2:
-                    f = 16.0;
-                    break;
-                case 3:
-                    f = 14.0;
-                    break;
-                case 4:
-                    f = 19.0;
-                    break;
-            }
-            
-            return [NSDecimalNumber numberWithFloat:f];
+            return _averageDailyValues[idx];
         }
         else if ([plot.identifier isEqual:@"avg"])
         {
-            float f = 0.0;
-            switch (idx) {
-                case 0:
-                    f = 23.0;
-                    break;
-                case 1:
-                    f = 25.0;
-                    break;
-                case 2:
-                    f = 20.0;
-                    break;
-                case 3:
-                    f = 15.0;
-                    break;
-                case 4:
-                    f = 17.0;
-                    break;
-            }
-            
-            return [NSDecimalNumber numberWithFloat:f];
+            return [self.cloudValues objectForKey:[NSNumber numberWithUnsignedInt:idx+1]];
         }
     }
     return [NSDecimalNumber numberWithUnsignedInt:idx];

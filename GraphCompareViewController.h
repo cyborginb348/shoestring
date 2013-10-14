@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
+#import "CloudService.h"
 
-@interface GraphCompareViewController : UIViewController <CPTBarPlotDataSource, MBProgressHUDDelegate>
+@interface GraphCompareViewController : UIViewController <CPTBarPlotDataSource, MBProgressHUDDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -18,5 +19,6 @@
 @property (strong, nonatomic) MBProgressHUD *HUD;
 
 - (IBAction)periodChanged:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *placeLabel;
 
 @end
