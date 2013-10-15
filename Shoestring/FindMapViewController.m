@@ -43,7 +43,7 @@
 
     //create new favourite managed object
     currentFavourite = (Favourite*) [NSEntityDescription insertNewObjectForEntityForName:@"Favourite"
-                                                                  inManagedObjectContext:[self managedObjectContext]];
+            inManagedObjectContext:[self managedObjectContext]];
     
     }
 
@@ -112,5 +112,12 @@
     if(![[self managedObjectContext] save:&error]) {
         NSLog(@"Error! %@", error);
     }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saved"
+                                                    message: [NSString stringWithFormat:@"%@ is saved as a favourite.",[self nameFromFT]]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 @end

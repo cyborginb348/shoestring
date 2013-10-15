@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Favourite.h"
 
 @interface HomeViewController : UIViewController
 <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+
+@property (nonatomic, strong) Favourite *favourite;
 
 
 @end
