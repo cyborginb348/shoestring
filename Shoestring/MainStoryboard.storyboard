@@ -1128,7 +1128,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Nearby" id="Uve-F6-MhS">
-                        <barButtonItem key="rightBarButtonItem" title="Save as favourite" id="fXc-aP-Quf"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save as favourite" id="fXc-aP-Quf">
+                            <connections>
+                                <action selector="saveFavourite:" destination="9hW-1E-H8r" id="Ug4-95-8WR"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="findMapView" destination="j9w-bK-oMY" id="UQc-1L-72l"/>

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "AppDelegate.h"
+#import "Favourite.h"
 
 @interface FindMapViewController : UIViewController<MKMapViewDelegate>
 
@@ -18,7 +20,10 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *findMapView;
 
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
+@property (nonatomic, strong) Favourite *currentFavourite;
 
+- (IBAction)saveFavourite:(id)sender;
 
 @end

@@ -14,7 +14,11 @@
 
 @implementation FindMapViewController
 
-@synthesize addressFromFT,phoneFromFT,nameFromFT,ratingFromFT, findMapView = _findMapView;
+@synthesize currentFavourite;
+@synthesize managedObjectContext;
+
+@synthesize addressFromFT,phoneFromFT,nameFromFT,ratingFromFT;
+@synthesize findMapView = _findMapView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,6 +37,14 @@
     [self.findMapView.delegate self];
     [self.findMapView setShowsUserLocation:YES];
     [self updateMap];
+    
+    AppDelegate *appDelegate = (AppDelegate*) [[UIApplication sharedApplication]delegate];
+    managedObjectContext = [appDelegate managedObjectContext];
+
+    //create new favourite managed object
+    currentFavourite = (Favourite*) [NSEntityDescription insertNewObjectForEntityForName:@"Favourite"
+                                                                  inManagedObjectContext:[self managedObjectContext]];
+    
     }
 
 - (void)didReceiveMemoryWarning
@@ -66,8 +78,8 @@
             MKCoordinateRegion placeRegion;
             placeRegion.center.latitude = placeAddress.latitude;
             placeRegion.center.longitude = placeAddress.longitude;
-            placeRegion.span.longitudeDelta = 0.1f;
-            placeRegion.span.latitudeDelta = 0.1f;
+            placeRegion.span.longitudeDelta = 0.01f;
+            placeRegion.span.latitudeDelta = 0.01f;
             [self.findMapView setRegion:placeRegion animated:NO];
             
             Annotation *annPlace= [[Annotation alloc]initWithPosition:placeAddress];
@@ -76,17 +88,29 @@
             annPlace.subtitle = [NSString stringWithFormat:@"Rating from Yelp: %@\n Phone:%@", ratingFromFT, phoneFromFT];
             
             [self.findMapView addAnnotation:annPlace];
-
+            
+            //save to Coredata
+            [[self currentFavourite] setFavouritePlace:[self nameFromFT]];
+            [[self currentFavourite] setLatitude:[NSNumber numberWithDouble:placeAddress.latitude]];
+            [[self currentFavourite] setLongitude:[NSNumber numberWithDouble:placeAddress.longitude]];
 
             NSLog(@"lat,lon: %f ,%f", placeAddress.latitude, placeAddress.longitude);
-        }
-        else {
+            
+        } else {
             NSLog(@"No Area of Interest Was Found");
         }
     }];
+      
+   }
 
+
+
+- (IBAction)saveFavourite:(id)sender {
+    
+    NSError *error;
+    
+    if(![[self managedObjectContext] save:&error]) {
+        NSLog(@"Error! %@", error);
+    }
 }
-
-
-
 @end
