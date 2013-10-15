@@ -56,6 +56,8 @@
     [_locationManager startUpdatingLocation];
     
     //[self getCloudData];
+    int days = self.periodSlider.value;
+    self.periodLabel.text = [NSString stringWithFormat:(days>1)?@"%d days":@"%d day",days];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -302,6 +304,7 @@
 {
     UISlider *slider = sender;
     int days = slider.value;
+    self.periodLabel.text = [NSString stringWithFormat:(days>1)?@"%d days":@"%d day",days];
     [self getAverageValues:days];
     [self.hostView.hostedGraph reloadData];
 }

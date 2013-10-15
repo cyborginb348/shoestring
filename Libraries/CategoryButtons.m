@@ -83,15 +83,15 @@
     
     [categoryLabel setText:@""];
     
-    if(currentBtn.selected == NO) {
+    /*if(currentBtn.selected == NO) {*/
         [currentBtn setSelected:YES];
         [categoryLabel setText:[categoryNames objectAtIndex: [currentBtn tag]]];
         [self setButtonsUnselected:currentBtn]; //set all buttons unselected except current
         currentCategory = [categoryNames objectAtIndex: [currentBtn tag]];
         [self notifyDelegate];
-    } else {
+    /*} else {
         [currentBtn setSelected:NO];
-    }
+    }*/
     
 }
 

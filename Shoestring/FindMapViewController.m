@@ -66,14 +66,14 @@
             MKCoordinateRegion placeRegion;
             placeRegion.center.latitude = placeAddress.latitude;
             placeRegion.center.longitude = placeAddress.longitude;
-            placeRegion.span.longitudeDelta = 0.30f;
-            placeRegion.span.latitudeDelta = 0.30f;
+            placeRegion.span.longitudeDelta = 0.1f;
+            placeRegion.span.latitudeDelta = 0.1f;
             [self.findMapView setRegion:placeRegion animated:NO];
             
             Annotation *annPlace= [[Annotation alloc]initWithPosition:placeAddress];
             
             annPlace.title = nameFromFT;
-            annPlace.subtitle = [NSString stringWithFormat:@"RatingStar from Yelp: %@\n Phone:%@", ratingFromFT, phoneFromFT];
+            annPlace.subtitle = [NSString stringWithFormat:@"Rating from Yelp: %@\n Phone:%@", ratingFromFT, phoneFromFT];
             
             [self.findMapView addAnnotation:annPlace];
 

@@ -17,5 +17,7 @@
 @property (weak, nonatomic) IBOutlet CPTGraphHostingView *hostView;
 
 - (IBAction)periodChanged:(id)sender;
+@property (weak, nonatomic) IBOutlet UISlider *periodSlider;
+@property (weak, nonatomic) IBOutlet UILabel *periodLabel;
 
 @end
