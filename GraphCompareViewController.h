@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet CPTGraphHostingView *hostView;
 @property (strong, nonatomic) MBProgressHUD *HUD;
 
+@property (weak, nonatomic) IBOutlet UISlider *periodSlider;
+@property (weak, nonatomic) IBOutlet UILabel *periodLabel;
 - (IBAction)periodChanged:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *placeLabel;
 
