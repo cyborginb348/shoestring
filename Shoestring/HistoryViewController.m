@@ -7,7 +7,6 @@
 //
 
 #import "HistoryViewController.h"
-#import "HistoryDetailViewController.h"
 #import "DayViewController.h"
 #import "AppDelegate.h"
 
@@ -279,6 +278,11 @@
     [self setSelectedDate:dateFromString];
     
     NSLog(@"cell date: %@", dateFromString);
+    
+    
+    
+    
+    
 }
 
 #pragma mark - format Date
@@ -290,6 +294,7 @@
     [dateFormatter setDateFormat:@"EEEE MMMM d yyyy"];
     return [dateFormatter stringFromDate:date];
 }
+
 
 
 

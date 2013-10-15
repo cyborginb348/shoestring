@@ -48,6 +48,7 @@
 		4D5866EE17EE7979000DF65F /* OAServiceTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5866D817EE7979000DF65F /* OAServiceTicket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4D5866EF17EE7979000DF65F /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5866DB17EE7979000DF65F /* OAToken.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4D5866F017EE7979000DF65F /* OATokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5866DD17EE7979000DF65F /* OATokenManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4D85E1AA180DE9000017F675 /* AddHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D85E1A9180DE9000017F675 /* AddHistoryViewController.m */; };
 		4D8F4DEC17F9BCEC00FD90AB /* star_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F4DE717F9BCEC00FD90AB /* star_highlighted.png */; };
 		4D8F4DED17F9BCEC00FD90AB /* star_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F4DE817F9BCEC00FD90AB /* star_highlighted@2x.png */; };
 		4D8F4DEE17F9BCEC00FD90AB /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F4DE917F9BCEC00FD90AB /* star.png */; };
@@ -93,7 +94,6 @@
 		7B37EC7317E14E3B003AFCA2 /* FindTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC7217E14E3B003AFCA2 /* FindTableViewController.m */; };
 		7B7A5A9A17E15FB500E6BC58 /* FindMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A5A9917E15FB500E6BC58 /* FindMapViewController.m */; };
 		7B7A5A9D17E1606B00E6BC58 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A5A9C17E1606B00E6BC58 /* HistoryViewController.m */; };
-		7B7A5AA017E160A000E6BC58 /* HistoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A5A9F17E160A000E6BC58 /* HistoryDetailViewController.m */; };
 		7BC1DE5F17F500F8001930DC /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC4CA2117F4687200F04317 /* WindowsAzureMobileServices.framework */; };
 		7BC2F91A17D82B8C00AAB3FE /* DayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2F91917D82B8C00AAB3FE /* DayViewController.m */; };
 		7BC2F91D17D82C3300AAB3FE /* AddExpenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2F91C17D82C3300AAB3FE /* AddExpenseViewController.m */; };
@@ -251,6 +251,8 @@
 		4D5866DC17EE7979000DF65F /* OATokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OATokenManager.h; sourceTree = "<group>"; };
 		4D5866DD17EE7979000DF65F /* OATokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OATokenManager.m; sourceTree = "<group>"; };
 		4D5866DE17EE7979000DF65F /* OAuthConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthConsumer.h; sourceTree = "<group>"; };
+		4D85E1A8180DE9000017F675 /* AddHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHistoryViewController.h; sourceTree = "<group>"; };
+		4D85E1A9180DE9000017F675 /* AddHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHistoryViewController.m; sourceTree = "<group>"; };
 		4D8F4DE717F9BCEC00FD90AB /* star_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_highlighted.png; sourceTree = "<group>"; };
 		4D8F4DE817F9BCEC00FD90AB /* star_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_highlighted@2x.png"; sourceTree = "<group>"; };
 		4D8F4DE917F9BCEC00FD90AB /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
@@ -310,8 +312,6 @@
 		7B7A5A9917E15FB500E6BC58 /* FindMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindMapViewController.m; sourceTree = "<group>"; };
 		7B7A5A9B17E1606B00E6BC58 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
 		7B7A5A9C17E1606B00E6BC58 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
-		7B7A5A9E17E160A000E6BC58 /* HistoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryDetailViewController.h; sourceTree = "<group>"; };
-		7B7A5A9F17E160A000E6BC58 /* HistoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailViewController.m; sourceTree = "<group>"; };
 		7BC2F91817D82B8C00AAB3FE /* DayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayViewController.h; sourceTree = "<group>"; };
 		7BC2F91917D82B8C00AAB3FE /* DayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayViewController.m; sourceTree = "<group>"; };
 		7BC2F91B17D82C3300AAB3FE /* AddExpenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddExpenseViewController.h; path = ../AddExpenseViewController.h; sourceTree = "<group>"; };
@@ -626,8 +626,8 @@
 			children = (
 				7B7A5A9B17E1606B00E6BC58 /* HistoryViewController.h */,
 				7B7A5A9C17E1606B00E6BC58 /* HistoryViewController.m */,
-				7B7A5A9E17E160A000E6BC58 /* HistoryDetailViewController.h */,
-				7B7A5A9F17E160A000E6BC58 /* HistoryDetailViewController.m */,
+				4D85E1A8180DE9000017F675 /* AddHistoryViewController.h */,
+				4D85E1A9180DE9000017F675 /* AddHistoryViewController.m */,
 			);
 			name = History;
 			sourceTree = "<group>";
@@ -914,7 +914,7 @@
 				7B37EC7317E14E3B003AFCA2 /* FindTableViewController.m in Sources */,
 				7B7A5A9A17E15FB500E6BC58 /* FindMapViewController.m in Sources */,
 				7B7A5A9D17E1606B00E6BC58 /* HistoryViewController.m in Sources */,
-				7B7A5AA017E160A000E6BC58 /* HistoryDetailViewController.m in Sources */,
+				4D85E1AA180DE9000017F675 /* AddHistoryViewController.m in Sources */,
 				4D1338B017E67DCE0047308B /* Favourite.m in Sources */,
 				4D1338B317E67E210047308B /* CloudAverage.m in Sources */,
 				4D5866DF17EE7979000DF65F /* MBProgressHUD.m in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="12E3067" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="mCr-fU-2cg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="mCr-fU-2cg">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
@@ -681,7 +681,13 @@
                             <outlet property="delegate" destination="zJe-vG-DNd" id="NLD-7O-6Zc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="History" id="pzp-p4-GOS"/>
+                    <navigationItem key="navigationItem" title="History" id="pzp-p4-GOS">
+                        <barButtonItem key="rightBarButtonItem" title="Add Day" id="W3m-jS-aau">
+                            <connections>
+                                <segue destination="xEn-mX-isV" kind="modal" identifier="addDay" id="yhf-2D-Jsw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9z1-f0-XSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1183,36 +1189,87 @@
             </objects>
             <point key="canvasLocation" x="-2987" y="-1257"/>
         </scene>
-        <!--History Detail View Controller - Detail-->
-        <scene sceneID="k2C-MM-lBR">
+        <!--Add History View Controller-->
+        <scene sceneID="jQm-lp-AGu">
             <objects>
-                <tableViewController title="Detail" id="u87-nI-AX9" customClass="HistoryDetailViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="r1n-t6-xKO">
+                <viewController id="xEn-mX-isV" customClass="AddHistoryViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kCT-Oe-PVM">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="K38-vo-tdj">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="u87-nI-AX9" id="gmK-ET-f6E"/>
-                            <outlet property="delegate" destination="u87-nI-AX9" id="OWY-7d-vsl"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Sept 11  2013" id="icS-hK-xtq"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NxV-QF-nMN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZwP-bt-rFA">
+                                <rect key="frame" x="0.0" y="133" width="320" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="403565186.60693997">
+                                    <!--2013-10-15 21:26:26 +0000-->
+                                </date>
+                                <timeZone key="timeZone" name="America/Los_Angeles">
+                                    <mutableData key="data">
+VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
+y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
+5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
+8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
+AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
+DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
+HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
+KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
+OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
+Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
+VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
+Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
+cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
+f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
+</mutableData>
+                                </timeZone>
+                            </datePicker>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mp8-Qv-DYa">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Add Day" id="wQe-w2-Oo4">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="O7l-8z-tce">
+                                            <connections>
+                                                <action selector="cancel:" destination="xEn-mX-isV" id="Phh-3K-bTT"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="sqf-WP-1dG">
+                                            <connections>
+                                                <action selector="save:" destination="xEn-mX-isV" id="IXM-31-uja"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a past date to add" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ukx-ci-gli">
+                                <rect key="frame" x="20" y="80" width="242" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="242" id="EIw-OU-6XR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZwP-bt-rFA" firstAttribute="trailing" secondItem="mp8-Qv-DYa" secondAttribute="trailing" type="default" id="684-H6-09O"/>
+                            <constraint firstItem="ZwP-bt-rFA" firstAttribute="leading" secondItem="mp8-Qv-DYa" secondAttribute="leading" type="default" id="LPz-LX-Z0X"/>
+                            <constraint firstItem="mp8-Qv-DYa" firstAttribute="top" secondItem="kCT-Oe-PVM" secondAttribute="top" type="default" id="OTk-zA-Jdb"/>
+                            <constraint firstItem="Ukx-ci-gli" firstAttribute="leading" secondItem="kCT-Oe-PVM" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="UlT-ID-H9E"/>
+                            <constraint firstItem="ZwP-bt-rFA" firstAttribute="leading" secondItem="kCT-Oe-PVM" secondAttribute="leading" type="default" id="c2X-Ni-SiL"/>
+                            <constraint firstItem="ZwP-bt-rFA" firstAttribute="top" secondItem="kCT-Oe-PVM" secondAttribute="top" constant="133" id="k2o-ah-t1n"/>
+                            <constraint firstAttribute="trailing" secondItem="ZwP-bt-rFA" secondAttribute="trailing" type="default" id="tFO-us-6GR"/>
+                            <constraint firstItem="Ukx-ci-gli" firstAttribute="top" secondItem="kCT-Oe-PVM" secondAttribute="top" constant="80" id="vMq-40-cIa"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z9s-Qg-TNO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2866" y="-351"/>
+            <point key="canvasLocation" x="-2338" y="-658"/>
         </scene>
         <!--Navigation Controller - Graphs-->
         <scene sceneID="nhj-MJ-lQa">
