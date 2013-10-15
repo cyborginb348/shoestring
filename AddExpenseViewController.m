@@ -99,21 +99,29 @@
     
     //assigns values to the current expense object and calls the delegate method to save the context (in DayViewController)
     
-    [[self currentExpense]setCategory:currentCategory];
-    [[self currentExpense]setItemName:[itemNameField text]];
-    [[self currentExpense]setPlaceName:[placeNameField text]];
-    
-    NSNumberFormatter *formatString = [[NSNumberFormatter alloc]init];
-    [[self currentExpense]setAmount: [formatString numberFromString:[amountField text]]];
-    
-    [[self currentExpense]setSavingTip:[savingTipField text]];
-    [[self currentExpense]setRating: [NSNumber numberWithInt: rate]];
-    [[self currentExpense]setDate:[self getTodaysDate]];
-    [[self currentExpense]setLatitude:[self currentLatitude]];
-    [[self currentExpense]setLatitude:[self currentLongitude]];
-    
-    
-    [[self delegate] addExpenseViewControllerDidSave];
+    if (itemNameField.text.length == 0)
+    {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a name!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [av show];
+    }
+    else
+    {
+        [[self currentExpense]setCategory:currentCategory];
+        [[self currentExpense]setItemName:[itemNameField text]];
+        [[self currentExpense]setPlaceName:[placeNameField text]];
+        
+        NSNumberFormatter *formatString = [[NSNumberFormatter alloc]init];
+        [[self currentExpense]setAmount: [formatString numberFromString:[amountField text]]];
+        
+        [[self currentExpense]setSavingTip:[savingTipField text]];
+        [[self currentExpense]setRating: [NSNumber numberWithInt: rate]];
+        [[self currentExpense]setDate:[self getTodaysDate]];
+        [[self currentExpense]setLatitude:[self currentLatitude]];
+        [[self currentExpense]setLatitude:[self currentLongitude]];
+        
+        
+        [[self delegate] addExpenseViewControllerDidSave];
+    }
 }
 
 #pragma mark - CategoryButton Actions
