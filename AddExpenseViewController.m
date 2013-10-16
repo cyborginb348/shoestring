@@ -308,9 +308,6 @@
     CLLocationCoordinate2D coord = [newLocation coordinate];
     [self setCurrentLatitude: [NSNumber numberWithFloat: coord.latitude]];
     [self setCurrentLongitude: [NSNumber numberWithFloat: coord.longitude]];
-    
-//    NSLog(@"lat %@", [self currentLatitude]);
-//    NSLog(@"didUpdateToLocation %@ from %@", newLocation, oldLocation);
 }
 
 @end

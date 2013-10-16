@@ -30,18 +30,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSError *error = nil;
-    if(![[self fetchedResultsController] performFetch:&error]) {
-        NSLog(@"Error! %@", error);
-        abort();
-    }
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    NSError *error = nil;
+    if(![[self fetchedResultsController] performFetch:&error]) {
+        NSLog(@"Error! %@", error);
+        abort();
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,14 +57,13 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if([[segue identifier] isEqualToString:@"historyDetail"]) {
+        
         DayViewController *dvc= (DayViewController*) [segue destinationViewController];
 
         //get the current index path
         NSIndexPath *indexPath = [[self tableView]indexPathForSelectedRow];
         
         NSString *title = [self tableView:[self tableView]titleForHeaderInSection:[indexPath section]];
-                            //[self tableView:tableView titleForHeaderInSection:indexPath.section];
-        NSLog(@"title: %@", title);
         
         //set the NSDate field
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
@@ -69,19 +71,22 @@
         NSDate *dateFromString = [[NSDate alloc]init];
         dateFromString = [dateFormatter dateFromString:title];
         [self setSelectedDate:dateFromString];
-    
-        
-        
+
         [dvc setCurrentDate:[self selectedDate]];
-        
-        NSLog(@"prepare for segue");
-        //[tvc setDelegate:self];
         [dvc setManagedObjectContext:[self managedObjectContext]];
+    
+    } else if([[segue identifier] isEqualToString:@"addDay"]) {
+        
+        AddHistoryViewController *ahvc = (AddHistoryViewController*) [segue destinationViewController];
+        
+        //create new expense managed object, and set expense variable in new window being modally segued to...
+        Expense *expense = (Expense*) [NSEntityDescription insertNewObjectForEntityForName:@"Expense"
+                                                                    inManagedObjectContext:[self managedObjectContext]];
+        [ahvc setCurrentExpense:expense];
+        
+        //pass the managed object context
+        [ahvc setManagedObjectContext:[self managedObjectContext]];
     }
-    
-    
-    
-    
 }
 
 
@@ -293,7 +298,6 @@
     [dateFormatter setDateFormat:@"EEEE MMMM d yyyy"];
     return [dateFormatter stringFromDate:date];
 }
-
 
 
 

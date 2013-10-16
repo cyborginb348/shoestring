@@ -91,7 +91,7 @@
         ViewExpenseViewController *vevc = (ViewExpenseViewController*) [segue destinationViewController];
         NSIndexPath *indexPath  = [[self tableView] indexPathForSelectedRow];
         Expense *selectedExpense = (Expense*) [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [vevc setCurrentExpense:selectedExpense];
+        [vevc setCurrentExpense:selectedExpense]; 
     }  
 }
 
@@ -328,7 +328,6 @@
                             withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
-    
 }
 
 //Method: calculates and diplays the total of the expenses recored so far.

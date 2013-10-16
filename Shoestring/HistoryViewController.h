@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Expense.h"
 #import "DayViewController.h"
+#import "AddHistoryViewController.h"
+
 
 @interface HistoryViewController : UITableViewController
 <NSFetchedResultsControllerDelegate>
