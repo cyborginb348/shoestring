@@ -51,19 +51,19 @@
 }
 
 //Method: prepare to Segue - either addExpense or viewExpense
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if([[segue identifier] isEqualToString:@"historyDetail"]) {
-        DayViewController *tvc= (DayViewController*) [segue destinationViewController];
-        
-        
-        //set the date in the DayViewController to the history date
-        [tvc setCurrentDate:[self selectedDate]];
-        NSLog(@"prepare for segue");
-        //[tvc setDelegate:self];
-        [tvc setManagedObjectContext:[self managedObjectContext]];
-    }
-}
+//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//    if([[segue identifier] isEqualToString:@"historyDetail"]) {
+//        DayViewController *tvc= (DayViewController*) [segue destinationViewController];
+//        
+//        
+//        //set the date in the DayViewController to the history date
+//        [tvc setCurrentDate:[self selectedDate]];
+//        NSLog(@"prepare for segue");
+//        //[tvc setDelegate:self];
+//        [tvc setManagedObjectContext:[self managedObjectContext]];
+//    }
+//}
 
 
 #pragma mark - Table view data source
@@ -279,8 +279,10 @@
     
     NSLog(@"cell date: %@", dateFromString);
     
+    [self performSegueWithIdentifier:@"historyDetail" sender:self];
+    //set the date in the DayViewController to the history date
     
-    
+
     
     
 }
