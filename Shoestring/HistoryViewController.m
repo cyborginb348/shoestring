@@ -51,19 +51,38 @@
 }
 
 //Method: prepare to Segue - either addExpense or viewExpense
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    if([[segue identifier] isEqualToString:@"historyDetail"]) {
-//        DayViewController *tvc= (DayViewController*) [segue destinationViewController];
-//        
-//        
-//        //set the date in the DayViewController to the history date
-//        [tvc setCurrentDate:[self selectedDate]];
-//        NSLog(@"prepare for segue");
-//        //[tvc setDelegate:self];
-//        [tvc setManagedObjectContext:[self managedObjectContext]];
-//    }
-//}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if([[segue identifier] isEqualToString:@"historyDetail"]) {
+        DayViewController *dvc= (DayViewController*) [segue destinationViewController];
+
+        //get the current index path
+        NSIndexPath *indexPath = [[self tableView]indexPathForSelectedRow];
+        
+        NSString *title = [self tableView:[self tableView]titleForHeaderInSection:[indexPath section]];
+                            //[self tableView:tableView titleForHeaderInSection:indexPath.section];
+        NSLog(@"title: %@", title);
+        
+        //set the NSDate field
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zz"];
+        NSDate *dateFromString = [[NSDate alloc]init];
+        dateFromString = [dateFormatter dateFromString:title];
+        [self setSelectedDate:dateFromString];
+    
+        
+        
+        [dvc setCurrentDate:[self selectedDate]];
+        
+        NSLog(@"prepare for segue");
+        //[tvc setDelegate:self];
+        [dvc setManagedObjectContext:[self managedObjectContext]];
+    }
+    
+    
+    
+    
+}
 
 
 #pragma mark - Table view data source
@@ -264,28 +283,6 @@
 }
 */
 
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *title = [self tableView:tableView titleForHeaderInSection:indexPath.section];
-    
-    //set the NSDate field
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zz"];
-    NSDate *dateFromString = [[NSDate alloc]init];
-    dateFromString = [dateFormatter dateFromString:title];
-    [self setSelectedDate:dateFromString];
-    
-    NSLog(@"cell date: %@", dateFromString);
-    
-    [self performSegueWithIdentifier:@"historyDetail" sender:self];
-    //set the date in the DayViewController to the history date
-    
-
-    
-    
-}
 
 #pragma mark - format Date
 
