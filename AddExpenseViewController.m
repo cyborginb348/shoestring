@@ -99,9 +99,20 @@
     
     //assigns values to the current expense object and calls the delegate method to save the context (in DayViewController)
     
+    NSString *errorMessage;
+    NSNumberFormatter *formatString = [[NSNumberFormatter alloc]init];
+    NSNumber *amount = [formatString numberFromString:[amountField text]];
+    
     if (itemNameField.text.length == 0)
+        errorMessage = @"Please enter a name!";
+    else if (![currentCategory isKindOfClass:[NSString class]] || [currentCategory length]==0)
+        errorMessage = @"Please select a category!";
+    else if (!amount || !([amount floatValue]>0.0f))
+        errorMessage = @"Please enter a valid amount!";
+    
+    if (errorMessage)
     {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a name!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [av show];
     }
     else
@@ -117,7 +128,7 @@
         [[self currentExpense]setRating: [NSNumber numberWithInt: rate]];
         [[self currentExpense]setDate:[self getTodaysDate]];
         [[self currentExpense]setLatitude:[self currentLatitude]];
-        [[self currentExpense]setLatitude:[self currentLongitude]];
+        [[self currentExpense]setLongitude:[self currentLongitude]];
         
         
         [[self delegate] addExpenseViewControllerDidSave];

@@ -2,7 +2,7 @@
 //  Expense.m
 //  Shoestring
 //
-//  Created by mark on 12/10/13.
+//  Created by Yannick Schillinger on 15/10/2013.
 //  Copyright (c) 2013 mark. All rights reserved.
 //
 
@@ -20,5 +20,6 @@
 @dynamic placeName;
 @dynamic rating;
 @dynamic savingTip;
+@dynamic synced;
 
 @end

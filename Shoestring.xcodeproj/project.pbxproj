@@ -86,7 +86,6 @@
 		4DCCADC017D97D01000BCA6B /* glyphicons_045_calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCADBB17D97D01000BCA6B /* glyphicons_045_calendar.png */; };
 		4DCCADC117D97D01000BCA6B /* glyphicons_057_history.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DCCADBC17D97D01000BCA6B /* glyphicons_057_history.png */; };
 		4DDC8EC217F7A23500F1BD90 /* CategoryButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDC8EC117F7A23500F1BD90 /* CategoryButtons.m */; };
-		4DDFA4041809258B0013AE5D /* Expense.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDFA4031809258B0013AE5D /* Expense.m */; };
 		7B37EC6717E14C9A003AFCA2 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC6617E14C9A003AFCA2 /* HomeViewController.m */; };
 		7B37EC6A17E14D16003AFCA2 /* ViewExpenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC6917E14D16003AFCA2 /* ViewExpenseViewController.m */; };
 		7B37EC6D17E14DBA003AFCA2 /* ViewExpenseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC6C17E14DBA003AFCA2 /* ViewExpenseMapViewController.m */; };
@@ -100,6 +99,7 @@
 		7BC2F91D17D82C3300AAB3FE /* AddExpenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2F91C17D82C3300AAB3FE /* AddExpenseViewController.m */; };
 		ACC4CA2517F4688B00F04317 /* CloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC4CA2417F4688B00F04317 /* CloudService.m */; };
 		ACC4CA2717F468CD00F04317 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC4CA2617F468CD00F04317 /* CoreLocation.framework */; };
+		ACF51DFA180D41AC00BCC4AC /* Expense.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF51DF9180D41AC00BCC4AC /* Expense.m */; };
 		F5C768BF18091D4900C165E7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C768BE18091D4900C165E7 /* MapKit.framework */; };
 		F5C768CC1809569200C165E7 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C768CB1809569200C165E7 /* Annotation.m */; };
 /* End PBXBuildFile section */
@@ -296,8 +296,6 @@
 		4DCCADBC17D97D01000BCA6B /* glyphicons_057_history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_057_history.png; sourceTree = "<group>"; };
 		4DDC8EC017F7A23500F1BD90 /* CategoryButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryButtons.h; sourceTree = "<group>"; };
 		4DDC8EC117F7A23500F1BD90 /* CategoryButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryButtons.m; sourceTree = "<group>"; };
-		4DDFA4021809258B0013AE5D /* Expense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Expense.h; path = ../Expense.h; sourceTree = "<group>"; };
-		4DDFA4031809258B0013AE5D /* Expense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Expense.m; path = ../Expense.m; sourceTree = "<group>"; };
 		7B37EC6517E14C9A003AFCA2 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		7B37EC6617E14C9A003AFCA2 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		7B37EC6817E14D16003AFCA2 /* ViewExpenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewExpenseViewController.h; sourceTree = "<group>"; };
@@ -322,6 +320,8 @@
 		ACC4CA2317F4688B00F04317 /* CloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudService.h; sourceTree = "<group>"; };
 		ACC4CA2417F4688B00F04317 /* CloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudService.m; sourceTree = "<group>"; };
 		ACC4CA2617F468CD00F04317 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		ACF51DF8180D41AC00BCC4AC /* Expense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expense.h; sourceTree = SOURCE_ROOT; };
+		ACF51DF9180D41AC00BCC4AC /* Expense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expense.m; sourceTree = SOURCE_ROOT; };
 		F5C768BE18091D4900C165E7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F5C768CA1809569200C165E7 /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
 		F5C768CB1809569200C165E7 /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
@@ -690,8 +690,8 @@
 			isa = PBXGroup;
 			children = (
 				4D479C6C17D5D59500C565BD /* Shoestring.xcdatamodeld */,
-				4DDFA4021809258B0013AE5D /* Expense.h */,
-				4DDFA4031809258B0013AE5D /* Expense.m */,
+				ACF51DF8180D41AC00BCC4AC /* Expense.h */,
+				ACF51DF9180D41AC00BCC4AC /* Expense.m */,
 				ACC4CA2317F4688B00F04317 /* CloudService.h */,
 				ACC4CA2417F4688B00F04317 /* CloudService.m */,
 				4D1338B117E67E210047308B /* CloudAverage.h */,
@@ -917,12 +917,12 @@
 				7B7A5AA017E160A000E6BC58 /* HistoryDetailViewController.m in Sources */,
 				4D1338B017E67DCE0047308B /* Favourite.m in Sources */,
 				4D1338B317E67E210047308B /* CloudAverage.m in Sources */,
-				4DDFA4041809258B0013AE5D /* Expense.m in Sources */,
 				4D5866DF17EE7979000DF65F /* MBProgressHUD.m in Sources */,
 				4D5866E017EE7979000DF65F /* NSMutableURLRequest+Parameters.m in Sources */,
 				4D8F4DF617F9BCFE00FD90AB /* TFAppDelegate.m in Sources */,
 				4DA86813180A917B00A5C671 /* VBAnnotation.m in Sources */,
 				4D5866E117EE7979000DF65F /* NSString+URLEncoding.m in Sources */,
+				ACF51DFA180D41AC00BCC4AC /* Expense.m in Sources */,
 				4D5866E217EE7979000DF65F /* NSURL+Base.m in Sources */,
 				4D5866E317EE7979000DF65F /* Base64Transcoder.c in Sources */,
 				4D5866E417EE7979000DF65F /* hmac.c in Sources */,

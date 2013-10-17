@@ -2,7 +2,7 @@
 //  Expense.h
 //  Shoestring
 //
-//  Created by mark on 12/10/13.
+//  Created by Yannick Schillinger on 15/10/2013.
 //  Copyright (c) 2013 mark. All rights reserved.
 //
 
@@ -21,5 +21,6 @@
 @property (nonatomic, retain) NSString * placeName;
 @property (nonatomic, retain) NSNumber * rating;
 @property (nonatomic, retain) NSString * savingTip;
+@property (nonatomic, retain) NSNumber * synced;
 
 @end

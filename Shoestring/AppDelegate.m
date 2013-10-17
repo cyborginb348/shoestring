@@ -7,6 +7,13 @@
 // test   
 
 #import "AppDelegate.h"
+#import "CloudService.h"
+
+@interface AppDelegate ()
+
+@property (nonatomic, strong) NSArray *result;
+
+@end
 
 @implementation AppDelegate
 
@@ -50,7 +57,65 @@
     [historyView setManagedObjectContext:[self managedObjectContext]];
     [graphView setManagedObjectContext:[self managedObjectContext]];
     
+    
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expense"
+                                              inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSExpressionDescription* ex = [[NSExpressionDescription alloc] init];
+    [ex setExpression:[NSExpression expressionWithFormat:@"@sum.amount"]];
+    [ex setExpressionResultType:NSDecimalAttributeType];
+    [ex setName:@"sum"];
+    
+    NSExpressionDescription* exLat = [[NSExpressionDescription alloc] init];
+    [exLat setExpression:[NSExpression expressionWithFormat:@"@avg.latitude"]];
+    [exLat setExpressionResultType:NSDecimalAttributeType];
+    [exLat setName:@"latitude"];
+    
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObjects:@"category", @"date", ex, exLat, nil]];
+    [fetchRequest setPropertiesToGroupBy:[NSArray arrayWithObjects:@"category", @"date", nil]];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    
+    NSDate *date = [NSDate date];
+    NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(synced == NO) AND (date < %@)", date];
+    [fetchRequest setPredicate:predicate];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSError *error;
+    self.result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    NSLog(@"count: %d", self.result.count);
+    if (self.result.count > 0)
+    {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Share your data" message:@"Are you done entering expenses for yesterday?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Yes", @"No", nil];
+        //[av show];
+    }
+    
     return YES;
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"button index: %d", buttonIndex);
+    
+    if (buttonIndex == 0)
+    {
+        CloudService *cloudService = [CloudService getInstance];
+        for (NSDictionary *dict in self.result)
+        {
+            NSLog(@"Bla: %@", dict);
+            //[cloudService addDailyExpenseOn:[dict objectForKey:@"date"] location:<#(CLLocation *)#> category:<#(NSNumber *)#> amount:<#(NSNumber *)#> completion:<#^(NSError *)completion#>]
+        }
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
