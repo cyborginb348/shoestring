@@ -39,14 +39,14 @@
     //assign today to current dat (if Today tabBar item selected)
     AddExpenseViewController *aevc = [[AddExpenseViewController alloc]init];
     
-    NSLog(@"Initial Date %@)", [self currentDate]);
+    //NSLog(@"Initial Date %@)", [self currentDate]);
     
     //query the request as the required date
     if([self currentDate] == NULL) {
         [self setCurrentDate:[aevc getTodaysDate]];
     }
 
-    NSLog(@"AFter set Date %@)", [self currentDate]);
+    //NSLog(@"AFter set Date %@)", [self currentDate]);
     
     
     NSError *error = nil;
@@ -58,7 +58,8 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"EEE MMM d"];
     NSString *date = [dateFormatter stringFromDate:[self currentDate]];
-    NSLog(@"%@",date);
+    
+    //NSLog(@"%@",date);
     
     [[self dateLabel]setText:date];
     

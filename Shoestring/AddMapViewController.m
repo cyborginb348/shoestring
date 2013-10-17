@@ -31,8 +31,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSLog(@"%@", [self currentLongitude]);
 	
     //set delegate for mapview as this controller
     [[self mapView] setDelegate:self];
@@ -86,38 +84,27 @@
     [view setDraggable:YES];
     [view setAnimatesDrop:YES];
     [view setCanShowCallout:YES];
+    
+    
     return view;
 }
-//
-//
-//-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-//    
-//    NSLog(@"showing");
-//    
-//    CLLocationCoordinate2D location = [userLocation coordinate];
-//    [[self mapView] setCenterCoordinate:location];
-//    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location, 100000, 100000);
-//    [[self mapView] setRegion:region animated:YES];
-//}
 
-//allows draggable pin
-//-(void)mapView:(MKMapView *)mapView
-//annotationView:(MKAnnotationView *) viewdidChangeDragState:(MKAnnotationViewDragState)newState
-//  fromOldState:(MKAnnotationViewDragState)oldState {
-//    
-//}
-//
-//-(void)gotoLocation {
-//    MKCoordinateRegion region;
-//    CLLocationCoordinate2D center;
-//    center.latitude = [[self currentLatitude] doubleValue];
-//    center.longitude = [[self currentLongitude] doubleValue];
-//    MKCoordinateSpan span;
-//    span.latitudeDelta = SPAN_VALUE;
-//    span.longitudeDelta = SPAN_VALUE;
-//    region.center = center;
-//    region.span = span;
-//    [mapView setRegion:region animated:YES];
-//}
+//Method for draggable pin
+
+-(void)mapView:(MKMapView *)mapView
+annotationView:(MKAnnotationView *)annotationView viewdidChangeDragState:(MKAnnotationViewDragState)newState
+  fromOldState:(MKAnnotationViewDragState)oldState {
+    
+    if (newState == MKAnnotationViewDragStateEnding) {
+        CLLocationCoordinate2D droppedAt = annotationView.annotation.coordinate;
+        NSLog(@"dropped at %f,%f", droppedAt.latitude, droppedAt.longitude);
+    }
+    
+    if (newState == MKAnnotationViewDragStateStarting)
+    {
+        NSLog(@"Beginning drag");
+    }
+}
+
 
 @end

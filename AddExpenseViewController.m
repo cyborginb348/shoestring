@@ -299,8 +299,6 @@
     CLLocation *newLocation = [locations lastObject];
     CLLocation *oldLocation;
     
-    NSLog(@"lm");
-    
     if([locations count] > 1) {
         oldLocation = [locations objectAtIndex:[locations count] - 1];
     } else {
@@ -311,10 +309,8 @@
     [self setCurrentLatitude: [NSNumber numberWithFloat: coord.latitude]];
     [self setCurrentLongitude: [NSNumber numberWithFloat: coord.longitude]];
     
-    NSLog(@"lat %@", [self currentLatitude]);
-    
-    
-    NSLog(@"didUpdateToLocation %@ from %@", newLocation, oldLocation);
+//    NSLog(@"lat %@", [self currentLatitude]);
+//    NSLog(@"didUpdateToLocation %@ from %@", newLocation, oldLocation);
 }
 
 @end

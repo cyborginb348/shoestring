@@ -49,6 +49,7 @@
     FindViewController  *findView = (FindViewController*)[find topViewController];
     HistoryViewController  *historyView = (HistoryViewController*)[history topViewController];
     GraphMyExpensesViewController  *graphView = (GraphMyExpensesViewController*)[graphs topViewController];
+
                                                          
     //set references to managed object context for each view
     [homeView setManagedObjectContext:[self managedObjectContext]];
