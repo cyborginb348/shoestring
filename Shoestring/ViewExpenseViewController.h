@@ -42,5 +42,8 @@
 @property (nonatomic, retain) NSMutableArray *itemNames;
 @property (nonatomic, retain) NSMutableArray *autocompleteNames;
 
+@property (weak, nonatomic) IBOutlet UIButton *locationButton;
+@property (weak, nonatomic) IBOutlet UIButton *mapButton;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 
 @end
