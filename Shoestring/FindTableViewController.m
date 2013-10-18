@@ -179,6 +179,11 @@
      */
 }
 
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"cellToMapSegue" sender:self];
+}
+
 #pragma mark - Yelp API methods
 
 //Method to get the request fromn the API
