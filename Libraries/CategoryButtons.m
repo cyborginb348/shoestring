@@ -72,6 +72,7 @@
     [categoryLabel setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:categoryLabel];
     
+    [self changeSelection:buttons[0]];
     
     return self;
 }
