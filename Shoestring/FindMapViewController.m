@@ -7,6 +7,7 @@
 //
 
 #import "FindMapViewController.h"
+#import "FindViewController.h"
 #import "Annotation.h"
 
 @interface FindMapViewController ()
@@ -16,6 +17,8 @@
 
 @synthesize currentFavourite;
 @synthesize managedObjectContext;
+
+@synthesize category;
 
 @synthesize addressFromFT,phoneFromFT,nameFromFT,ratingFromFT;
 @synthesize findMapView = _findMapView;
@@ -45,6 +48,8 @@
     currentFavourite = (Favourite*) [NSEntityDescription insertNewObjectForEntityForName:@"Favourite"
             inManagedObjectContext:[self managedObjectContext]];
     
+    NSLog(@"CATEGORY: %@", [self category]);
+
     }
 
 - (void)didReceiveMemoryWarning
@@ -91,6 +96,7 @@
             
             //save to Coredata
             [[self currentFavourite] setFavouritePlace:[self nameFromFT]];
+            [[self currentFavourite] setCategory:[self category]];
             [[self currentFavourite] setLatitude:[NSNumber numberWithDouble:placeAddress.latitude]];
             [[self currentFavourite] setLongitude:[NSNumber numberWithDouble:placeAddress.longitude]];
 
@@ -114,7 +120,7 @@
     }
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saved"
-                                                    message: [NSString stringWithFormat:@"%@ is saved as a favourite.",[self nameFromFT]]
+                                                    message: [NSString stringWithFormat:@"%@ is saved as a favourite %@ location.",[self nameFromFT], [self category]]
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];

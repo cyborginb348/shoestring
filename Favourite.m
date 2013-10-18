@@ -12,6 +12,7 @@
 @implementation Favourite
 
 @dynamic favouritePlace;
+@dynamic category;
 @dynamic latitude;
 @dynamic longitude;
 

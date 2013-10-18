@@ -60,6 +60,7 @@
 -(void) buttonView: (CategoryButtons*) buttonView changedCategory: (NSString*)newCategory {
     currentCategory = newCategory;
     NSLog(@"category %@", [self currentCategory]);
+    
 }
 
 - (IBAction)distanceSlider:(id)sender {

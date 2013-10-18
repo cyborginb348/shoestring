@@ -76,12 +76,14 @@
         NSString *passedAddress = [[businessObjectList objectAtIndex:path.row] objectForKey:@"address"];
         NSString *passedRating = [[businessObjectList objectAtIndex:path.row] objectForKey:@"rating"];
         NSString *passedPhone = [[businessObjectList objectAtIndex:path.row] objectForKey:@"phone"];
+        
                
         //passing data here
         [findMapVC setAddressFromFT:passedAddress];
         [findMapVC setNameFromFT:passedName];
         [findMapVC setRatingFromFT:passedRating];
         [findMapVC setPhoneFromFT:passedPhone];
+        [findMapVC setCategory: selectedCat];
         
        
         //NSLog(@"nameFromFT %@", passedName);

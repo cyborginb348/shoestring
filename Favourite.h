@@ -13,6 +13,7 @@
 @interface Favourite : NSManagedObject
 
 @property (nonatomic, retain) NSString * favouritePlace;
+@property (nonatomic, retain) NSString * category;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;
 

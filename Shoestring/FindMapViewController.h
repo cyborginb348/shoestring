@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSString *nameFromFT;
 @property (nonatomic, strong) NSString *phoneFromFT;
 
+@property (nonatomic, strong) NSString *category;
+
 @property (weak, nonatomic) IBOutlet MKMapView *findMapView;
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
