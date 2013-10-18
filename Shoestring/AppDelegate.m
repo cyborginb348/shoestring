@@ -59,7 +59,7 @@
     [graphView setManagedObjectContext:[self managedObjectContext]];
     
     
-    
+    //[[[CloudService getInstance] client] loginWithProvider:@"facebook" controller:homeView animated:YES completion:^(MSUser *user, NSError *error) {}];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expense"
@@ -76,7 +76,12 @@
     [exLat setExpressionResultType:NSDecimalAttributeType];
     [exLat setName:@"latitude"];
     
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObjects:@"category", @"date", ex, exLat, nil]];
+    NSExpressionDescription* exLon = [[NSExpressionDescription alloc] init];
+    [exLon setExpression:[NSExpression expressionWithFormat:@"@avg.longitude"]];
+    [exLon setExpressionResultType:NSDecimalAttributeType];
+    [exLon setName:@"longitude"];
+    
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObjects:@"category", @"date", ex, exLat, exLon, nil]];
     [fetchRequest setPropertiesToGroupBy:[NSArray arrayWithObjects:@"category", @"date", nil]];
     [fetchRequest setResultType:NSDictionaryResultType];
     
@@ -114,8 +119,32 @@
         for (NSDictionary *dict in self.result)
         {
             NSLog(@"Bla: %@", dict);
-            //[cloudService addDailyExpenseOn:[dict objectForKey:@"date"] location:<#(CLLocation *)#> category:<#(NSNumber *)#> amount:<#(NSNumber *)#> completion:<#^(NSError *)completion#>]
+            CLLocation *location = [[CLLocation alloc] initWithLatitude:[[dict objectForKey:@"latitude"] doubleValue] longitude:[[dict objectForKey:@"longitude"] doubleValue]];
+            [cloudService addDailyExpenseOn:[dict objectForKey:@"date"] location:location category:[dict objectForKey:@"category"] amount:[dict objectForKey:@"sum"] completion:^(NSError *error) {
+                if (error)
+                {
+                    NSLog(@"Error: %@", error.localizedDescription);
+                }
+            }];
         }
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Expense"];
+        
+        NSDate *date = [NSDate date];
+        NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+        date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(synced == NO) AND (date < %@)", date];
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error;
+        NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        
+        for (Expense *expense in result)
+        {
+            expense.synced = [NSNumber numberWithBool:YES];
+        }
+        
+        [self.managedObjectContext save:&error];
     }
 }
 

@@ -61,6 +61,15 @@
     [amountField setText: [NSString stringWithFormat:@"%@",[[self currentExpense] amount]]];
     [savingTipField setText: [[self currentExpense] savingTip]];
     
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:self.currentExpense.latitude.doubleValue longitude:self.currentExpense.longitude.doubleValue];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (!error)
+        {
+            CLPlacemark *placemark = placemarks[0];
+            self.locationLabel.text = [NSString stringWithFormat:@"%@, %@", placemark.thoroughfare, placemark.locality];
+        }
+    }];
     
     //set delegates for keyboard dismissal
     [itemNameField setDelegate:self];
@@ -71,8 +80,14 @@
     //StarRating
     _ratingLabels = [NSArray arrayWithObjects:@"Unrated", @"Hate it", @"Don't like it", @"It's OK", @"It's good", @"It's great", nil];
 	
-	
-    
+    [itemNameField setEnabled:NO];
+    [placeNameField setEnabled:NO];
+    [amountField setEnabled:NO];
+    [savingTipField setEnabled:NO];
+    [_starRatingControl setEnabled:NO];
+    [categoryView setEnabled:NO];
+    [self.locationButton setHidden:YES];
+    [self.mapButton setHidden:YES];
     
     [[self starRatingControl] setRating:[[currentExpense rating]integerValue]];
     [[self ratingLabel]setText: [_ratingLabels objectAtIndex:[[currentExpense rating]integerValue]]];
@@ -127,6 +142,11 @@
     [placeNameField setEnabled:YES];
     [amountField setEnabled:YES];
     [savingTipField setEnabled:YES];
+    [_starRatingControl setEnabled:YES];
+    [categoryView setEnabled:YES];
+    [self.locationButton setHidden:NO];
+    [self.mapButton setHidden:NO];
+    [self.locationLabel setHidden:YES];
     [self setSetEditable:YES];
     [_starRatingControl setDelegate:self];
     
@@ -147,6 +167,22 @@
     [placeNameField setEnabled:NO];
     [amountField setEnabled:NO];
     [savingTipField setEnabled:NO];
+    [_starRatingControl setEnabled:NO];
+    [categoryView setEnabled:NO];
+    [self.locationButton setHidden:YES];
+    [self.mapButton setHidden:YES];
+    [self.locationLabel setHidden:NO];
+    
+    self.locationLabel.text = @"";
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:self.currentExpense.latitude.doubleValue longitude:self.currentExpense.longitude.doubleValue];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (!error)
+        {
+            CLPlacemark *placemark = placemarks[0];
+            self.locationLabel.text = [NSString stringWithFormat:@"%@, %@", placemark.thoroughfare, placemark.locality];
+        }
+    }];
     
     
     [itemNameField setBorderStyle:UITextBorderStyleNone];

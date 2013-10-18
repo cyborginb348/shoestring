@@ -12,7 +12,7 @@
 @protocol CategoryButtonsDelegate;
 
 
-@interface CategoryButtons : UIView
+@interface CategoryButtons : UIControl
 
 @property (strong, nonatomic) NSString *currentCategory;
 @property (strong, nonatomic) NSArray *categoryNames;
