@@ -24,17 +24,17 @@
 -(CategoryButtons*) init {
     
     //initialise button arrays for the button objects and names
-    categoryNames = [[NSArray alloc] initWithObjects:@"Accomodation", @"Food", @"Travel", @"Entertainment", @"Shopping", nil];
+    categoryNames = [[NSArray alloc] initWithObjects:@"Accommodation", @"Food", @"Travel", @"Entertainment", @"Shopping", nil];
     
     self = [self initWithFrame:CGRectMake(10, 10, 300, 300)];
     
     //the images
-    UIImage *accomImage = [UIImage imageNamed:@"accomodation.png"];
+    UIImage *accomImage = [UIImage imageNamed:@"accommodation.png"];
     UIImage *foodImage = [UIImage imageNamed:@"food.png"];
     UIImage *travelImage = [UIImage imageNamed:@"travel.png"];
     UIImage *entertainImage = [UIImage imageNamed:@"entertainment.png"];
     UIImage *shopImage = [UIImage imageNamed:@"shopping.png"];
-    UIImage *accomImageSel = [UIImage imageNamed:@"accomodation_sel.png"];
+    UIImage *accomImageSel = [UIImage imageNamed:@"accommodation_sel.png"];
     UIImage *foodImageSel = [UIImage imageNamed:@"food_sel.png"];
     UIImage *travelImageSel = [UIImage imageNamed:@"travel_sel.png"];
     UIImage *entertainImageSel = [UIImage imageNamed:@"entertainment_sel.png"];

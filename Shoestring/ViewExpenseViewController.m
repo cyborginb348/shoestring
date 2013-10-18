@@ -109,7 +109,7 @@
 
 -(int) categoryNumberFromString: (NSString*) category {
     
-    if([category isEqualToString:@"Accomodation"]){
+    if([category isEqualToString:@"Accommodation"]){
        return 0; 
     } else if ([category isEqualToString:@"Food"]){
         return 1;

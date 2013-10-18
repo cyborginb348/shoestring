@@ -86,7 +86,7 @@
         {
             NSString *category = [record objectForKey:@"category"];
             NSNumber *sum = [record objectForKey:@"sum"];
-            if ([category isEqualToString:@"Accomodation"])
+            if ([category isEqualToString:@"Accommodation"])
             {
                 sums[0] += [sum floatValue];
                 ++counts[0];
