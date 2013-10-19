@@ -99,7 +99,7 @@
     NSError *error;
     self.result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
-    NSLog(@"count: %d", self.result.count);
+    //NSLog(@"count: %d", self.result.count);
     if (self.result.count > 0)
     {
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Share your data" message:@"Are you done entering expenses for yesterday?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Yes", @"No", nil];

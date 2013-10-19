@@ -28,4 +28,7 @@
 
 - (IBAction)saveFavourite:(id)sender;
 
+@property (nonatomic, strong)NSString *haveLatLon;
+@property (nonatomic, strong)NSNumber *lat;
+@property (nonatomic, strong)NSNumber *lon;
 @end
