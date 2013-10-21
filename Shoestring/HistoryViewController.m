@@ -66,7 +66,6 @@
     NSManagedObjectContext *context = self.managedObjectContext;
     [context deleteObject:expenseToDelete];
     [self dismissViewControllerAnimated:YES completion:nil];
-    NSLog(@"cancel");
 }
 
 
@@ -82,7 +81,6 @@
         NSIndexPath *indexPath = [[self tableView]indexPathForSelectedRow];
         UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
         NSString *myDate = [[cell textLabel] text];
-        NSLog(@"selected %@", myDate);
         
         //set the NSDate field
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
@@ -213,13 +211,10 @@
         case NSFetchedResultsChangeUpdate: {
             Expense *changedExpense = [[self fetchedResultsController] objectAtIndexPath:indexPath];
             
-            NSLog(@"expense: %@", changedExpense.date);
-            
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             
             //get the date as a string ie NSDate to NSString required date format
            [[cell textLabel]setText:[self formatDate:[changedExpense date]]];
-            NSLog(@"didUpdate");
             
             //cell.textLabel.text = @"test";
            

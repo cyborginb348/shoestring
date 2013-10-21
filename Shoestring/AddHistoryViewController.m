@@ -75,7 +75,6 @@
 - (IBAction)cancel:(id)sender {
     // dismiss and remove the object
     [self.delegate addHistoryViewControllerDidCancel:[self currentExpense]];
-    NSLog(@"cancelling");
 }
 
 /*
@@ -91,8 +90,6 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"EEEE MMM d YYYY"];
     NSString *dateChosen = [formatter stringFromDate:chosen];
-    
-    NSLog(@"chosen date: %@", [self chosenDate]);
     
     //get the expense data
     NSArray *fetchedData = [_fetchedResultsController fetchedObjects];
