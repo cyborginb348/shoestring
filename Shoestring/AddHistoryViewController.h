@@ -10,11 +10,13 @@
 #import <Foundation/Foundation.h>
 #import "Expense.h"
 
-//@protocol AddHistoryViewControllerDelegate;
+@protocol AddHistoryViewControllerDelegate;
 
 
 @interface AddHistoryViewController : UIViewController
 <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, weak) id <AddHistoryViewControllerDelegate> delegate;
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -37,7 +39,10 @@
 
 @end
 
-
+@protocol AddHistoryViewControllerDelegate
+-(void)addHistoryViewControllerDidSave;
+-(void)addHistoryViewControllerDidCancel:(Expense*)expenseToDelete;
+@end
 
 
 

@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Shoestring/AddHistoryViewController.m"
-            timestampString = "403622995.058285"
+            timestampString = "404018710.615108"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "@implementation AddHistoryViewController"
             landmarkType = "3">
          </BreakpointContent>

@@ -26,6 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+   
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -39,7 +41,7 @@
     //assign today to current dat (if Today tabBar item selected)
     AddExpenseViewController *aevc = [[AddExpenseViewController alloc]init];
     
-    //NSLog(@"Initial Date %@)", [self currentDate]);
+    NSLog(@"Initial Date %@)", [self currentDate]);
     
     //query the request as the required date
     if([self currentDate] == NULL) {
