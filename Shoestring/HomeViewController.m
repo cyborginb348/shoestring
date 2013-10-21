@@ -8,7 +8,7 @@
 
 #import "HomeViewController.h"
 #import "AppDelegate.h"
-#import "Annotation.h"
+#import "VBAnnotation.h"
 
 @interface HomeViewController ()
 

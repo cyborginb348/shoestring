@@ -1,5 +1,5 @@
 //
-//  TodayViewController.h
+//  DayViewController.h
 //  Shoestring
 //
 //  Created by Mark Wigglesworth on 5/09/13.
@@ -11,6 +11,7 @@
 #import "AddExpenseViewController.h"
 #import "ViewExpenseViewController.h"
 #import "HistoryViewController.h"
+
 #import "Expense.h"
 
 @interface DayViewController : UITableViewController

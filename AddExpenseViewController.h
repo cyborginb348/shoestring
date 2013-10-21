@@ -13,10 +13,11 @@
 #import "CategoryButtons.h"
 #import "StarRatingControl.h"
 
+
 @protocol AddExpenseViewControllerDelegate;
 
 @interface AddExpenseViewController : UIViewController
-<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CategoryButtonsDelegate, StarRatingDelegate, CLLocationManagerDelegate>
+< UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CategoryButtonsDelegate, StarRatingDelegate, CLLocationManagerDelegate, AddMapViewControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
@@ -47,6 +48,8 @@
 @property  NSUInteger rate;
 @property (strong, nonatomic) NSNumber *currentLatitude;
 @property (strong, nonatomic) NSNumber *currentLongitude;
+@property (strong, nonatomic) NSNumber *movingLatitude;
+@property (strong, nonatomic) NSNumber *movingLongitude;
 
 
 

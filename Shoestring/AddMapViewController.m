@@ -7,6 +7,7 @@
 //
 
 #import "AddMapViewController.h"
+#import "AddExpenseViewController.h"
 
 @interface AddMapViewController ()
 
@@ -17,7 +18,6 @@
 @implementation AddMapViewController
 
 @synthesize mapView = _mapView;
-@synthesize locationManager = _locationManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,11 +48,12 @@
     location.longitude = [[self currentLongitude] doubleValue];
     
     //annotation
-    VBAnnotation *annotation = [[VBAnnotation alloc]initWithPosition:location];
-    annotation.title = @"drag to new location";
-    annotation.subTitle = @"touch and drag";
+    VBAnnotation *ann = [[VBAnnotation alloc]initWithPosition:location];
+    [ann setCoordinate:location];
+    ann.title = @"drag pin to new location";
+    ann.subTitle = @"touch and drag";
     //add to map
-    [[self mapView] addAnnotation:annotation];
+    [[self mapView] addAnnotation:ann];
 
 }
 
@@ -62,48 +63,55 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)save:(id)sender {
-    //get reference to AddExpense View controller and save to currentLatitude/longitude
-    
-}
 
-- (IBAction)cancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (IBAction)done:(id)sender {
+    
+    //get reference to AddExpense View controller and save to currentLatitude/longitude
+    AddExpenseViewController *aevc = [[AddExpenseViewController alloc]init];
+    [aevc setCurrentLatitude:[self currentLatitude]];
+    [aevc setCurrentLongitude:[self currentLongitude]];
+    NSLog(@"setting LAT %@", [self currentLatitude]);
+ 
+    [self.delegate addMapViewControllerDidFinish:self];
 }
 
 /*
  Method to create and style an annotation
  */
--(MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+        return nil;
     
-    //view
-    MKPinAnnotationView *view = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"pin"];
-    //pin color
-    [view setPinColor:MKPinAnnotationColorPurple];
-    [view setEnabled:YES];
-    [view setDraggable:YES];
-    [view setAnimatesDrop:YES];
-    [view setCanShowCallout:YES];
+    static NSString *reuseId = @"pin";
+    MKPinAnnotationView *pav = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
     
+    if (pav == nil) {
+        pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+        pav.draggable = YES;
+        pav.canShowCallout = YES;
+        } else {
+        pav.annotation = annotation;
+        }
     
-    return view;
+    return pav;
 }
 
 //Method for draggable pin
 
--(void)mapView:(MKMapView *)mapView
-annotationView:(MKAnnotationView *)annotationView viewdidChangeDragState:(MKAnnotationViewDragState)newState
-  fromOldState:(MKAnnotationViewDragState)oldState {
-    
-    if (newState == MKAnnotationViewDragStateEnding) {
+- (void)mapView:(MKMapView *)mapView
+ annotationView:(MKAnnotationView *)annotationView
+didChangeDragState:(MKAnnotationViewDragState)newState
+   fromOldState:(MKAnnotationViewDragState)oldState
+{
+    if (newState == MKAnnotationViewDragStateEnding)
+        {
         CLLocationCoordinate2D droppedAt = annotationView.annotation.coordinate;
         NSLog(@"dropped at %f,%f", droppedAt.latitude, droppedAt.longitude);
-    }
-    
-    if (newState == MKAnnotationViewDragStateStarting)
-    {
-        NSLog(@"Beginning drag");
-    }
+        [self setCurrentLatitude:[NSNumber numberWithFloat:droppedAt.latitude]];
+        [self setCurrentLongitude:[NSNumber numberWithFloat:droppedAt.longitude]];
+        }
 }
 
 

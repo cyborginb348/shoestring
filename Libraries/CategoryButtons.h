@@ -20,6 +20,7 @@
 @property (strong, nonatomic) UILabel *categoryLabel;
     
 -(void) setButtonSelected: (int) button;
+-(void) setCategoryTitle: (NSString*) title;
 
 @property (assign,nonatomic) NSObject <CategoryButtonsDelegate> *delegate;
 
