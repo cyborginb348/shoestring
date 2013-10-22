@@ -115,9 +115,6 @@
     return _fetchedResultsController;
 }
 
-//map method under here
-//http://stackoverflow.com/questions/8325200/how-do-i-show-multiple-custom-annotations-pin-left-icon-loaded-via-plist
-
 -(void) updateFavInMapView{
     NSArray *fetchedData = [_fetchedResultsController fetchedObjects];
     NSLog(@"count fetched data: %i", [fetchedData count]);
