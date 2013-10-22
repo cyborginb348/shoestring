@@ -13,7 +13,7 @@
 
 
 @interface HistoryViewController : UITableViewController
-<NSFetchedResultsControllerDelegate>
+<AddHistoryViewControllerDelegate,  NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;

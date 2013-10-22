@@ -30,12 +30,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    
  
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -44,7 +40,6 @@
         NSLog(@"Error! %@", error);
         abort();
     }
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +48,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) addHistoryViewControllerDidSave {
+    
+    NSError *error = nil;
+    NSManagedObjectContext *context = self.managedObjectContext;
+    if (![context save:&error]) {
+        NSLog(@"Error! %@", error);
+    }
+    
+    [[self tableView] reloadData];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void) addHistoryViewControllerDidCancel:(Expense *)expenseToDelete {
+    //delete MO
+    NSManagedObjectContext *context = self.managedObjectContext;
+    [context deleteObject:expenseToDelete];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
 //Method: prepare to Segue - either addExpense or viewExpense
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
@@ -60,16 +77,16 @@
         
         DayViewController *dvc= (DayViewController*) [segue destinationViewController];
 
-        //get the current index path
+        //get the current index path, cell, text
         NSIndexPath *indexPath = [[self tableView]indexPathForSelectedRow];
-        
-        NSString *title = [self tableView:[self tableView]titleForHeaderInSection:[indexPath section]];
+        UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
+        NSString *myDate = [[cell textLabel] text];
         
         //set the NSDate field
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zz"];
+        [dateFormatter setDateFormat:@"EEEE MMM d yyyy"];
         NSDate *dateFromString = [[NSDate alloc]init];
-        dateFromString = [dateFormatter dateFromString:title];
+        dateFromString = [dateFormatter dateFromString:myDate];
         [self setSelectedDate:dateFromString];
 
         [dvc setCurrentDate:[self selectedDate]];
@@ -82,6 +99,7 @@
         //create new expense managed object, and set expense variable in new window being modally segued to...
         Expense *expense = (Expense*) [NSEntityDescription insertNewObjectForEntityForName:@"Expense"
                                                                     inManagedObjectContext:[self managedObjectContext]];
+        [ahvc setDelegate:self];
         [ahvc setCurrentExpense:expense];
         
         //pass the managed object context
@@ -95,7 +113,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [[[self fetchedResultsController]sections] count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -113,23 +131,19 @@
     // Configure the cell with the name of the item expense
     Expense *expense = [[self fetchedResultsController]objectAtIndexPath:indexPath];
     
-    DayViewController *tvc = [[DayViewController alloc]init];
-    
     [[cell textLabel] setText:[self formatDate:[expense date]]];
-    [[cell detailTextLabel]setText:[NSString stringWithFormat:@"Total $%@",[tvc calculateTotal:[expense date] forManagedObjectContext:[self managedObjectContext]]]];
-
     return cell;
 }
 
--(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView* header = [[UIView alloc]init];
-    return header;
-}
-
--(NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
-    return[[[[self fetchedResultsController]sections]objectAtIndex:section]name];
-}
+//-(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    UIView* header = [[UIView alloc]init];
+//    return header;
+//}
+//
+//-(NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    
+//    return[[[[self fetchedResultsController]sections]objectAtIndex:section]name];
+//}
 
 
 // Override to support conditional editing of the table view.
@@ -196,9 +210,13 @@
             
         case NSFetchedResultsChangeUpdate: {
             Expense *changedExpense = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+            
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-            [[cell textLabel]setText:[NSString stringWithFormat:@"$%@  %@",[changedExpense amount],[changedExpense itemName]]];
-            [[cell detailTextLabel] setText:[changedExpense placeName]];
+            
+            //get the date as a string ie NSDate to NSString required date format
+           [[cell textLabel]setText:[self formatDate:[changedExpense date]]];
+            
+            //cell.textLabel.text = @"test";
            
         }
             break;
@@ -236,7 +254,7 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                    managedObjectContext:[self managedObjectContext] sectionNameKeyPath: @"date"
+                                                                    managedObjectContext:[self managedObjectContext] sectionNameKeyPath: nil
                                                                                cacheName:nil];
     
     //set this class as the delegate for the fetchedResults controller

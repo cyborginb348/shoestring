@@ -26,12 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -39,15 +33,10 @@
     //assign today to current dat (if Today tabBar item selected)
     AddExpenseViewController *aevc = [[AddExpenseViewController alloc]init];
     
-    //NSLog(@"Initial Date %@)", [self currentDate]);
-    
     //query the request as the required date
     if([self currentDate] == NULL) {
         [self setCurrentDate:[aevc getTodaysDate]];
     }
-
-    //NSLog(@"AFter set Date %@)", [self currentDate]);
-    
     
     NSError *error = nil;
     if(![[self fetchedResultsController] performFetch:&error]) {
@@ -58,9 +47,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"EEE MMM d"];
     NSString *date = [dateFormatter stringFromDate:[self currentDate]];
-    
-    //NSLog(@"%@",date);
-    
+
     [[self dateLabel]setText:date];
     
     [self showTotal];
@@ -231,10 +218,7 @@
                                           inManagedObjectContext:[self managedObjectContext]];
     [fetchRequest setEntity:entity];
     
-    //set the query predicate to select the correct display date
-   
-    NSLog(@"predicate Date: %@", currentDate);
-    
+    //set the query predicate to select the correct display date    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date == %@",currentDate];
     [fetchRequest setPredicate:predicate];
 

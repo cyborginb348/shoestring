@@ -67,56 +67,61 @@
         NSLog(@"Error! %@", error);
     }
     
-    [self dismissViewControllerAnimated:YES completion:nil];    
+    [self.delegate addHistoryViewControllerDidSave];
 }
 
 
 
 - (IBAction)cancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    // dismiss and remove the object
+    [self.delegate addHistoryViewControllerDidCancel:[self currentExpense]];
 }
+
+/*
+ Method is called when pickerView changed
+ */
 
 - (IBAction)displayDate:(id)sender {
     
     NSDate *chosen = [datePicker date];
     
     [self setChosenDate:[self formatDate:chosen]];
-    
-    NSLog(@"chosen date: %@", [self chosenDate]);
-    
-    
+
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"EEEE MMM d YYYY"];
-    
     NSString *dateChosen = [formatter stringFromDate:chosen];
-     
-    
-    
     
     //get the expense data
     NSArray *fetchedData = [_fetchedResultsController fetchedObjects];
     
+    //check all the saved dates against the current dates
+    int dateAlready = 0;
     for (Expense *current in fetchedData ) {
-        
-        //if there is a dated expense already there, or date is earlier than today
-        if([[self chosenDate]isEqualToDate:[current date]] ||
-           [self oneDate:[self chosenDate] isLaterThanOrEqualTo:[self formatDate:[NSDate date]]]) {
-        
-            [[self dateLabel]setText:@"Sorry choose and earlier date"];
-            [[self saveBtn]setEnabled:NO];
-        
-        } else {
-            
-            //you can save now
-            
-            [dateLabel setText:dateChosen];
-            [[self saveBtn]setEnabled:YES];
-            
-           
+        if([[self chosenDate]isEqualToDate:[current date]]) {
+            dateAlready++;
         }
     }
+    // Check 1: if there is a dated expense already there
+    if(dateAlready > 0) {
+        [[self dateLabel]setText:@"Sorry that date is already there"];
+        [[self saveBtn]setEnabled:NO];
+    } else {
+        //Check 2: if date is earlier than today
+        if([self date1:[self chosenDate] isLaterThanOrEqualTo:[self formatDate:[NSDate date]]]) {
+            
+            [[self dateLabel]setText:@"Sorry choose and earlier date"];
+            [[self saveBtn]setEnabled:NO];
+            
+        } else {
+            
+            //wecan save now
+            [dateLabel setText:dateChosen];
+            [[self saveBtn]setEnabled:YES];
 
+        }
+    }
 }
+
 
 #pragma mark -
 #pragma mark Fetched Results Controller
@@ -160,7 +165,7 @@
     return[calendar dateFromComponents:components];
 }
 
--(BOOL)oneDate:(NSDate*)date1 isLaterThanOrEqualTo:(NSDate*)date2 {
+-(BOOL)date1:(NSDate*)date1 isLaterThanOrEqualTo:(NSDate*)date2 {
     return !([date1 compare:date2] == NSOrderedAscending);
 }
 

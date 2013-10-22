@@ -16,6 +16,7 @@
 
 @implementation AddExpenseViewController
 
+
 @synthesize managedObjectContext;
 
 @synthesize categoryView;
@@ -45,6 +46,8 @@
 {
     [super viewDidLoad];
     
+    
+    
     [self initialiseAutocomplete];
     
     //set delegates for keyboard dismissal
@@ -59,6 +62,7 @@
     CGRect bounds = [[self view] bounds];
     [btnView setCenter: CGPointMake(bounds.size.width/2, 160)];
     [categoryView addSubview:btnView];
+    [btnView setCategoryTitle:@"Please select..."];
     
     //starRatings
     _ratingLabels = [NSArray arrayWithObjects:@"Unrated", @"not great", @"Ok", @"not bad", @"really good", @"great deal!", nil];
@@ -67,6 +71,11 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
+    
+    AddMapViewController *amvc = [[AddMapViewController alloc]init];
+    
+    NSLog(@"latttt %@", [amvc currentLatitude]);
+    
     [self startLocationManager];
 }
 
@@ -82,9 +91,11 @@
     
     if([[segue identifier] isEqualToString:@"addMapLocation"]) {
         AddMapViewController *amvc = (AddMapViewController*)[segue destinationViewController];
+        
+        [amvc setDelegate:self];
 
-        [amvc setCurrentLatitude:[self currentLatitude]];
-        [amvc setCurrentLongitude:[self currentLongitude]];
+        [amvc setCurrentLatitude:[self movingLatitude]];
+        [amvc setCurrentLongitude:[self movingLongitude]];
         
         [[self locationManager] stopUpdatingLocation];
     }
@@ -129,7 +140,8 @@
         [[self currentExpense]setDate:[self getTodaysDate]];
         [[self currentExpense]setLatitude:[self currentLatitude]];
         [[self currentExpense]setLongitude:[self currentLongitude]];
-        
+    
+    NSLog(@"LAT %@", [self currentLatitude]);
         
         [[self delegate] addExpenseViewControllerDidSave];
     }
@@ -174,7 +186,7 @@
 #pragma mark AutoComplete and UITextFieldDelegate methods
 
 -(void)initialiseAutocomplete {
-    autocompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, 320, 120) style:UITableViewStylePlain];
+    autocompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 45, 320, 120) style:UITableViewStylePlain];
     autocompleteTableView.delegate = self;
     autocompleteTableView.dataSource = self;
     autocompleteTableView.scrollEnabled = YES;
@@ -250,7 +262,7 @@
 
 -(void) slideFrame:(BOOL) up
 {
-    const int movementDistance = 125; // tweak as needed
+    const int movementDistance = 127; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
     int movement = (up ? -movementDistance : movementDistance);
@@ -278,10 +290,12 @@
 
 
 - (IBAction)findLocation:(id)sender {
+    
 }
 
 - (IBAction)useCurrentLocation:(id)sender {
-        [self startLocationManager];
+    [self setCurrentLatitude:[self movingLatitude]];
+    [self setCurrentLongitude:[self movingLongitude]];
 }
 
 -(void) startLocationManager {
@@ -292,7 +306,6 @@
     [[self locationManager] setDesiredAccuracy: kCLLocationAccuracyBest];
     [[self locationManager] setDistanceFilter:kCLDistanceFilterNone];
     [[self locationManager] startUpdatingLocation];
-    NSLog(@"start");
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -306,8 +319,17 @@
     }
     
     CLLocationCoordinate2D coord = [newLocation coordinate];
-    [self setCurrentLatitude: [NSNumber numberWithFloat: coord.latitude]];
-    [self setCurrentLongitude: [NSNumber numberWithFloat: coord.longitude]];
+    [self setMovingLatitude: [NSNumber numberWithFloat: coord.latitude]];
+    [self setMovingLongitude: [NSNumber numberWithFloat: coord.longitude]];
+}
+
+-(void)addMapViewControllerDidFinish:(AddMapViewController *)addMapViewController {
+    
+    [self setCurrentLatitude:[addMapViewController currentLatitude]];
+    [self setCurrentLongitude:[addMapViewController currentLongitude]];
+    
+   [self dismissViewControllerAnimated:YES completion:nil];
+ 
 }
 
 @end
