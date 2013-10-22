@@ -11,7 +11,7 @@
 #import "Favourite.h"
 
 @interface HomeViewController : UIViewController
-<NSFetchedResultsControllerDelegate, MKMapViewDelegate>
+<NSFetchedResultsControllerDelegate, MKMapViewDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
