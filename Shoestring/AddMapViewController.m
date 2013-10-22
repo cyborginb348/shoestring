@@ -65,13 +65,6 @@
 
 
 - (IBAction)done:(id)sender {
-    
-    //get reference to AddExpense View controller and save to currentLatitude/longitude
-    AddExpenseViewController *aevc = [[AddExpenseViewController alloc]init];
-    [aevc setCurrentLatitude:[self currentLatitude]];
-    [aevc setCurrentLongitude:[self currentLongitude]];
-    NSLog(@"setting LAT %@", [self currentLatitude]);
- 
     [self.delegate addMapViewControllerDidFinish:self];
 }
 

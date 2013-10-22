@@ -100,6 +100,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Method: prepare to Segue - either addExpense or viewExpense
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if([[segue identifier] isEqualToString:@"editMapLocation"]) {
+        AddMapViewController *amvc = (AddMapViewController*)[segue destinationViewController];
+        
+        [amvc setDelegate:self];
+        
+        [amvc setCurrentLatitude:self.currentExpense.latitude];
+        [amvc setCurrentLongitude:self.currentExpense.longitude];
+        
+        //[[self locationManager] stopUpdatingLocation];
+    }
+}
+
 #pragma mark - CategoryButton Actions
 
 -(void) buttonView: (CategoryButtons*) buttonView changedCategory: (NSString*)newCategory {
@@ -343,6 +358,15 @@
 	_ratingLabel.text = [_ratingLabels objectAtIndex:rating];
     [self setRate:rating];
     }
+}
+
+-(void)addMapViewControllerDidFinish:(AddMapViewController *)addMapViewController {
+    
+    self.currentExpense.latitude = addMapViewController.currentLatitude;
+    self.currentExpense.longitude = addMapViewController.currentLongitude;
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 @end

@@ -17,7 +17,7 @@
 @protocol AddExpenseViewControllerDelegate;
 
 @interface AddExpenseViewController : UIViewController
-< UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CategoryButtonsDelegate, StarRatingDelegate, CLLocationManagerDelegate, AddMapViewControllerDelegate>
+< UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, CategoryButtonsDelegate, StarRatingDelegate, CLLocationManagerDelegate, AddMapViewControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 

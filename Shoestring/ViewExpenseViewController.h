@@ -11,9 +11,10 @@
 #import "CategoryButtons.h"
 #import "AppDelegate.h"
 #import "StarRatingControl.h"
+#import "AddMapViewController.h"
 
 @interface ViewExpenseViewController : UIViewController
-<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CategoryButtonsDelegate, StarRatingDelegate>
+<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CategoryButtonsDelegate, StarRatingDelegate, AddMapViewControllerDelegate>
 
 @property (strong, nonatomic) Expense *currentExpense;
 @property (strong, nonatomic) NSString *currentCategory;
