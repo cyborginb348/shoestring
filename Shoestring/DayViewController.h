@@ -14,14 +14,15 @@
 
 #import "Expense.h"
 
-@interface DayViewController : UITableViewController
+@interface DayViewController : UIViewController
 <AddExpenseViewControllerDelegate, NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (strong, nonatomic) NSDate *currentDate;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *total;
 

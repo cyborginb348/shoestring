@@ -73,7 +73,6 @@
 		4DDC8EC217F7A23500F1BD90 /* CategoryButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDC8EC117F7A23500F1BD90 /* CategoryButtons.m */; };
 		7B37EC6717E14C9A003AFCA2 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC6617E14C9A003AFCA2 /* HomeViewController.m */; };
 		7B37EC6A17E14D16003AFCA2 /* ViewExpenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC6917E14D16003AFCA2 /* ViewExpenseViewController.m */; };
-		7B37EC6D17E14DBA003AFCA2 /* ViewExpenseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC6C17E14DBA003AFCA2 /* ViewExpenseMapViewController.m */; };
 		7B37EC7017E14DFA003AFCA2 /* FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC6F17E14DFA003AFCA2 /* FindViewController.m */; };
 		7B37EC7317E14E3B003AFCA2 /* FindTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B37EC7217E14E3B003AFCA2 /* FindTableViewController.m */; };
 		7B7A5A9A17E15FB500E6BC58 /* FindMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A5A9917E15FB500E6BC58 /* FindMapViewController.m */; };
@@ -325,8 +324,6 @@
 		7B37EC6617E14C9A003AFCA2 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		7B37EC6817E14D16003AFCA2 /* ViewExpenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewExpenseViewController.h; sourceTree = "<group>"; };
 		7B37EC6917E14D16003AFCA2 /* ViewExpenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExpenseViewController.m; sourceTree = "<group>"; };
-		7B37EC6B17E14DBA003AFCA2 /* ViewExpenseMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewExpenseMapViewController.h; sourceTree = "<group>"; };
-		7B37EC6C17E14DBA003AFCA2 /* ViewExpenseMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExpenseMapViewController.m; sourceTree = "<group>"; };
 		7B37EC6E17E14DFA003AFCA2 /* FindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindViewController.h; sourceTree = "<group>"; };
 		7B37EC6F17E14DFA003AFCA2 /* FindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindViewController.m; sourceTree = "<group>"; };
 		7B37EC7117E14E3B003AFCA2 /* FindTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindTableViewController.h; sourceTree = "<group>"; };
@@ -683,8 +680,6 @@
 				4DCCADB517D94C0F000BCA6B /* AddMapViewController.m */,
 				7B37EC6817E14D16003AFCA2 /* ViewExpenseViewController.h */,
 				7B37EC6917E14D16003AFCA2 /* ViewExpenseViewController.m */,
-				7B37EC6B17E14DBA003AFCA2 /* ViewExpenseMapViewController.h */,
-				7B37EC6C17E14DBA003AFCA2 /* ViewExpenseMapViewController.m */,
 			);
 			name = Today;
 			sourceTree = "<group>";
@@ -1066,7 +1061,6 @@
 				4DCCADB617D94C0F000BCA6B /* AddMapViewController.m in Sources */,
 				7B37EC6717E14C9A003AFCA2 /* HomeViewController.m in Sources */,
 				7B37EC6A17E14D16003AFCA2 /* ViewExpenseViewController.m in Sources */,
-				7B37EC6D17E14DBA003AFCA2 /* ViewExpenseMapViewController.m in Sources */,
 				7B37EC7017E14DFA003AFCA2 /* FindViewController.m in Sources */,
 				7B37EC7317E14E3B003AFCA2 /* FindTableViewController.m in Sources */,
 				7B7A5A9A17E15FB500E6BC58 /* FindMapViewController.m in Sources */,

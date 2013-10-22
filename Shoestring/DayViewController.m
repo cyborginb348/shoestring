@@ -18,9 +18,12 @@
 
 //internal instance variable
 @synthesize fetchedResultsController = _fetchedResultsController;
+
+@synthesize tableView;
+
 @synthesize total;
 @synthesize currentDate;
-@synthesize dateLabel;
+
 
 
 - (void)viewDidLoad
@@ -48,7 +51,7 @@
     [dateFormatter setDateFormat:@"EEE MMM d"];
     NSString *date = [dateFormatter stringFromDate:[self currentDate]];
 
-    [[self dateLabel]setText:date];
+    [[self navigationItem]setTitle: date];
     
     [self showTotal];
 }
@@ -105,14 +108,14 @@
 }
 
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+//- (id)initWithStyle:(UITableViewStyle)style
+//{
+//    self = [super initWithStyle:style];
+//    if (self) {
+//        // Custom initialization
+//    }
+//    return self;
+//}
 
 #pragma mark - Table view data source
 
@@ -350,7 +353,7 @@
 
 -(void) showTotal {
     
-    [total setText:[NSString stringWithFormat:@"$%@",[self calculateTotal:[self currentDate] forManagedObjectContext:[self managedObjectContext]]]];
+    [total setText:[NSString stringWithFormat:@"Total for this day is $%@",[self calculateTotal:[self currentDate] forManagedObjectContext:[self managedObjectContext]]]];
 }
 
 
