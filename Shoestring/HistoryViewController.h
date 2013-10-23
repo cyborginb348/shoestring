@@ -9,11 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Expense.h"
 #import "DayViewController.h"
-#import "AddHistoryViewController.h"
 
 
-@interface HistoryViewController : UITableViewController
-<AddHistoryViewControllerDelegate,  NSFetchedResultsControllerDelegate>
+@interface HistoryViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;

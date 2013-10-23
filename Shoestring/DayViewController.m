@@ -32,6 +32,7 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     //assign today to current dat (if Today tabBar item selected)
     AddExpenseViewController *aevc = [[AddExpenseViewController alloc]init];
@@ -74,15 +75,20 @@
                                                                     inManagedObjectContext:[self managedObjectContext]];
         [aevc setCurrentExpense:expense];
     }
-    
     //OR if we are viewing a current cell
-    if([[segue identifier] isEqualToString:@"viewExpense"]) {
+    else if([[segue identifier] isEqualToString:@"viewExpense"]) {
         
         ViewExpenseViewController *vevc = (ViewExpenseViewController*) [segue destinationViewController];
         NSIndexPath *indexPath  = [[self tableView] indexPathForSelectedRow];
         Expense *selectedExpense = (Expense*) [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [vevc setCurrentExpense:selectedExpense]; 
-    }  
+    }
+    else if([[segue identifier] isEqualToString:@"selectDate"]) {
+        
+        SelectDateViewController *sdvc = (SelectDateViewController*) [segue destinationViewController];
+        sdvc.chosenDate = self.currentDate;
+        [sdvc setDelegate:self];
+    }
 }
 
 #pragma mark - View Control save and cancel
@@ -353,8 +359,26 @@
 
 -(void) showTotal {
     
-    [total setText:[NSString stringWithFormat:@"Total for this day is $%@",[self calculateTotal:[self currentDate] forManagedObjectContext:[self managedObjectContext]]]];
+    [total setText:[NSString stringWithFormat:@"Total: $%@",[self calculateTotal:[self currentDate] forManagedObjectContext:[self managedObjectContext]]]];
 }
 
+#pragma mark - Select Date delegate
+
+-(void) selectDateViewControllerDidSelect:(NSDate*)selectedDate {
+    
+    NSLog(@"Selected Date: %@", selectedDate);
+    
+    self.currentDate = selectedDate;
+    _fetchedResultsController = nil;
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [[self tableView] reloadData];
+}
+
+-(void) selectDateViewControllerDidCancel {
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

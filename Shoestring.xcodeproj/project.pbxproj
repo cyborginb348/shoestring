@@ -43,7 +43,7 @@
 		4D5866EE17EE7979000DF65F /* OAServiceTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5866D817EE7979000DF65F /* OAServiceTicket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4D5866EF17EE7979000DF65F /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5866DB17EE7979000DF65F /* OAToken.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4D5866F017EE7979000DF65F /* OATokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5866DD17EE7979000DF65F /* OATokenManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4D85E1AA180DE9000017F675 /* AddHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D85E1A9180DE9000017F675 /* AddHistoryViewController.m */; };
+		4D85E1AA180DE9000017F675 /* SelectDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D85E1A9180DE9000017F675 /* SelectDateViewController.m */; };
 		4D8F4DEC17F9BCEC00FD90AB /* star_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F4DE717F9BCEC00FD90AB /* star_highlighted.png */; };
 		4D8F4DED17F9BCEC00FD90AB /* star_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F4DE817F9BCEC00FD90AB /* star_highlighted@2x.png */; };
 		4D8F4DEE17F9BCEC00FD90AB /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F4DE917F9BCEC00FD90AB /* star.png */; };
@@ -284,8 +284,8 @@
 		4D5866DC17EE7979000DF65F /* OATokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OATokenManager.h; sourceTree = "<group>"; };
 		4D5866DD17EE7979000DF65F /* OATokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OATokenManager.m; sourceTree = "<group>"; };
 		4D5866DE17EE7979000DF65F /* OAuthConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthConsumer.h; sourceTree = "<group>"; };
-		4D85E1A8180DE9000017F675 /* AddHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHistoryViewController.h; sourceTree = "<group>"; };
-		4D85E1A9180DE9000017F675 /* AddHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHistoryViewController.m; sourceTree = "<group>"; };
+		4D85E1A8180DE9000017F675 /* SelectDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDateViewController.h; sourceTree = "<group>"; };
+		4D85E1A9180DE9000017F675 /* SelectDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDateViewController.m; sourceTree = "<group>"; };
 		4D8F4DE717F9BCEC00FD90AB /* star_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_highlighted.png; sourceTree = "<group>"; };
 		4D8F4DE817F9BCEC00FD90AB /* star_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_highlighted@2x.png"; sourceTree = "<group>"; };
 		4D8F4DE917F9BCEC00FD90AB /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
@@ -678,6 +678,8 @@
 				7BC2F91C17D82C3300AAB3FE /* AddExpenseViewController.m */,
 				4DCCADB417D94C0F000BCA6B /* AddMapViewController.h */,
 				4DCCADB517D94C0F000BCA6B /* AddMapViewController.m */,
+				4D85E1A8180DE9000017F675 /* SelectDateViewController.h */,
+				4D85E1A9180DE9000017F675 /* SelectDateViewController.m */,
 				7B37EC6817E14D16003AFCA2 /* ViewExpenseViewController.h */,
 				7B37EC6917E14D16003AFCA2 /* ViewExpenseViewController.m */,
 			);
@@ -702,8 +704,6 @@
 			children = (
 				7B7A5A9B17E1606B00E6BC58 /* HistoryViewController.h */,
 				7B7A5A9C17E1606B00E6BC58 /* HistoryViewController.m */,
-				4D85E1A8180DE9000017F675 /* AddHistoryViewController.h */,
-				4D85E1A9180DE9000017F675 /* AddHistoryViewController.m */,
 			);
 			name = History;
 			sourceTree = "<group>";
@@ -1066,7 +1066,7 @@
 				7B7A5A9A17E15FB500E6BC58 /* FindMapViewController.m in Sources */,
 				AC11EEDA1813B64A00D67007 /* FavAnnotation.m in Sources */,
 				7B7A5A9D17E1606B00E6BC58 /* HistoryViewController.m in Sources */,
-				4D85E1AA180DE9000017F675 /* AddHistoryViewController.m in Sources */,
+				4D85E1AA180DE9000017F675 /* SelectDateViewController.m in Sources */,
 				4D1338B017E67DCE0047308B /* Favourite.m in Sources */,
 				4D1338B317E67E210047308B /* CloudAverage.m in Sources */,
 				4D5866DF17EE7979000DF65F /* MBProgressHUD.m in Sources */,

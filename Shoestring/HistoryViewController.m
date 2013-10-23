@@ -48,27 +48,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) addHistoryViewControllerDidSave {
-    
-    NSError *error = nil;
-    NSManagedObjectContext *context = self.managedObjectContext;
-    if (![context save:&error]) {
-        NSLog(@"Error! %@", error);
-    }
-    
-    [[self tableView] reloadData];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
--(void) addHistoryViewControllerDidCancel:(Expense *)expenseToDelete {
-    //delete MO
-    NSManagedObjectContext *context = self.managedObjectContext;
-    [context deleteObject:expenseToDelete];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
 
 //Method: prepare to Segue - either addExpense or viewExpense
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -91,19 +70,10 @@
 
         [dvc setCurrentDate:[self selectedDate]];
         [dvc setManagedObjectContext:[self managedObjectContext]];
+        
+        // Remove 'Select Date' button
+        [dvc.navigationItem setLeftBarButtonItem:nil];
     
-    } else if([[segue identifier] isEqualToString:@"addDay"]) {
-        
-        AddHistoryViewController *ahvc = (AddHistoryViewController*) [segue destinationViewController];
-        
-        //create new expense managed object, and set expense variable in new window being modally segued to...
-        Expense *expense = (Expense*) [NSEntityDescription insertNewObjectForEntityForName:@"Expense"
-                                                                    inManagedObjectContext:[self managedObjectContext]];
-        [ahvc setDelegate:self];
-        [ahvc setCurrentExpense:expense];
-        
-        //pass the managed object context
-        [ahvc setManagedObjectContext:[self managedObjectContext]];
     }
 }
 

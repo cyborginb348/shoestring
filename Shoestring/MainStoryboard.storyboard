@@ -15,12 +15,9 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZdJ-aW-wrj">
-                                <rect key="frame" x="0.0" y="37" width="320" height="408"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="337"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="408" id="hBu-IB-4D9"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="Ogt-9b-Mk6">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -40,28 +37,43 @@
                                     <outlet property="delegate" destination="AD5-lL-WyP" id="h0e-Y7-f5M"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="total" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njh-uO-MOR">
-                                <rect key="frame" x="46" y="8" width="228" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njh-uO-MOR">
+                                <rect key="frame" x="5" y="337" width="315" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="228" id="7WQ-v5-oZh"/>
+                                    <constraint firstAttribute="width" constant="315" id="wup-KV-EPP"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="0.17254902422428131" green="0.31372550129890442" blue="0.42745101451873779" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zI3-qG-SqK">
+                                <rect key="frame" x="0.0" y="337" width="320" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ZdJ-aW-wrj" secondAttribute="trailing" type="default" id="2D8-2m-ap0"/>
-                            <constraint firstItem="ZdJ-aW-wrj" firstAttribute="leading" secondItem="hPe-cC-7SK" secondAttribute="leading" type="default" id="6Oe-1m-psS"/>
-                            <constraint firstItem="ZdJ-aW-wrj" firstAttribute="top" secondItem="Njh-uO-MOR" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="aFn-gg-dIx"/>
-                            <constraint firstItem="ZdJ-aW-wrj" firstAttribute="centerX" secondItem="Njh-uO-MOR" secondAttribute="centerX" type="default" id="nUS-YM-GYp"/>
-                            <constraint firstItem="Njh-uO-MOR" firstAttribute="top" secondItem="hPe-cC-7SK" secondAttribute="top" constant="8" id="oKD-K6-szq"/>
+                            <constraint firstAttribute="trailing" secondItem="zI3-qG-SqK" secondAttribute="trailing" type="default" id="FAg-rJ-qth"/>
+                            <constraint firstItem="zI3-qG-SqK" firstAttribute="leading" secondItem="hPe-cC-7SK" secondAttribute="leading" type="default" id="JV6-O0-EF2"/>
+                            <constraint firstItem="zI3-qG-SqK" firstAttribute="trailing" secondItem="Njh-uO-MOR" secondAttribute="trailing" type="default" id="QsB-C2-MdW"/>
+                            <constraint firstItem="zI3-qG-SqK" firstAttribute="top" secondItem="Njh-uO-MOR" secondAttribute="top" type="default" id="UTy-DK-YyD"/>
+                            <constraint firstItem="Njh-uO-MOR" firstAttribute="top" secondItem="ZdJ-aW-wrj" secondAttribute="bottom" type="user" id="W72-KU-46D"/>
+                            <constraint firstAttribute="bottom" secondItem="zI3-qG-SqK" secondAttribute="bottom" constant="28" id="ad3-DE-cZG"/>
+                            <constraint firstAttribute="bottom" secondItem="Njh-uO-MOR" secondAttribute="bottom" type="user" id="l9S-c3-bKT"/>
+                            <constraint firstItem="zI3-qG-SqK" firstAttribute="leading" secondItem="ZdJ-aW-wrj" secondAttribute="leading" type="default" id="pxn-nd-B4N"/>
+                            <constraint firstItem="ZdJ-aW-wrj" firstAttribute="top" secondItem="hPe-cC-7SK" secondAttribute="top" type="user" id="tXc-Fs-etU"/>
+                            <constraint firstItem="zI3-qG-SqK" firstAttribute="trailing" secondItem="ZdJ-aW-wrj" secondAttribute="trailing" type="default" id="tZW-AF-r4F"/>
+                            <constraint firstAttribute="bottom" secondItem="ZdJ-aW-wrj" secondAttribute="bottom" constant="30" type="user" id="yhA-wt-gq8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NO1-Nu-4kR">
-                        <barButtonItem key="leftBarButtonItem" title="Change Date" id="dgv-ln-rA1"/>
+                        <barButtonItem key="leftBarButtonItem" title="Change Date" id="dgv-ln-rA1">
+                            <connections>
+                                <segue destination="xEn-mX-isV" kind="modal" identifier="selectDate" id="Ip9-7t-n9k"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add Expense" id="dn3-Yd-IzN">
                             <connections>
                                 <segue destination="Kyj-bf-pXN" kind="modal" identifier="addExpense" id="fbf-gV-P0i"/>
@@ -69,13 +81,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="changeDateButton" destination="dgv-ln-rA1" id="BkC-r3-qui"/>
                         <outlet property="tableView" destination="ZdJ-aW-wrj" id="050-ZU-xWQ"/>
                         <outlet property="total" destination="Njh-uO-MOR" id="dWi-Ei-A6J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBZ-W9-gDY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1468" y="-1892"/>
+            <point key="canvasLocation" x="-1356" y="-2118"/>
         </scene>
         <!--Add Expense View Controller - Add Expense-->
         <scene sceneID="bbR-s1-Obn">
@@ -270,7 +283,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="84m-Q2-jqN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1039" y="-1893"/>
+            <point key="canvasLocation" x="-815" y="-2377"/>
         </scene>
         <!--Add Map View Controller - AddLocation-->
         <scene sceneID="MlJ-EM-cSO">
@@ -314,13 +327,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wft-ct-HAo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-565" y="-1893"/>
+            <point key="canvasLocation" x="-273" y="-2112"/>
         </scene>
-        <!--Navigation Controller - DayView-->
+        <!--Navigation Controller - Daily-->
         <scene sceneID="dUJ-wc-yCC">
             <objects>
                 <navigationController definesPresentationContext="YES" id="CZL-R2-aB3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1" title="DayView" image="today.png" id="Wd3-ed-g9m"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Daily" image="today.png" id="Wd3-ed-g9m"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dvK-EP-ITC">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -330,7 +343,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNg-TZ-wfg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1918" y="-1892"/>
+            <point key="canvasLocation" x="-2340" y="-2492"/>
         </scene>
         <!--Graph My Expenses View Controller - My Expenses-->
         <scene sceneID="Q1Y-Kh-1ri">
@@ -427,7 +440,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6rt-yK-zLS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-975" y="-205"/>
+            <point key="canvasLocation" x="-1897" y="-1309"/>
         </scene>
         <!--Graph Compare View Controller - Compare-->
         <scene sceneID="kKl-M4-JU1">
@@ -582,7 +595,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8GQ-KN-t0o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-565" y="-205"/>
+            <point key="canvasLocation" x="-1356" y="-1309"/>
         </scene>
         <!--History View Controller - History-->
         <scene sceneID="AEN-cV-ntR">
@@ -625,7 +638,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9z1-f0-XSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1963" y="-1297"/>
+            <point key="canvasLocation" x="-1897" y="-1886"/>
         </scene>
         <!--Home View Controller - Home-->
         <scene sceneID="JJo-49-Zwo">
@@ -671,7 +684,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Okn-wN-HEs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2318" y="-1886"/>
+            <point key="canvasLocation" x="-2814" y="-2624"/>
         </scene>
         <!--Navigation Controller - Find-->
         <scene sceneID="Xtq-1z-1Jv">
@@ -687,7 +700,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sVC-RM-vQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1918" y="-770"/>
+            <point key="canvasLocation" x="-2340" y="-718"/>
         </scene>
         <!--View Expense View Controller - Expense-->
         <scene sceneID="UPG-PM-PrN">
@@ -886,7 +899,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zsM-Zi-6kn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1032" y="-1328"/>
+            <point key="canvasLocation" x="-815" y="-1774"/>
         </scene>
         <!--Find View Controller - Find-->
         <scene sceneID="baH-ft-bs4">
@@ -994,7 +1007,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5B-lE-NJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1497" y="-770"/>
+            <point key="canvasLocation" x="-1897" y="-718"/>
         </scene>
         <!--Find Table View Controller - Accommodation-->
         <scene sceneID="BhL-ua-0hJ">
@@ -1044,7 +1057,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GJQ-FU-0es" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-976" y="-768"/>
+            <point key="canvasLocation" x="-1356" y="-718"/>
         </scene>
         <!--Find Map View Controller - Nearby-->
         <scene sceneID="r2B-hO-gsk">
@@ -1079,7 +1092,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HfZ-XS-AmB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-565" y="-770"/>
+            <point key="canvasLocation" x="-815" y="-718"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="a01-kM-eyb">
@@ -1120,21 +1133,18 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ykr-Xv-sbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2987" y="-1257"/>
+            <point key="canvasLocation" x="-2340" y="-1886"/>
         </scene>
-        <!--Add History View Controller-->
+        <!--Select Date View Controller-->
         <scene sceneID="jQm-lp-AGu">
             <objects>
-                <viewController id="xEn-mX-isV" customClass="AddHistoryViewController" sceneMemberID="viewController">
+                <viewController id="xEn-mX-isV" customClass="SelectDateViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kCT-Oe-PVM">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZwP-bt-rFA">
-                                <rect key="frame" x="-80" y="156" width="480" height="162"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="288" id="S7G-h6-hbf"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="44" width="320" height="162"/>
                                 <date key="date" timeIntervalSinceReferenceDate="403565186.60693997">
                                     <!--2013-10-15 21:26:26 +0000-->
                                 </date>
@@ -1159,20 +1169,17 @@ AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
 </data>
                                 </timeZone>
-                                <connections>
-                                    <action selector="displayDate:" destination="xEn-mX-isV" eventType="valueChanged" id="1Kf-d7-i6T"/>
-                                </connections>
                             </datePicker>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mp8-Qv-DYa">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
-                                    <navigationItem title="Add Day" id="wQe-w2-Oo4">
+                                    <navigationItem title="Select Date" id="wQe-w2-Oo4">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="O7l-8z-tce">
                                             <connections>
                                                 <action selector="cancel:" destination="xEn-mX-isV" id="Phh-3K-bTT"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="sqf-WP-1dG">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="sqf-WP-1dG">
                                             <connections>
                                                 <action selector="save:" destination="xEn-mX-isV" id="IXM-31-uja"/>
                                             </connections>
@@ -1181,15 +1188,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                             </navigationBar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ukx-ci-gli">
-                                <rect key="frame" x="20" y="80" width="280" height="33"/>
+                                <rect key="frame" x="20" y="221" width="280" height="33"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="vQe-bj-nAo"/>
+                                    <constraint firstAttribute="height" constant="33" id="56U-br-TKg"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="Select a day in the past">
+                                    <fragment content="Select a date to display">
                                         <attributes>
                                             <color key="NSColor" red="0.015686275437474251" green="0.12941177189350128" blue="0.21960785984992981" alpha="1" colorSpace="deviceRGB"/>
-                                            <font key="NSFont" size="23" name="HelveticaNeue"/>
+                                            <font key="NSFont" size="25" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
@@ -1197,27 +1204,26 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ZwP-bt-rFA" firstAttribute="centerX" secondItem="Ukx-ci-gli" secondAttribute="centerX" type="default" id="GgQ-kg-tpb"/>
-                            <constraint firstItem="Ukx-ci-gli" firstAttribute="centerX" secondItem="mp8-Qv-DYa" secondAttribute="centerX" type="default" id="I8S-hO-sHz"/>
-                            <constraint firstItem="ZwP-bt-rFA" firstAttribute="top" secondItem="kCT-Oe-PVM" secondAttribute="top" constant="156" id="NV4-8F-B1B"/>
-                            <constraint firstItem="mp8-Qv-DYa" firstAttribute="top" secondItem="kCT-Oe-PVM" secondAttribute="top" type="default" id="OTk-zA-Jdb"/>
-                            <constraint firstItem="Ukx-ci-gli" firstAttribute="leading" secondItem="kCT-Oe-PVM" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="UlT-ID-H9E"/>
-                            <constraint firstItem="mp8-Qv-DYa" firstAttribute="leading" secondItem="kCT-Oe-PVM" secondAttribute="leading" type="default" id="ftp-Z1-s3s"/>
-                            <constraint firstItem="Ukx-ci-gli" firstAttribute="top" secondItem="kCT-Oe-PVM" secondAttribute="top" constant="80" id="vMq-40-cIa"/>
-                            <constraint firstAttribute="trailing" secondItem="Ukx-ci-gli" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="yYN-xB-ISm"/>
+                            <constraint firstItem="Ukx-ci-gli" firstAttribute="top" secondItem="ZwP-bt-rFA" secondAttribute="bottom" constant="15" type="user" id="9eW-Br-SIK"/>
+                            <constraint firstItem="ZwP-bt-rFA" firstAttribute="leading" secondItem="mp8-Qv-DYa" secondAttribute="leading" type="default" id="BiP-OJ-jMf"/>
+                            <constraint firstItem="mp8-Qv-DYa" firstAttribute="top" secondItem="kCT-Oe-PVM" secondAttribute="top" type="user" id="OTk-zA-Jdb"/>
+                            <constraint firstItem="Ukx-ci-gli" firstAttribute="leading" secondItem="kCT-Oe-PVM" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="UlT-ID-H9E"/>
+                            <constraint firstAttribute="trailing" secondItem="ZwP-bt-rFA" secondAttribute="trailing" type="user" id="WY3-5Z-wLt"/>
+                            <constraint firstItem="ZwP-bt-rFA" firstAttribute="trailing" secondItem="mp8-Qv-DYa" secondAttribute="trailing" type="default" id="qCQ-1w-HIl"/>
+                            <constraint firstItem="ZwP-bt-rFA" firstAttribute="top" secondItem="mp8-Qv-DYa" secondAttribute="bottom" type="user" id="tC1-qC-14k"/>
+                            <constraint firstItem="ZwP-bt-rFA" firstAttribute="leading" secondItem="kCT-Oe-PVM" secondAttribute="leading" type="user" id="u8y-sm-Yv6"/>
+                            <constraint firstAttribute="trailing" secondItem="Ukx-ci-gli" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="yYN-xB-ISm"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dateLabel" destination="Ukx-ci-gli" id="R4o-Nx-X40"/>
                         <outlet property="datePicker" destination="ZwP-bt-rFA" id="fjg-Py-eXF"/>
-                        <outlet property="saveBtn" destination="sqf-WP-1dG" id="IIz-td-UyO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z9s-Qg-TNO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2338" y="-593"/>
+            <point key="canvasLocation" x="-815" y="-2938"/>
         </scene>
         <!--Navigation Controller - Graphs-->
         <scene sceneID="nhj-MJ-lQa">
@@ -1236,7 +1242,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4dB-zz-RcU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1497" y="-205"/>
+            <point key="canvasLocation" x="-2340" y="-1309"/>
         </scene>
     </scenes>
     <resources>
@@ -1259,6 +1265,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Mjh-9r-ZQx"/>
-        <segue reference="J90-uY-kfb"/>
+        <segue reference="P8i-h3-C08"/>
     </inferredMetricsTieBreakers>
 </document>

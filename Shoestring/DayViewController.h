@@ -11,11 +11,12 @@
 #import "AddExpenseViewController.h"
 #import "ViewExpenseViewController.h"
 #import "HistoryViewController.h"
+#import "SelectDateViewController.h"
 
 #import "Expense.h"
 
 @interface DayViewController : UIViewController
-<AddExpenseViewControllerDelegate, NSFetchedResultsControllerDelegate>
+<AddExpenseViewControllerDelegate, NSFetchedResultsControllerDelegate, SelectDateViewControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -28,6 +29,7 @@
 
 - (NSNumber*)calculateTotal: (NSDate*) date forManagedObjectContext: (NSManagedObjectContext*) managedObjectContext;
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *changeDateButton;
 
 
 @end
