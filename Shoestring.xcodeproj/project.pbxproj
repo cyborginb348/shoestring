@@ -95,6 +95,14 @@
 		AC11EF1A1813CB5A00D67007 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC11EF181813CB5A00D67007 /* delete@2x.png */; };
 		ACC4CA2517F4688B00F04317 /* CloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC4CA2417F4688B00F04317 /* CloudService.m */; };
 		ACC4CA2717F468CD00F04317 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC4CA2617F468CD00F04317 /* CoreLocation.framework */; };
+		ACDC8DCB1818C38C00D1F7A9 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = ACDC8DC41818C38C00D1F7A9 /* icon114.png */; };
+		ACDC8DCC1818C38C00D1F7A9 /* icon120.png in Resources */ = {isa = PBXBuildFile; fileRef = ACDC8DC51818C38C00D1F7A9 /* icon120.png */; };
+		ACDC8DCD1818C38C00D1F7A9 /* icon29.png in Resources */ = {isa = PBXBuildFile; fileRef = ACDC8DC61818C38C00D1F7A9 /* icon29.png */; };
+		ACDC8DCE1818C38C00D1F7A9 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = ACDC8DC71818C38C00D1F7A9 /* icon57.png */; };
+		ACDC8DCF1818C38C00D1F7A9 /* icon58.png in Resources */ = {isa = PBXBuildFile; fileRef = ACDC8DC81818C38C00D1F7A9 /* icon58.png */; };
+		ACDC8DD01818C38C00D1F7A9 /* icon80.png in Resources */ = {isa = PBXBuildFile; fileRef = ACDC8DC91818C38C00D1F7A9 /* icon80.png */; };
+		ACDC8DE31818E75D00D1F7A9 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = ACDC8DE11818E75D00D1F7A9 /* header.png */; };
+		ACDC8DE41818E75D00D1F7A9 /* header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACDC8DE21818E75D00D1F7A9 /* header@2x.png */; };
 		ACF51DFA180D41AC00BCC4AC /* Expense.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF51DF9180D41AC00BCC4AC /* Expense.m */; };
 		ACF717CA18114F0700F020BB /* graphs.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF717C518114F0700F020BB /* graphs.png */; };
 		ACF717CB18114F0700F020BB /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF717C618114F0700F020BB /* history.png */; };
@@ -354,6 +362,14 @@
 		ACC4CA2317F4688B00F04317 /* CloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudService.h; sourceTree = "<group>"; };
 		ACC4CA2417F4688B00F04317 /* CloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudService.m; sourceTree = "<group>"; };
 		ACC4CA2617F468CD00F04317 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		ACDC8DC41818C38C00D1F7A9 /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
+		ACDC8DC51818C38C00D1F7A9 /* icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon120.png; sourceTree = "<group>"; };
+		ACDC8DC61818C38C00D1F7A9 /* icon29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon29.png; sourceTree = "<group>"; };
+		ACDC8DC71818C38C00D1F7A9 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
+		ACDC8DC81818C38C00D1F7A9 /* icon58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon58.png; sourceTree = "<group>"; };
+		ACDC8DC91818C38C00D1F7A9 /* icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon80.png; sourceTree = "<group>"; };
+		ACDC8DE11818E75D00D1F7A9 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
+		ACDC8DE21818E75D00D1F7A9 /* header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header@2x.png"; sourceTree = "<group>"; };
 		ACF51DF8180D41AC00BCC4AC /* Expense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expense.h; sourceTree = SOURCE_ROOT; };
 		ACF51DF9180D41AC00BCC4AC /* Expense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expense.m; sourceTree = SOURCE_ROOT; };
 		ACF717C518114F0700F020BB /* graphs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graphs.png; sourceTree = "<group>"; };
@@ -569,6 +585,8 @@
 		4D479C5B17D5D59500C565BD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ACDC8DD21818DE7600D1F7A9 /* Images */,
+				ACDC8DC31818C38C00D1F7A9 /* AppIcons */,
 				F5C768C91809567100C165E7 /* Map */,
 				4DCCADB717D97D01000BCA6B /* icons */,
 				4DCCAD8617D8A7DA000BCA6B /* Buttons */,
@@ -902,6 +920,28 @@
 			name = CustomClasses;
 			sourceTree = "<group>";
 		};
+		ACDC8DC31818C38C00D1F7A9 /* AppIcons */ = {
+			isa = PBXGroup;
+			children = (
+				ACDC8DC41818C38C00D1F7A9 /* icon114.png */,
+				ACDC8DC51818C38C00D1F7A9 /* icon120.png */,
+				ACDC8DC61818C38C00D1F7A9 /* icon29.png */,
+				ACDC8DC71818C38C00D1F7A9 /* icon57.png */,
+				ACDC8DC81818C38C00D1F7A9 /* icon58.png */,
+				ACDC8DC91818C38C00D1F7A9 /* icon80.png */,
+			);
+			path = AppIcons;
+			sourceTree = "<group>";
+		};
+		ACDC8DD21818DE7600D1F7A9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				ACDC8DE11818E75D00D1F7A9 /* header.png */,
+				ACDC8DE21818E75D00D1F7A9 /* header@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		F5C768C91809567100C165E7 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -991,6 +1031,7 @@
 				4DBB58AC17D6C43100686605 /* dailyExpenses.png in Resources */,
 				4DBB58AE17D6C43100686605 /* mapPlace.png in Resources */,
 				ACF718141811574100F020BB /* cat3@2x.png in Resources */,
+				ACDC8DCB1818C38C00D1F7A9 /* icon114.png in Resources */,
 				ACF717D21811500F00F020BB /* find@2x.png in Resources */,
 				4D8F4DEE17F9BCEC00FD90AB /* star.png in Resources */,
 				4DBB58AF17D6C43100686605 /* mapRecord.png in Resources */,
@@ -1000,11 +1041,14 @@
 				ACF718161811574100F020BB /* cat4@2x.png in Resources */,
 				ACF717F9181155B900F020BB /* accommodation_sel@2x.png in Resources */,
 				4DBB58B217D6DB1500686605 /* pieChart.png in Resources */,
+				ACDC8DCE1818C38C00D1F7A9 /* icon57.png in Resources */,
 				ACF717D71811509E00F020BB /* graphs@2x.png in Resources */,
 				4DBB58B417D6EBD800686605 /* shoestring_logo.png in Resources */,
 				4D8F4DED17F9BCEC00FD90AB /* star_highlighted@2x.png in Resources */,
 				AC11EF0F1813C09100D67007 /* ann3.png in Resources */,
 				ACF717D91811509E00F020BB /* home@2x.png in Resources */,
+				ACDC8DCC1818C38C00D1F7A9 /* icon120.png in Resources */,
+				ACDC8DE31818E75D00D1F7A9 /* header.png in Resources */,
 				ACF717ED181153AF00F020BB /* travel_sel.png in Resources */,
 				ACF717CC18114F0700F020BB /* home.png in Resources */,
 				ACF717E8181153AF00F020BB /* entertainment.png in Resources */,
@@ -1022,11 +1066,14 @@
 				4DCCADBD17D97D01000BCA6B /* glyphicons_020_home.png in Resources */,
 				4D8F4DEF17F9BCEC00FD90AB /* star.psd in Resources */,
 				4DCCADBE17D97D01000BCA6B /* glyphicons_027_search.png in Resources */,
+				ACDC8DCF1818C38C00D1F7A9 /* icon58.png in Resources */,
 				ACF717FA181155B900F020BB /* accommodation@2x.png in Resources */,
 				4DCCADBF17D97D01000BCA6B /* glyphicons_042_pie_chart.png in Resources */,
 				ACF71802181155B900F020BB /* travel@2x.png in Resources */,
 				ACF717CA18114F0700F020BB /* graphs.png in Resources */,
+				ACDC8DE41818E75D00D1F7A9 /* header@2x.png in Resources */,
 				ACF718111811574100F020BB /* cat2.png in Resources */,
+				ACDC8DD01818C38C00D1F7A9 /* icon80.png in Resources */,
 				4DCCADC017D97D01000BCA6B /* glyphicons_045_calendar.png in Resources */,
 				4DCCADC117D97D01000BCA6B /* glyphicons_057_history.png in Resources */,
 				AC11EF101813C09100D67007 /* ann3@2x.png in Resources */,
@@ -1035,6 +1082,7 @@
 				ACF718151811574100F020BB /* cat4.png in Resources */,
 				ACF717EA181153AF00F020BB /* food.png in Resources */,
 				ACF7180D1811574100F020BB /* cat0.png in Resources */,
+				ACDC8DCD1818C38C00D1F7A9 /* icon29.png in Resources */,
 				ACF717FD181155B900F020BB /* food_sel@2x.png in Resources */,
 				ACF717DA1811509E00F020BB /* today@2x.png in Resources */,
 				ACF717CB18114F0700F020BB /* history.png in Resources */,
