@@ -14,7 +14,8 @@
 <NSFetchedResultsControllerDelegate, MKMapViewDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *favouritesResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *expensesResultsController;
 
 @property (nonatomic, strong) Favourite *favourite;
 

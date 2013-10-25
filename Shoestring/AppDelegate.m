@@ -58,6 +58,12 @@
     [historyView setManagedObjectContext:[self managedObjectContext]];
     [graphView setManagedObjectContext:[self managedObjectContext]];
     
+    // Set the application defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *appDefaults =  [NSDictionary dictionaryWithObjects:@[@"YES", @"NO"] forKeys:@[@"showFavourites", @"showExpenses"]];
+    [defaults registerDefaults:appDefaults];
+    [defaults synchronize];
+    
     
     //[[[CloudService getInstance] client] loginWithProvider:@"facebook" controller:homeView animated:YES completion:^(MSUser *user, NSError *error) {}];
     

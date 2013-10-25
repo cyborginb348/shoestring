@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "AppDelegate.h"
 #import "FavAnnotation.h"
+#import "ExpAnnotation.h"
 
 @interface HomeViewController ()
 
@@ -21,7 +22,8 @@
 @implementation HomeViewController
 
 @synthesize favourite;
-@synthesize fetchedResultsController= _fetchedResultsController;
+@synthesize favouritesResultsController= _favouritesResultsController;
+@synthesize expensesResultsController= _expensesResultsController;
 @synthesize homeMapView = _homeMapView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,13 +52,26 @@
 
 -(void)refreshMap
 {
-    NSLog(@"BLAAA");
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL showFavourites = [defaults boolForKey:@"showFavourites"];
+    BOOL showExpenses = [defaults boolForKey:@"showExpenses"];
+    
     //fetch the manamed object entity
     NSError *error = nil;
-    if(![[self fetchedResultsController] performFetch:&error]) {
-        NSLog(@"Error! %@", error);
-        abort();
-    }
+    if (showFavourites)
+    {
+        if(![[self favouritesResultsController] performFetch:&error]) {
+            NSLog(@"Error! %@", error);
+            abort();
+        }
+    } else _favouritesResultsController = nil;
+    if (showExpenses)
+    {
+        if(![[self expensesResultsController] performFetch:&error]) {
+            NSLog(@"Error! %@", error);
+            abort();
+        }
+    } else _expensesResultsController = nil;
     [self updateFavInMapView];
     
     
@@ -87,10 +102,10 @@
 #pragma mark -
 #pragma mark Fetched Results Controller
 
--(NSFetchedResultsController*) fetchedResultsController {
+-(NSFetchedResultsController*) favouritesResultsController {
     
-    if(_fetchedResultsController != nil) {
-        return _fetchedResultsController;
+    if(_favouritesResultsController != nil) {
+        return _favouritesResultsController;
     }
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -105,18 +120,50 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
 
     
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+    _favouritesResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                     managedObjectContext:[self managedObjectContext] sectionNameKeyPath: @"favouritePlace"
                                                                                cacheName:nil];
     
     //set this class as the delegate for the fetchedResults controller
-    [_fetchedResultsController setDelegate:self];
+    [_favouritesResultsController setDelegate:self];
     
-    return _fetchedResultsController;
+    return _favouritesResultsController;
+}
+
+-(NSFetchedResultsController*) expensesResultsController {
+    
+    if(_expensesResultsController != nil) {
+        return _expensesResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expense"
+                                              inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date"
+                                                                   ascending:NO];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    [fetchRequest setFetchLimit:5];
+    
+    
+    _expensesResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                    managedObjectContext:[self managedObjectContext] sectionNameKeyPath: nil
+                                                                               cacheName:nil];
+    
+    //set this class as the delegate for the fetchedResults controller
+    [_expensesResultsController setDelegate:self];
+    
+    return _expensesResultsController;
 }
 
 -(void) updateFavInMapView{
-    NSArray *fetchedData = [_fetchedResultsController fetchedObjects];
+    [self.homeMapView removeAnnotations:self.homeMapView.annotations];
+    
+    NSArray *fetchedData = [_favouritesResultsController fetchedObjects];
     NSLog(@"count fetched data: %i", [fetchedData count]);
     
     NSMutableArray *annotations = [[NSMutableArray alloc] init];
@@ -143,46 +190,45 @@
     }
     
     [self.homeMapView addAnnotations:annotations];
+    
+    fetchedData = [_expensesResultsController fetchedObjects];
+    NSLog(@"count fetched data: %i", [fetchedData count]);
+    
+    annotations = [[NSMutableArray alloc] init];
+    
+    for (Expense *currentExpense in fetchedData ) {
+        NSLog(@"place: %@", [currentExpense placeName]);
+        NSLog(@"latitude: %@", [currentExpense latitude]);
+        NSLog(@"longitude: %@", [currentExpense longitude]);
+        NSLog(@"category: %@", [currentExpense category]);
+        
+        
+        
+        CLLocationCoordinate2D location;
+        ExpAnnotation *ann;
+        
+        location.latitude = [[currentExpense latitude] doubleValue];
+        location.longitude = [[currentExpense longitude] doubleValue];
+        ann = [[ExpAnnotation alloc] init];
+        [ann setCoordinate:location];
+        ann.title = [currentExpense placeName];
+        ann.expense = currentExpense;
+        ann.subtitle = [currentExpense category];
+        [annotations addObject:ann];
+    }
+    
+    [self.homeMapView addAnnotations:annotations];
 }
 
--(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    NSString *category;
+    MKAnnotationView *view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
+    
     if ([annotation isMemberOfClass:[FavAnnotation class]])
     {
         FavAnnotation *favAnnotation = (FavAnnotation*)annotation;
-        
-        MKAnnotationView *view = [[MKAnnotationView alloc] initWithAnnotation:favAnnotation reuseIdentifier:@"pin"];
-        //view.pinColor = MKPinAnnotationColorPurple;
-        view.enabled = YES;
-        //view.animatesDrop = YES;
-        view.canShowCallout = YES;
-        
-        NSString *category = favAnnotation.favourite.category;
-        
-        if ([category isEqualToString:@"Accommodation"])
-        {
-            view.image = [UIImage imageNamed:@"ann0.png"];
-            view.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cat0.png"]];
-        }
-        else if ([category isEqualToString:@"Food"])
-        {
-            view.image = [UIImage imageNamed:@"ann1.png"];
-            view.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cat1.png"]];
-        }
-        else if ([category isEqualToString:@"Travel"])
-        {
-            view.image = [UIImage imageNamed:@"ann2.png"];
-            view.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cat2.png"]];
-        }
-        else if ([category isEqualToString:@"Entertainment"])
-        {
-            view.image = [UIImage imageNamed:@"ann3.png"];
-            view.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cat3.png"]];
-        }
-        else if ([category isEqualToString:@"Shopping"])
-        {
-            view.image = [UIImage imageNamed:@"ann4.png"];
-            view.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cat4.png"]];
-        }
+        category = favAnnotation.favourite.category;
         
         UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [deleteButton setFrame:CGRectMake(0, 0, 32, 32)];
@@ -191,11 +237,44 @@
         [deleteButton setBackgroundImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
         [deleteButton addTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
         view.rightCalloutAccessoryView = deleteButton;
-        
-        return view;
+    }
+    else if ([annotation isMemberOfClass:[ExpAnnotation class]])
+    {
+        ExpAnnotation *expAnnotation = (ExpAnnotation*)annotation;
+        category = expAnnotation.expense.category;
+    }
+    else return nil;
+    
+    
+    view.enabled = YES;
+    view.canShowCallout = YES;
+    if ([category isEqualToString:@"Accommodation"])
+    {
+        view.image = [UIImage imageNamed:@"ann0.png"];
+        view.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cat0.png"]];
+    }
+    else if ([category isEqualToString:@"Food"])
+    {
+        view.image = [UIImage imageNamed:@"ann1.png"];
+        view.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cat1.png"]];
+    }
+    else if ([category isEqualToString:@"Travel"])
+    {
+        view.image = [UIImage imageNamed:@"ann2.png"];
+        view.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cat2.png"]];
+    }
+    else if ([category isEqualToString:@"Entertainment"])
+    {
+        view.image = [UIImage imageNamed:@"ann3.png"];
+        view.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cat3.png"]];
+    }
+    else if ([category isEqualToString:@"Shopping"])
+    {
+        view.image = [UIImage imageNamed:@"ann4.png"];
+        view.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cat4.png"]];
     }
     
-    return nil;
+    return view;
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
@@ -219,7 +298,7 @@
         NSError *error;
         [self.managedObjectContext save:&error];
         
-        [self.homeMapView removeAnnotation:self.selectedAnnotation];
+        //[self.homeMapView removeAnnotation:self.selectedAnnotation];
     }
     self.selectedAnnotation = nil;
 }

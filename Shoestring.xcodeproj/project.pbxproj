@@ -93,6 +93,8 @@
 		AC11EF121813C09100D67007 /* ann4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC11EF081813C09100D67007 /* ann4@2x.png */; };
 		AC11EF191813CB5A00D67007 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = AC11EF171813CB5A00D67007 /* delete.png */; };
 		AC11EF1A1813CB5A00D67007 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC11EF181813CB5A00D67007 /* delete@2x.png */; };
+		AC7BD595181A5A4F0071A774 /* ExpAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AC7BD594181A5A4F0071A774 /* ExpAnnotation.m */; };
+		AC7BD597181A8BB50071A774 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC7BD596181A8BB50071A774 /* Settings.bundle */; };
 		ACC4CA2517F4688B00F04317 /* CloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = ACC4CA2417F4688B00F04317 /* CloudService.m */; };
 		ACC4CA2717F468CD00F04317 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC4CA2617F468CD00F04317 /* CoreLocation.framework */; };
 		ACDC8DCB1818C38C00D1F7A9 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = ACDC8DC41818C38C00D1F7A9 /* icon114.png */; };
@@ -358,6 +360,9 @@
 		AC11EF081813C09100D67007 /* ann4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ann4@2x.png"; sourceTree = "<group>"; };
 		AC11EF171813CB5A00D67007 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		AC11EF181813CB5A00D67007 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
+		AC7BD593181A5A4F0071A774 /* ExpAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpAnnotation.h; sourceTree = "<group>"; };
+		AC7BD594181A5A4F0071A774 /* ExpAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpAnnotation.m; sourceTree = "<group>"; };
+		AC7BD596181A8BB50071A774 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		ACC4CA2117F4687200F04317 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
 		ACC4CA2317F4688B00F04317 /* CloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudService.h; sourceTree = "<group>"; };
 		ACC4CA2417F4688B00F04317 /* CloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudService.m; sourceTree = "<group>"; };
@@ -537,6 +542,7 @@
 		4D479C4617D5D59500C565BD = {
 			isa = PBXGroup;
 			children = (
+				AC7BD596181A8BB50071A774 /* Settings.bundle */,
 				4D5866B417EE7978000DF65F /* Libraries */,
 				4D479C5A17D5D59500C565BD /* Shoestring */,
 				4D479C5117D5D59500C565BD /* Frameworks */,
@@ -680,6 +686,8 @@
 			children = (
 				7B37EC6517E14C9A003AFCA2 /* HomeViewController.h */,
 				7B37EC6617E14C9A003AFCA2 /* HomeViewController.m */,
+				AC7BD593181A5A4F0071A774 /* ExpAnnotation.h */,
+				AC7BD594181A5A4F0071A774 /* ExpAnnotation.m */,
 				AC11EED81813B64A00D67007 /* FavAnnotation.h */,
 				AC11EED91813B64A00D67007 /* FavAnnotation.m */,
 			);
@@ -1066,6 +1074,7 @@
 				4DCCADBD17D97D01000BCA6B /* glyphicons_020_home.png in Resources */,
 				4D8F4DEF17F9BCEC00FD90AB /* star.psd in Resources */,
 				4DCCADBE17D97D01000BCA6B /* glyphicons_027_search.png in Resources */,
+				AC7BD597181A8BB50071A774 /* Settings.bundle in Resources */,
 				ACDC8DCF1818C38C00D1F7A9 /* icon58.png in Resources */,
 				ACF717FA181155B900F020BB /* accommodation@2x.png in Resources */,
 				4DCCADBF17D97D01000BCA6B /* glyphicons_042_pie_chart.png in Resources */,
@@ -1137,6 +1146,7 @@
 				4D5866EC17EE7979000DF65F /* OAProblem.m in Sources */,
 				4D5866ED17EE7979000DF65F /* OARequestParameter.m in Sources */,
 				4D5866EE17EE7979000DF65F /* OAServiceTicket.m in Sources */,
+				AC7BD595181A5A4F0071A774 /* ExpAnnotation.m in Sources */,
 				4D5866EF17EE7979000DF65F /* OAToken.m in Sources */,
 				4D5866F017EE7979000DF65F /* OATokenManager.m in Sources */,
 				4D8F4DF517F9BCFE00FD90AB /* StarRatingControl.m in Sources */,
