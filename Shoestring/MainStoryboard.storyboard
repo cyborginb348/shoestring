@@ -913,7 +913,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Vsb-ZB-m3w" kind="push" identifier="FindVCSegue" id="w85-wX-pSf"/>
+                                    <action selector="btnFindPlaces:" destination="6Ql-mS-lXu" eventType="touchUpInside" id="OWj-06-Xif"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="distance from you" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gg6-EW-e2R">
@@ -996,6 +996,7 @@
                         <outlet property="categoryView" destination="ggV-wf-Sza" id="J1k-wR-Lmx"/>
                         <outlet property="distanceValue" destination="RU6-cG-iUT" id="cQB-19-PPT"/>
                         <outlet property="selectedDistance" destination="Y9c-m6-2Ta" id="X0X-fB-xcF"/>
+                        <segue destination="Vsb-ZB-m3w" kind="push" identifier="FindVCSegue" id="itZ-39-Ug5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5B-lE-NJX" userLabel="First Responder" sceneMemberID="firstResponder"/>

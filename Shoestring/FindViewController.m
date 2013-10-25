@@ -34,6 +34,7 @@
     // add the category buttons
     CategoryButtons *btnView = [[CategoryButtons alloc] init];
     [btnView setDelegate:self];
+    [btnView setCategoryTitle:@"Please select..."];
     CGRect bounds = [[self view] bounds];
     [btnView setCenter: CGPointMake(bounds.size.width/2, 160)];
     [categoryView addSubview:btnView];
@@ -81,7 +82,15 @@
 }
 
 - (IBAction)btnFindPlaces:(id)sender {
-    [self performSegueWithIdentifier:@"FindVCSegue" sender:sender];
+    if (![currentCategory isKindOfClass:[NSString class]] || [currentCategory length]==0)
+    {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please select a category!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [av show];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"FindVCSegue" sender:sender];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
