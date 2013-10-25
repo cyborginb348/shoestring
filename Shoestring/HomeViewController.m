@@ -10,10 +10,15 @@
 #import "AppDelegate.h"
 #import "FavAnnotation.h"
 #import "ExpAnnotation.h"
+#import "CloudService.h"
+
+#define kAlertViewSync 1
+#define kAlertViewDelete 2
 
 @interface HomeViewController ()
 
 @property (nonatomic, strong) FavAnnotation *selectedAnnotation;
+@property (nonatomic, strong) NSArray *result;
 
 -(void)refreshMap;
 
@@ -47,7 +52,135 @@
 {
     [super viewDidAppear:animated];
     
+    
+    // Log in
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.loggedIn)
+    {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *loginMethod = [defaults stringForKey:@"loginMethod"];
+        if (!loginMethod)
+            [self performSegueWithIdentifier:@"chooseLogIn" sender:self];
+        else if ([loginMethod isEqualToString:@"facebook"] || [loginMethod isEqualToString:@"twitter"] || [loginMethod isEqualToString:@"google"] || [loginMethod isEqualToString:@"microsoftaccount"])
+        {
+            [defaults setObject:@"nil" forKey:@"loginMethod"];
+            [[[CloudService getInstance] client] loginWithProvider:loginMethod controller:self animated:YES completion:^(MSUser *user, NSError *error) {
+                if (!error)
+                {
+                    appDelegate.loggedIn = YES;
+                    [defaults setObject:loginMethod forKey:@"loginMethod"];
+                    
+                    // Check for unsynced expenses
+                    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+                    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expense"
+                                                              inManagedObjectContext:[self managedObjectContext]];
+                    [fetchRequest setEntity:entity];
+                    
+                    NSExpressionDescription* ex = [[NSExpressionDescription alloc] init];
+                    [ex setExpression:[NSExpression expressionWithFormat:@"@sum.amount"]];
+                    [ex setExpressionResultType:NSDecimalAttributeType];
+                    [ex setName:@"sum"];
+                    
+                    NSExpressionDescription* exLat = [[NSExpressionDescription alloc] init];
+                    [exLat setExpression:[NSExpression expressionWithFormat:@"@avg.latitude"]];
+                    [exLat setExpressionResultType:NSDecimalAttributeType];
+                    [exLat setName:@"latitude"];
+                    
+                    NSExpressionDescription* exLon = [[NSExpressionDescription alloc] init];
+                    [exLon setExpression:[NSExpression expressionWithFormat:@"@avg.longitude"]];
+                    [exLon setExpressionResultType:NSDecimalAttributeType];
+                    [exLon setName:@"longitude"];
+                    
+                    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObjects:@"category", @"date", ex, exLat, exLon, nil]];
+                    [fetchRequest setPropertiesToGroupBy:[NSArray arrayWithObjects:@"category", @"date", nil]];
+                    [fetchRequest setResultType:NSDictionaryResultType];
+                    
+                    NSDate *date = [NSDate date];
+                    NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+                    date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+                    
+                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(synced == NO) AND (date < %@)", date];
+                    [fetchRequest setPredicate:predicate];
+                    
+                    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+                    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+                    [fetchRequest setSortDescriptors:sortDescriptors];
+                    
+                    NSError *error;
+                    self.result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+                    
+                    NSLog(@"count: %d", self.result.count);
+                    if (self.result.count > 0)
+                    {
+                        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Share your data" message:@"Are you done entering expenses for yesterday?" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Yes", @"No", nil];
+                        av.tag = kAlertViewSync;
+                        [av show];
+                    }
+                }
+                else
+                {
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    [defaults setObject:@"nil" forKey:@"loginMethod"];
+                    [defaults synchronize];
+                }
+            }];
+        }
+    }
+    
     [self refreshMap];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == kAlertViewSync)
+    {
+        
+        if (buttonIndex == 0)
+        {
+            CloudService *cloudService = [CloudService getInstance];
+            for (NSDictionary *dict in self.result)
+            {
+                NSLog(@"Bla: %@", dict);
+                CLLocation *location = [[CLLocation alloc] initWithLatitude:[[dict objectForKey:@"latitude"] doubleValue] longitude:[[dict objectForKey:@"longitude"] doubleValue]];
+                [cloudService addDailyExpenseOn:[dict objectForKey:@"date"] location:location category:[dict objectForKey:@"category"] amount:[dict objectForKey:@"sum"] completion:^(NSError *error) {
+                    if (error)
+                    {
+                        NSLog(@"Error: %@", error.localizedDescription);
+                    }
+                }];
+            }
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Expense"];
+            
+            NSDate *date = [NSDate date];
+            NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+            date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+            
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(synced == NO) AND (date < %@)", date];
+            [fetchRequest setPredicate:predicate];
+            
+            NSError *error;
+            NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+            
+            for (Expense *expense in result)
+            {
+                expense.synced = [NSNumber numberWithBool:YES];
+            }
+            
+            [self.managedObjectContext save:&error];
+        }
+    }
+    else if (alertView.tag == kAlertViewDelete)
+    {
+        if (buttonIndex == 0 && self.selectedAnnotation != nil)
+        {
+            [self.managedObjectContext deleteObject:self.selectedAnnotation.favourite];
+            NSError *error;
+            [self.managedObjectContext save:&error];
+            
+            //[self.homeMapView removeAnnotation:self.selectedAnnotation];
+        }
+        self.selectedAnnotation = nil;
+    }
 }
 
 -(void)refreshMap
@@ -285,28 +418,35 @@
     {
         self.selectedAnnotation = (FavAnnotation*)annotation;
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Delete Favourite" message:[NSString stringWithFormat:@"Are you sure you want to delete '%@'", self.selectedAnnotation.favourite.favouritePlace] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Yes", @"No", nil];
+        av.tag = kAlertViewDelete;
         [av show];
         NSLog(@"clicked %@", [(FavAnnotation*)annotation favourite].favouritePlace);
     }
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0 && self.selectedAnnotation != nil)
-    {
-        [self.managedObjectContext deleteObject:self.selectedAnnotation.favourite];
-        NSError *error;
-        [self.managedObjectContext save:&error];
-        
-        //[self.homeMapView removeAnnotation:self.selectedAnnotation];
-    }
-    self.selectedAnnotation = nil;
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     CLLocationCoordinate2D loc = [userLocation coordinate];
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(loc, 500, 500);
     [self.homeMapView setRegion:region animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"chooseLogIn"])
+    {
+        ChooseLoginProviderViewController *clpvc = segue.destinationViewController;
+        clpvc.delegate = self;
+    }
+}
+
+-(void)chooseLoginProviderViewControllerDidSelect:(NSString *)loginMethod
+{
+    NSLog(@"Login method: %@", loginMethod);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:loginMethod forKey:@"loginMethod"];
+    [defaults synchronize];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

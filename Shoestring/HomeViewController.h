@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "Favourite.h"
+#import "ChooseLoginProviderViewController.h"
 
 @interface HomeViewController : UIViewController
-<NSFetchedResultsControllerDelegate, MKMapViewDelegate, UIAlertViewDelegate>
+<NSFetchedResultsControllerDelegate, MKMapViewDelegate, UIAlertViewDelegate, ChooseLoginProviderViewControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *favouritesResultsController;

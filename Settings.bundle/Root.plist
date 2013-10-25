@@ -8,6 +8,38 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
+			<string>Authentication</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Log in using</string>
+			<key>Key</key>
+			<string>loginMethod</string>
+			<key>DefaultValue</key>
+			<string>facebook</string>
+			<key>Titles</key>
+			<array>
+				<string>Facebook</string>
+				<string>Twitter</string>
+				<string>Google</string>
+				<string>Microsoft</string>
+				<string>Don&apos;t log in</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>facebook</string>
+				<string>twitter</string>
+				<string>google</string>
+				<string>microsoftaccount</string>
+				<string>nil</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
 			<string>Home Tab</string>
 		</dict>
 		<dict>
