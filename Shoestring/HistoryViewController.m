@@ -118,28 +118,39 @@
 
 
 // Override to support conditional editing of the table view.
-/*- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
-}*/
+}
 
 
 // Override to support editing the table view.
-/*- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         NSManagedObjectContext *context = [self managedObjectContext];
-        Expense *expenseToDelete = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [context deleteObject: expenseToDelete];
+        id <NSFetchedResultsSectionInfo> secInfo = [[[self fetchedResultsController]sections]objectAtIndex:indexPath.row];
+        
+        for (Expense *expense in [secInfo objects])
+        {
+            [context deleteObject:expense];
+        }
         
         NSError *error = nil;
         if(![context save:&error]) {
             NSLog(@"Error! %@", error);
         }
+        
+        // Update data in table
+        if(![[self fetchedResultsController] performFetch:&error]) {
+            NSLog(@"Error! %@", error);
+            abort();
+        }
+        [[self tableView] reloadData];
     }
-}*/
+}
 
 /*
  Method to begin updates on fetched results changes
