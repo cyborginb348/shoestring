@@ -11,6 +11,7 @@
 @interface Categories : NSObject
 
 + (NSString*)getNameFor:(NSUInteger)index;
++ (NSNumber*)getIndexFor:(NSString*)name;
 + (CPTColor*)getColorFor:(NSUInteger)index;
 + (CPTColor*)getTransparentColorFor:(NSUInteger)index;
 

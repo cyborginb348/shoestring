@@ -34,6 +34,16 @@ static NSArray *colors;
     return names[index];
 }
 
++ (NSNumber*)getIndexFor:(NSString*)name
+{
+    for (NSUInteger index = 0; index < names.count; ++index)
+    {
+        if ([name isEqualToString:names[index]])
+            return [NSNumber numberWithUnsignedInt:index];
+    }
+    return nil;
+}
+
 + (CPTColor*)getColorFor:(NSUInteger)index
 {
     return colors[index];

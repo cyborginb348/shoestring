@@ -40,7 +40,7 @@
     [categoryView addSubview:btnView];
     distanceValue.minimumValue = 500;
     distanceValue.maximumValue = 5000;
-    sendDistance = @"500";
+    sendDistance = 500;
     
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -67,8 +67,7 @@
 - (IBAction)distanceSlider:(id)sender {
     double sliDis = (double)distanceValue.value;
     
-    int intSliDis = (int)sliDis;
-    sendDistance = [NSString stringWithFormat:@"%i", intSliDis];
+    sendDistance =  (NSUInteger)sliDis; //[NSString stringWithFormat:@"%i", intSliDis];
     
     if(sliDis < 1000)
     {
@@ -141,8 +140,8 @@
     CLLocation *currentLocation = newLocation;
     
     if (currentLocation != nil) {
-        userCurrentLong = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-        userCurrentLat = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+        userCurrentLong = currentLocation.coordinate.longitude;
+        userCurrentLat = currentLocation.coordinate.latitude;
     }
 }
 @end

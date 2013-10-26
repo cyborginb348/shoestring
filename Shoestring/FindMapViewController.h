@@ -13,10 +13,9 @@
 
 @interface FindMapViewController : UIViewController<MKMapViewDelegate>
 
-@property (nonatomic, strong) NSString *addressFromFT;
-@property (nonatomic, strong) NSString *ratingFromFT;
 @property (nonatomic, strong) NSString *nameFromFT;
-@property (nonatomic, strong) NSString *phoneFromFT;
+@property (nonatomic, strong) NSString *subtitleFromFT;
+@property (nonatomic, strong) NSString *addressFromFT;
 
 @property (nonatomic, strong) NSString *category;
 
@@ -28,7 +27,7 @@
 
 - (IBAction)saveFavourite:(id)sender;
 
-@property (nonatomic, strong)NSString *haveLatLon;
+@property BOOL haveLatLon;
 @property (nonatomic, strong)NSNumber *lat;
 @property (nonatomic, strong)NSNumber *lon;
 @end

@@ -117,12 +117,12 @@
                         [av show];
                     }
                 }
-                else
+                /*else
                 {
                     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                     [defaults setObject:@"nil" forKey:@"loginMethod"];
                     [defaults synchronize];
-                }
+                }*/
             }];
         }
     }

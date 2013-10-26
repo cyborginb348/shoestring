@@ -58,7 +58,7 @@
     
     // Set the application defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *appDefaults =  [NSDictionary dictionaryWithObjects:@[@"YES", @"NO"] forKeys:@[@"showFavourites", @"showExpenses"]];
+    NSDictionary *appDefaults =  [NSDictionary dictionaryWithObjects:@[@"YES", @"NO", @"YES", @"YES"] forKeys:@[@"showFavourites", @"showExpenses", @"findRecommendations", @"findYelp"]];
     [defaults registerDefaults:appDefaults];
     [defaults synchronize];
     

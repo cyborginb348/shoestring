@@ -8,6 +8,8 @@
 
 #import "AddExpenseViewController.h"
 #import "DayViewController.h"
+#import "CloudService.h"
+#import "Categories.h"
 
 
 @interface AddExpenseViewController ()
@@ -46,8 +48,6 @@
 {
     [super viewDidLoad];
     
-    
-    
     [self initialiseAutocomplete];
     
     //set delegates for keyboard dismissal
@@ -71,11 +71,7 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
-    
-    AddMapViewController *amvc = [[AddMapViewController alloc]init];
-    
-    NSLog(@"latttt %@", [amvc currentLatitude]);
-    
+
     [self startLocationManager];
 }
 
@@ -116,6 +112,8 @@
     
     if (itemNameField.text.length == 0)
         errorMessage = @"Please enter a name!";
+    else if (placeNameField.text.length == 0)
+        errorMessage = @"Please enter a place!";
     else if (![currentCategory isKindOfClass:[NSString class]] || [currentCategory length]==0)
         errorMessage = @"Please select a category!";
     else if (!amount || !([amount floatValue]>0.0f))
@@ -140,8 +138,15 @@
         [[self currentExpense]setDate:[self getTodaysDate]];
         [[self currentExpense]setLatitude:[self currentLatitude]];
         [[self currentExpense]setLongitude:[self currentLongitude]];
-    
-    NSLog(@"LAT %@", [self currentLatitude]);
+        
+        // Save recommendation
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (appDelegate.loggedIn && savingTipField.text.length > 0 && self.currentLatitude && self.currentLatitude && self.currentLongitude)
+        {
+            CloudService *cloudService = [CloudService getInstance];
+            CLLocation *location = [[CLLocation alloc] initWithLatitude:self.currentLatitude.doubleValue longitude:self.currentLongitude.doubleValue];
+            [cloudService addRecommendationFor:placeNameField.text location:location rating:[NSNumber numberWithInt:rate] comment:savingTipField.text category:[Categories getIndexFor:currentCategory] completion:^(NSError *error) {}];
+        }
         
         [[self delegate] addExpenseViewControllerDidSave];
     }

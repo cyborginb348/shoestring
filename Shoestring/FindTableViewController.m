@@ -7,8 +7,13 @@
 //
 
 #import "FindTableViewController.h"
+#import "CloudService.h"
+#import "Categories.h"
 
 @interface FindTableViewController ()
+
+@property (strong, nonatomic) NSArray *recommendations;
+@property NSUInteger runningTasks;
 
 @end
 
@@ -45,8 +50,35 @@
     [[self view] addSubview:HUD];
     [HUD setDelegate:self];
     [HUD setLabelText:@"Loading..."];
-    [self testGETRequest];
+    self.runningTasks = 0;
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL findRecommendations = [defaults boolForKey:@"findRecommendations"];
+    BOOL findYelp = [defaults boolForKey:@"findYelp"];
+    
+    
+    if (findYelp) [self testGETRequest];
+    
+    if (findRecommendations)
+    {
+        // Load recommendations
+        self.recommendations = nil;
+        CloudService *cloudService = [CloudService getInstance];
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:userLat longitude:userLong];
+        
+        ++self.runningTasks;
+        [HUD show:YES];
+        [cloudService getRecommendationsFor:location category:[Categories getIndexFor:selectedCat] maxDistance:[NSNumber numberWithFloat:selectedDistance/1609.0f] completion:^(NSArray *result, NSError *error)
+         {
+             if(--self.runningTasks == 0) [HUD hide:YES];
+             if (!error && result.count > 0)
+             {
+                 NSLog(@"Recommendations: %@", result);
+                 self.recommendations = result;
+                 [self.tableView reloadData];
+             }
+         }];
+    }
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -71,18 +103,28 @@
         
         // perpare passing data
         NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+        NSString *passedName, *passedSubtitle, *passedAddress;
         
-        NSString *passedName = [[businessObjectList objectAtIndex:path.row] objectForKey:@"name"];
-        NSString *passedAddress = [[businessObjectList objectAtIndex:path.row] objectForKey:@"address"];
-        NSString *passedRating = [[businessObjectList objectAtIndex:path.row] objectForKey:@"rating"];
-        NSString *passedPhone = [[businessObjectList objectAtIndex:path.row] objectForKey:@"phone"];
-        
+        if (self.recommendations && path.section == 0)
+        {
+            passedName = [self.recommendations[path.row] objectForKey:@"name"];
+            passedSubtitle = [self.recommendations[path.row] objectForKey:@"comment"];
+            findMapVC.lat = [self.recommendations[path.row] objectForKey:@"latitude"];
+            findMapVC.lon = [self.recommendations[path.row] objectForKey:@"longitude"];
+            findMapVC.haveLatLon = YES;
+        }
+        else
+        {
+            passedName = [[businessObjectList objectAtIndex:path.row] objectForKey:@"name"];
+            passedAddress = [[businessObjectList objectAtIndex:path.row] objectForKey:@"address"];
+            passedSubtitle = [NSString stringWithFormat:@"Rating from Yelp: %@\n Phone:%@", [[businessObjectList objectAtIndex:path.row] objectForKey:@"rating"], [[businessObjectList objectAtIndex:path.row] objectForKey:@"phone"]];
+            findMapVC.haveLatLon = NO;
+        }
                
         //passing data here
         [findMapVC setAddressFromFT:passedAddress];
         [findMapVC setNameFromFT:passedName];
-        [findMapVC setRatingFromFT:passedRating];
-        [findMapVC setPhoneFromFT:passedPhone];
+        [findMapVC setSubtitleFromFT:passedSubtitle];
         [findMapVC setCategory: selectedCat];
         
        
@@ -100,13 +142,28 @@
 {
     //#warning Potentially incomplete method implementation.
     // Return the number of sections.
+    if (self.recommendations && businessObjectList.count > 0) return 2;
     return 1;
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (self.recommendations && businessObjectList.count > 0)
+    {
+        if (section == 0)
+            return @"Recommendations";
+        else
+            return @"Other Places";
+    }
+    return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //#warning Incomplete method implementation.
     // Return the number of rows in the section.
+    if (self.recommendations && section == 0)
+        return self.recommendations.count;
     return [businessObjectList count];
 }
 
@@ -118,12 +175,30 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell...
-    cell.textLabel.text = [[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"name"];
-    cell.detailTextLabel.text = [[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"address"];
-    cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"imageurl"]]]];
-    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    
+    if (self.recommendations && indexPath.section == 0)
+    {
+        cell.textLabel.text =  [self.recommendations[indexPath.row] objectForKey:@"name"];
+        NSString *stars;
+        switch ([[self.recommendations[indexPath.row] objectForKey:@"rating"] integerValue])
+        {
+            case 1: stars = @"★☆☆☆☆ "; break;
+            case 2: stars = @"★★☆☆☆ "; break;
+            case 3: stars = @"★★★☆☆ "; break;
+            case 4: stars = @"★★★★☆ "; break;
+            case 5: stars = @"★★★★★ "; break;
+            default: stars = @""; break;
+        }
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ \"%@\"", stars, [self.recommendations[indexPath.row] objectForKey:@"comment"]];
+        cell.imageView.image = [UIImage imageNamed:@"recommendation.png"];
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    }
+    else
+    {
+        cell.textLabel.text = [[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"name"];
+        cell.detailTextLabel.text = [[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"address"];
+        cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[businessObjectList objectAtIndex:indexPath.row] objectForKey:@"imageurl"]]]];
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    }
     return cell;
 }
 
@@ -181,6 +256,7 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+    [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     [self performSegueWithIdentifier:@"cellToMapSegue" sender:self];
 }
 
@@ -192,7 +268,7 @@
     
     //show the loading icon
     [HUD show:YES];
-    
+    ++self.runningTasks;
     
     
     //create the url for the request (with params)
@@ -201,8 +277,8 @@
     {
         term = @"transport";
     }
-    NSString *latLon = [NSString stringWithFormat:@"%@,%@", userLat, userLong];
-    NSString *radius = selectedDistance;
+    NSString *latLon = [NSString stringWithFormat:@"%@,%@", [NSString stringWithFormat:@"%.8f", userLat], [NSString stringWithFormat:@"%.8f", userLong]];
+    NSString *radius = [NSString stringWithFormat:@"%u", selectedDistance];
     NSString *urlString = [NSString stringWithFormat:
                            @"http://api.yelp.com/v2/search?%@=%@&%@=%@&%@=%@",
                            @"term",term, @"ll",latLon, @"radius_filter", radius];
@@ -315,7 +391,7 @@
                                dispatch_async(dispatch_get_main_queue(), ^{
                                    //NSLog(@"business list:%@",businessObjectList);
                                    [self.tableView reloadData];
-                                   [HUD hide:YES];
+                                   if(--self.runningTasks == 0) [HUD hide:YES];
                                });
                                
                            }];

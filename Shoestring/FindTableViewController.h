@@ -28,10 +28,10 @@
 @property (nonatomic, strong) NSString *oauthToken;
 @property (nonatomic, strong) NSString *oauthTokenSecret;
 
-@property (nonatomic, strong) NSString *selectedDistance;
+@property NSUInteger selectedDistance;
 @property (nonatomic, strong) NSString *selectedCat;
-@property (nonatomic, strong) NSString *userLong;
-@property (nonatomic, strong) NSString *userLat;
+@property double userLong;
+@property double userLat;
 
 
 //array of each business item, e.g. [0]name, address, imageurl;

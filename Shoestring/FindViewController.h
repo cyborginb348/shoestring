@@ -16,14 +16,14 @@
     CLLocationManager *locationManager;
     
     NSString *passedCategory;
-    NSString *passedDistance;
-    NSString *passedUserLats;
-    NSString *passedUserLong;
+    NSUInteger passedDistance;
+    double passedUserLats;
+    double passedUserLong;
 }
 @property (nonatomic, retain) NSString *passedCategory;
-@property (nonatomic, retain) NSString *passedDistance;
-@property (nonatomic, retain) NSString *passedUserLats;
-@property (nonatomic, retain) NSString *passedUserLong;
+@property NSUInteger passedDistance;
+@property double passedUserLats;
+@property double passedUserLong;
 
 //@property (nonatomic, strong) FindTableViewController *findTableVC;
 @property (nonatomic,retain) CLLocationManager *locationManager;
@@ -41,11 +41,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *selectedDistance;
 
 //send distance value
-@property (strong,nonatomic) NSString *sendDistance;
+@property NSUInteger sendDistance;
 
 //user locatiom
-@property (strong,nonatomic) NSString *userCurrentLong;
-@property (strong,nonatomic) NSString *userCurrentLat;
+@property double userCurrentLong;
+@property double userCurrentLat;
 
 //btn press and find places
 - (IBAction)btnFindPlaces:(id)sender;
