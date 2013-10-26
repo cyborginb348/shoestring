@@ -117,12 +117,6 @@
                         [av show];
                     }
                 }
-                /*else
-                {
-                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                    [defaults setObject:@"nil" forKey:@"loginMethod"];
-                    [defaults synchronize];
-                }*/
             }];
         }
     }
@@ -140,7 +134,6 @@
             CloudService *cloudService = [CloudService getInstance];
             for (NSDictionary *dict in self.result)
             {
-                NSLog(@"Bla: %@", dict);
                 CLLocation *location = [[CLLocation alloc] initWithLatitude:[[dict objectForKey:@"latitude"] doubleValue] longitude:[[dict objectForKey:@"longitude"] doubleValue]];
                 [cloudService addDailyExpenseOn:[dict objectForKey:@"date"] location:location category:[dict objectForKey:@"category"] amount:[dict objectForKey:@"sum"] completion:^(NSError *error) {
                     if (error)
@@ -177,7 +170,7 @@
             NSError *error;
             [self.managedObjectContext save:&error];
             
-            //[self.homeMapView removeAnnotation:self.selectedAnnotation];
+            [self.homeMapView removeAnnotation:self.selectedAnnotation];
         }
         self.selectedAnnotation = nil;
     }
@@ -297,17 +290,15 @@
     [self.homeMapView removeAnnotations:self.homeMapView.annotations];
     
     NSArray *fetchedData = [_favouritesResultsController fetchedObjects];
-    NSLog(@"count fetched data: %i", [fetchedData count]);
+    //NSLog(@"count fetched data: %i", [fetchedData count]);
     
     NSMutableArray *annotations = [[NSMutableArray alloc] init];
     
     for (Favourite *currentFavourite in fetchedData ) {
-        NSLog(@"place: %@", [currentFavourite favouritePlace]);
+        /*NSLog(@"place: %@", [currentFavourite favouritePlace]);
         NSLog(@"latitude: %@", [currentFavourite latitude]);
         NSLog(@"longitude: %@", [currentFavourite longitude]);
-        NSLog(@"category: %@", [currentFavourite category]);
-        
-                
+        NSLog(@"category: %@", [currentFavourite category]);*/
         
         CLLocationCoordinate2D location;
         FavAnnotation *ann;
@@ -325,17 +316,15 @@
     [self.homeMapView addAnnotations:annotations];
     
     fetchedData = [_expensesResultsController fetchedObjects];
-    NSLog(@"count fetched data: %i", [fetchedData count]);
+    //NSLog(@"count fetched data: %i", [fetchedData count]);
     
     annotations = [[NSMutableArray alloc] init];
     
     for (Expense *currentExpense in fetchedData ) {
-        NSLog(@"place: %@", [currentExpense placeName]);
+        /*NSLog(@"place: %@", [currentExpense placeName]);
         NSLog(@"latitude: %@", [currentExpense latitude]);
         NSLog(@"longitude: %@", [currentExpense longitude]);
-        NSLog(@"category: %@", [currentExpense category]);
-        
-        
+        NSLog(@"category: %@", [currentExpense category]);*/
         
         CLLocationCoordinate2D location;
         ExpAnnotation *ann;
@@ -365,8 +354,6 @@
         
         UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [deleteButton setFrame:CGRectMake(0, 0, 32, 32)];
-        //[deleteButton setTitle:@"Button Title" forState:UIControlStateNormal];
-        //[sampleButton setFont:[UIFont boldSystemFontOfSize:20]];
         [deleteButton setBackgroundImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
         [deleteButton addTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
         view.rightCalloutAccessoryView = deleteButton;
@@ -420,7 +407,6 @@
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Delete Favourite" message:[NSString stringWithFormat:@"Are you sure you want to delete '%@'", self.selectedAnnotation.favourite.favouritePlace] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Yes", @"No", nil];
         av.tag = kAlertViewDelete;
         [av show];
-        NSLog(@"clicked %@", [(FavAnnotation*)annotation favourite].favouritePlace);
     }
 }
 
@@ -441,7 +427,7 @@
 
 -(void)chooseLoginProviderViewControllerDidSelect:(NSString *)loginMethod
 {
-    NSLog(@"Login method: %@", loginMethod);
+    //NSLog(@"Login method: %@", loginMethod);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:loginMethod forKey:@"loginMethod"];
     [defaults synchronize];

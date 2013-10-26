@@ -67,7 +67,6 @@
     NSDate *date = [[NSDate date] dateByAddingTimeInterval:-60*60*24*days];
     NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
     date = [[NSCalendar currentCalendar] dateFromComponents:comps];
-    NSLog(@"%@", date);
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date > %@)", date];
     [fetchRequest setPredicate:predicate];
@@ -118,8 +117,6 @@
         {
             [_averageDailyValues addObject:[NSNumber numberWithFloat:sums[i]/counts[i]]];
         }
-        NSLog(@"%@", result);
-        NSLog(@"Bla: %@", _averageDailyValues);
     }
 }
 

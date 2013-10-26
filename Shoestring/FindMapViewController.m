@@ -132,7 +132,7 @@
                 
                 [HUD hide:YES];
                 
-                NSLog(@"lat,lon: %f ,%f", placeAddress.latitude, placeAddress.longitude);
+                //NSLog(@"lat,lon: %f ,%f", placeAddress.latitude, placeAddress.longitude);
                 
             } else {
                 NSLog(@"No Area of Interest Was Found");

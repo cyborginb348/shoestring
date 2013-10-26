@@ -40,6 +40,7 @@
         NSLog(@"Error! %@", error);
         abort();
     }
+    [[self tableView] reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,8 +90,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    id <NSFetchedResultsSectionInfo> secInfo = [[[self fetchedResultsController]sections]objectAtIndex:section];
-    return [secInfo numberOfObjects];
+    return [[[self fetchedResultsController] sections] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -99,7 +99,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     // Configure the cell with the name of the item expense
-    Expense *expense = [[self fetchedResultsController]objectAtIndexPath:indexPath];
+    id <NSFetchedResultsSectionInfo> secInfo = [[[self fetchedResultsController]sections]objectAtIndex:indexPath.row];
+    Expense *expense = [[secInfo objects] firstObject];
     
     [[cell textLabel] setText:[self formatDate:[expense date]]];
     return cell;
@@ -117,15 +118,15 @@
 
 
 // Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+/*- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
-}
+}*/
 
 
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+/*- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
@@ -138,26 +139,26 @@
             NSLog(@"Error! %@", error);
         }
     }
-}
+}*/
 
 /*
  Method to begin updates on fetched results changes
  */
--(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+/*-(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView]beginUpdates];
-}
+}*/
 
 /*
  Method to end updates on fetched results changes
  */
--(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+/*-(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [[self tableView]endUpdates];
-}
+}*/
 
 /*
  Method to end updates on fetched results changes update/delete/move
  */
--(void)controller:(NSFetchedResultsController *) controller didChangeObject:(id)anObject
+/*-(void)controller:(NSFetchedResultsController *) controller didChangeObject:(id)anObject
       atIndexPath:(NSIndexPath *)indexPath
     forChangeType:(NSFetchedResultsChangeType)type
      newIndexPath:(NSIndexPath *)newIndexPath {
@@ -199,7 +200,7 @@
             break;
     }
     
-}
+}*/
 
 
 
@@ -219,16 +220,16 @@
     [fetchRequest setEntity:entity];
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date"
-                                                                   ascending:YES];
+                                                                   ascending:NO];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                    managedObjectContext:[self managedObjectContext] sectionNameKeyPath: nil
+                                                                    managedObjectContext:[self managedObjectContext] sectionNameKeyPath:@"date"
                                                                                cacheName:nil];
     
     //set this class as the delegate for the fetchedResults controller
-    [_fetchedResultsController setDelegate:self];
+    //[_fetchedResultsController setDelegate:self];
     
     return _fetchedResultsController;
 }

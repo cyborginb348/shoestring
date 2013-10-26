@@ -55,7 +55,6 @@
     _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     [_locationManager startUpdatingLocation];
     
-    //[self getCloudData];
     int days = self.periodSlider.value;
     self.periodLabel.text = [NSString stringWithFormat:(days>1)?@"%d days":@"%d day",days];
 }
@@ -89,7 +88,7 @@
          }
          else
          {
-             // HANDLE ERROR
+             NSLog(@"Error: %@", error.localizedDescription);
          }
      }];
 }
@@ -112,7 +111,6 @@
     NSDate *date = [[NSDate date] dateByAddingTimeInterval:-60*60*24*days];
     NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
     date = [[NSCalendar currentCalendar] dateFromComponents:comps];
-    NSLog(@"%@", date);
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date > %@)", date];
     [fetchRequest setPredicate:predicate];

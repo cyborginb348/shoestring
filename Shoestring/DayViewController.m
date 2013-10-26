@@ -19,8 +19,6 @@
 //internal instance variable
 @synthesize fetchedResultsController = _fetchedResultsController;
 
-@synthesize tableView;
-
 @synthesize total;
 @synthesize currentDate;
 
@@ -73,6 +71,7 @@
         //create new expense managed object, and set expense variable in new window being modally segued to...
         Expense *expense = (Expense*) [NSEntityDescription insertNewObjectForEntityForName:@"Expense"
                                                                     inManagedObjectContext:[self managedObjectContext]];
+        expense.date = [self currentDate];
         [aevc setCurrentExpense:expense];
     }
     //OR if we are viewing a current cell
@@ -365,8 +364,6 @@
 #pragma mark - Select Date delegate
 
 -(void) selectDateViewControllerDidSelect:(NSDate*)selectedDate {
-    
-    NSLog(@"Selected Date: %@", selectedDate);
     
     self.currentDate = selectedDate;
     _fetchedResultsController = nil;

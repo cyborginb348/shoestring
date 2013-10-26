@@ -14,16 +14,10 @@
 #import "HistoryViewController.h"
 #import "GraphMyExpensesViewController.h"
 
-
-
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 @property (strong, nonatomic) UITabBarController *tabBarController;
-
--(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController;
-
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

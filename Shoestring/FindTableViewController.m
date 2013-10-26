@@ -73,7 +73,7 @@
              if(--self.runningTasks == 0) [HUD hide:YES];
              if (!error && result.count > 0)
              {
-                 NSLog(@"Recommendations: %@", result);
+                 //NSLog(@"Recommendations: %@", result);
                  self.recommendations = result;
                  [self.tableView reloadData];
              }
@@ -310,7 +310,6 @@
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:NSOperationQueue.mainQueue
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               NSString *serverData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                
                                //call the json parsing method to serialise the data
                                NSDictionary *parsedData = [self parseJson: data];

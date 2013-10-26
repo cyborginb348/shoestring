@@ -135,7 +135,7 @@
         
         [[self currentExpense]setSavingTip:[savingTipField text]];
         [[self currentExpense]setRating: [NSNumber numberWithInt: rate]];
-        [[self currentExpense]setDate:[self getTodaysDate]];
+        //[[self currentExpense]setDate:[self getTodaysDate]];
         [[self currentExpense]setLatitude:[self currentLatitude]];
         [[self currentExpense]setLongitude:[self currentLongitude]];
         

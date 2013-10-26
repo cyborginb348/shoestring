@@ -21,15 +21,12 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property (strong, nonatomic) NSDate *currentDate;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *total;
-
-- (NSNumber*)calculateTotal: (NSDate*) date forManagedObjectContext: (NSManagedObjectContext*) managedObjectContext;
-
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *changeDateButton;
 
+- (NSNumber*)calculateTotal: (NSDate*) date forManagedObjectContext: (NSManagedObjectContext*) managedObjectContext;
 
 @end
