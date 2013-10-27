@@ -245,7 +245,28 @@
         plot.barWidth = CPTDecimalFromDouble(0.25f);
         plot.barOffset = CPTDecimalFromDouble(barX);
         plot.lineStyle = nil;
+        plot.labelOffset = 0.0f;
         //plot.lineStyle = barLineStyle;
+        
+        // Add animation
+        CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"transform.scale.y"];
+        anim.duration = 1.0f;
+        anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        anim.toValue = [NSNumber numberWithFloat:1.0f];
+        anim.fromValue = [NSNumber numberWithFloat:0.0f];
+        //anim.removedOnCompletion = NO;
+        anim.fillMode = kCAFillModeForwards;
+        plot.anchorPoint = CGPointMake(0.0, 0.0);
+        [plot addAnimation:anim forKey:@"grow"];
+        
+        anim = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        anim.duration = 1.0f;
+        //anim.removedOnCompletion = NO;
+        anim.fillMode = kCAFillModeForwards;
+        anim.toValue = [NSNumber numberWithFloat:1.0f];
+        anim.fromValue = [NSNumber numberWithFloat:0.0f];
+        [plot addAnimation:anim forKey:@"fadeIn"];
+        
         [graph addPlot:plot toPlotSpace:graph.defaultPlotSpace];
         barX += 1.5*0.25f;
     }
@@ -296,6 +317,20 @@
         return [CPTFill fillWithColor:[Categories getTransparentColorFor:idx]];
     else
         return [CPTFill fillWithColor:[Categories getColorFor:idx]];
+}
+
+- (CPTLayer*)dataLabelForPlot:(CPTPlot *)plot recordIndex:(NSUInteger)idx
+{
+    NSNumber *value;
+    if ([plot.identifier isEqual:@"my"] && idx < 5)
+    {
+        value = _averageDailyValues[idx];
+    }
+    else if ([plot.identifier isEqual:@"avg"])
+    {
+        value = [self.cloudValues objectForKey:[NSNumber numberWithUnsignedInt:idx+1]];
+    }
+    return [[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"$%@", value]];
 }
 
 - (IBAction)periodChanged:(id)sender

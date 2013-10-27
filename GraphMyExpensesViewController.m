@@ -36,6 +36,13 @@
     self.periodLabel.text = [NSString stringWithFormat:(days>1)?@"%d days":@"%d day",days];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.hostView.hostedGraph = nil;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -173,15 +180,34 @@
     pieChart.delegate = self;
     pieChart.pieRadius = self.hostView.bounds.size.width * 0.3;
     pieChart.identifier = graph.title;
-    //pieChart.startAngle = M_PI_4;
+    //pieChart.startAngle = M_PI_2;
     pieChart.sliceDirection = CPTPieDirectionClockwise;
     //pieChart.labelOffset = -50.0f;
+    //pieChart.endAngle = 2*M_PI;
     
     // 3 - Create shadow
     CPTMutableShadow *shadow = [[CPTMutableShadow alloc] init];
     shadow.shadowBlurRadius = 5.0;
     shadow.shadowColor = [CPTColor colorWithComponentRed:0.0 green:0.0 blue:0.0 alpha:0.3];
     pieChart.shadow = shadow;
+    
+    // Add animation
+    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"endAngle"];
+    anim.duration = 1.0f;
+    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    //anim.removedOnCompletion = NO;
+    //anim.fillMode = kCAFillModeForwards;
+    anim.toValue = [NSNumber numberWithFloat:M_PI_2];
+    anim.fromValue = [NSNumber numberWithFloat:2*M_PI+M_PI_2];
+    [pieChart addAnimation:anim forKey:@"grow"];
+    
+    anim = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    anim.duration = 1.0f;
+    //anim.removedOnCompletion = NO;
+    anim.fillMode = kCAFillModeForwards;
+    anim.toValue = [NSNumber numberWithFloat:1.0f];
+    anim.fromValue = [NSNumber numberWithFloat:0.0f];
+    [pieChart addAnimation:anim forKey:@"fadeIn"];
     
     // 3 - Add chart to graph
     [graph addPlot:pieChart];
