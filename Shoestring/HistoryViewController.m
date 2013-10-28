@@ -103,6 +103,10 @@
     Expense *expense = [[secInfo objects] firstObject];
     
     [[cell textLabel] setText:[self formatDate:[expense date]]];
+    [[cell detailTextLabel]setText:[self getTotal:[expense date]]];
+    
+    NSLog(@"total for day%@",[self getTotal:[expense date]]);
+    
     return cell;
 }
 
@@ -246,7 +250,7 @@
 }
 
 
-
+//-(NSNumber*)calculateTotal: (NSDate*) date forManagedObjectContext: (NSManagedObjectContext*) managedObjectContext {
 
 
 /*
@@ -297,6 +301,16 @@
     //convert NSDate to format we want...
     [dateFormatter setDateFormat:@"EEEE MMMM d yyyy"];
     return [dateFormatter stringFromDate:date];
+}
+
+-(NSString*) getTotal: (NSDate*) date {
+    
+    DayViewController *dvc = [[DayViewController alloc] init];
+    
+    NSNumber *total = [dvc calculateTotal:date forManagedObjectContext: [self managedObjectContext]];
+    
+    return [NSString stringWithFormat:@"total $%@", total];
+    
 }
 
 
