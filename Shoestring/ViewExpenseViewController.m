@@ -46,10 +46,10 @@
 
     //add the categoryButton view for the buttons
     CategoryButtons *btnView = [[CategoryButtons alloc] init];
+    [btnView setDelegate:self];
     CGRect bounds = [[self view] bounds];
     [btnView setCenter: CGPointMake(bounds.size.width/2, 160)];
     [categoryView addSubview:btnView];
-    [categoryView setDelegate:self];
     
     //assign category from segue
     currentCategory = [currentExpense category];
