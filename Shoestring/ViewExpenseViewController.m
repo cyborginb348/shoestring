@@ -84,9 +84,9 @@
     [placeNameField setEnabled:NO];
     [amountField setEnabled:NO];
     [savingTipField setEnabled:NO];
+    if (savingTipField.text.length==0) savingTipField.hidden = YES;
     [_starRatingControl setEnabled:NO];
     [categoryView setEnabled:NO];
-    [self.locationButton setHidden:YES];
     [self.mapButton setHidden:YES];
     
     [[self starRatingControl] setRating:[[currentExpense rating]integerValue]];
@@ -157,9 +157,9 @@
     [placeNameField setEnabled:YES];
     [amountField setEnabled:YES];
     [savingTipField setEnabled:YES];
+    savingTipField.hidden = NO;
     [_starRatingControl setEnabled:YES];
     [categoryView setEnabled:YES];
-    [self.locationButton setHidden:NO];
     [self.mapButton setHidden:NO];
     [self.locationLabel setHidden:YES];
     [self setSetEditable:YES];
@@ -182,9 +182,9 @@
     [placeNameField setEnabled:NO];
     [amountField setEnabled:NO];
     [savingTipField setEnabled:NO];
+    if (savingTipField.text.length==0) savingTipField.hidden = YES;
     [_starRatingControl setEnabled:NO];
     [categoryView setEnabled:NO];
-    [self.locationButton setHidden:YES];
     [self.mapButton setHidden:YES];
     [self.locationLabel setHidden:NO];
     
@@ -211,6 +211,7 @@
     [toggleBtn setTintColor: nil];
   
     //make updates
+    [[self currentExpense] setCategory:currentCategory];
     [[self currentExpense] setItemName:[itemNameField text]];
     [[self currentExpense] setPlaceName:[placeNameField text]];
     NSNumber *amt = [NSNumber numberWithInteger:[[amountField text] integerValue]];

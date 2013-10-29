@@ -322,15 +322,18 @@
 - (CPTLayer*)dataLabelForPlot:(CPTPlot *)plot recordIndex:(NSUInteger)idx
 {
     NSNumber *value;
+    CPTMutableTextStyle *textStyle = [CPTMutableTextStyle textStyle];
     if ([plot.identifier isEqual:@"my"] && idx < 5)
     {
+        textStyle.fontName = @"Helvetica-Bold";
+        
         value = _averageDailyValues[idx];
     }
     else if ([plot.identifier isEqual:@"avg"])
     {
         value = [self.cloudValues objectForKey:[NSNumber numberWithUnsignedInt:idx+1]];
     }
-    return [[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"$%@", value]];
+    return [[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"$%@", value] style:textStyle];
 }
 
 - (IBAction)periodChanged:(id)sender

@@ -118,6 +118,8 @@
         errorMessage = @"Please select a category!";
     else if (!amount || !([amount floatValue]>0.0f))
         errorMessage = @"Please enter a valid amount!";
+    else if (!(currentLatitude && currentLongitude))
+        errorMessage = @"Please select a location!";
     
     if (errorMessage)
     {

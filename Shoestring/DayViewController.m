@@ -63,7 +63,7 @@
 
 //Method: prepare to Segue - either addExpense or viewExpense
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+
     if([[segue identifier] isEqualToString:@"addExpense"]) {
         AddExpenseViewController *aevc = (AddExpenseViewController*)[segue destinationViewController];
         [aevc setDelegate:self];
@@ -83,7 +83,6 @@
         [vevc setCurrentExpense:selectedExpense]; 
     }
     else if([[segue identifier] isEqualToString:@"selectDate"]) {
-        
         SelectDateViewController *sdvc = (SelectDateViewController*) [segue destinationViewController];
         sdvc.chosenDate = self.currentDate;
         [sdvc setDelegate:self];
