@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="mCr-fU-2cg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="13A598" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="mCr-fU-2cg">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
@@ -181,6 +181,7 @@
                                 <rect key="frame" x="37" y="278" width="74" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="74" id="1y5-ar-9DB"/>
+                                    <constraint firstAttribute="height" constant="30" type="user" id="eRQ-PO-Now"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -232,7 +233,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GnR-Bx-w7V" firstAttribute="top" secondItem="cHD-2H-8aM" secondAttribute="top" constant="278" id="4C3-i5-GPa"/>
+                            <constraint firstItem="GnR-Bx-w7V" firstAttribute="top" secondItem="cHD-2H-8aM" secondAttribute="top" constant="278" type="user" id="4C3-i5-GPa"/>
                             <constraint firstItem="ecj-da-uam" firstAttribute="top" secondItem="cHD-2H-8aM" secondAttribute="top" constant="339" type="user" id="6rs-cR-rAh"/>
                             <constraint firstItem="V92-iy-b9i" firstAttribute="trailing" secondItem="x0R-hd-fTt" secondAttribute="trailing" type="default" id="772-zM-ZVL"/>
                             <constraint firstItem="KMa-1A-5wg" firstAttribute="top" secondItem="fvx-YV-nyF" secondAttribute="top" type="default" id="7Me-yA-Grc"/>
@@ -248,8 +249,9 @@
                             <constraint firstItem="fvx-YV-nyF" firstAttribute="baseline" secondItem="KMa-1A-5wg" secondAttribute="baseline" type="default" id="Ocx-1E-pOm"/>
                             <constraint firstItem="KIP-hy-hC2" firstAttribute="top" secondItem="Hj3-ix-BNF" secondAttribute="bottom" type="user" id="PXd-mk-rg1"/>
                             <constraint firstItem="Hj3-ix-BNF" firstAttribute="top" secondItem="cHD-2H-8aM" secondAttribute="top" type="user" id="Tvr-7u-kF0"/>
+                            <constraint firstItem="fvx-YV-nyF" firstAttribute="top" secondItem="cHD-2H-8aM" secondAttribute="top" constant="278" type="user" id="Vsk-ev-Gdl"/>
                             <constraint firstItem="Hj3-ix-BNF" firstAttribute="leading" secondItem="cHD-2H-8aM" secondAttribute="leading" type="default" id="WJ2-bT-xkR"/>
-                            <constraint firstItem="GnR-Bx-w7V" firstAttribute="top" secondItem="fvx-YV-nyF" secondAttribute="top" type="default" id="WVU-Zl-RRv"/>
+                            <constraint firstItem="GnR-Bx-w7V" firstAttribute="top" secondItem="fvx-YV-nyF" secondAttribute="top" type="user" id="WVU-Zl-RRv"/>
                             <constraint firstItem="kbH-VJ-1gT" firstAttribute="trailing" secondItem="GnR-Bx-w7V" secondAttribute="trailing" type="default" id="Xj8-57-fTq"/>
                             <constraint firstItem="kbH-VJ-1gT" firstAttribute="top" secondItem="cHD-2H-8aM" secondAttribute="top" constant="311" type="user" id="c98-9n-mbk"/>
                             <constraint firstItem="ecj-da-uam" firstAttribute="trailing" secondItem="lkS-51-CcH" secondAttribute="trailing" type="default" id="e0a-ft-iNs"/>
