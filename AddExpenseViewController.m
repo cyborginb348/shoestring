@@ -22,6 +22,8 @@
 @synthesize managedObjectContext;
 
 @synthesize categoryView;
+@synthesize btnView;
+
 @synthesize currentCategory;
 @synthesize itemNameField,placeNameField,amountField,savingTipField, rate;
 @synthesize currentExpense;
@@ -48,7 +50,6 @@
 {
     [super viewDidLoad];
     
-    [self initialiseAutocomplete];
     
     //set delegates for keyboard dismissal
     [itemNameField setDelegate:self];
@@ -56,13 +57,18 @@
     [amountField setDelegate:self];
     [savingTipField setDelegate:self];
     
+    [itemNameField setTag:0];
+    [placeNameField setTag:1];
+    
     // add the category buttons
-    CategoryButtons *btnView = [[CategoryButtons alloc] init];
+    btnView = [[CategoryButtons alloc] init];
     [btnView setDelegate:self];
     CGRect bounds = [[self view] bounds];
     [btnView setCenter: CGPointMake(bounds.size.width/2, 160)];
     [categoryView addSubview:btnView];
     [btnView setCategoryTitle:@"Please select..."];
+    
+       [[UIApplication sharedApplication].keyWindow bringSubviewToFront:autocompleteTableView];
     
     //starRatings
     _ratingLabels = [NSArray arrayWithObjects:@"Unrated", @"not great", @"Ok", @"not bad", @"really good", @"great deal!", nil];
@@ -177,7 +183,16 @@
 
 #pragma mark - Dismiss keyboard
 
+
+-(void) textFieldDidBeginEditing:(UITextField *)textField {
+    
+    [self initialiseAutocomplete: textField];
+}
+
+
 - (IBAction)dismissKeyboard:(id)sender {
+    
+    
     [[self view] endEditing:YES];
     [autocompleteTableView setHidden:YES];
 }
@@ -186,21 +201,33 @@
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     [autocompleteTableView setHidden:YES];
+    [btnView setHidden:NO];
     return YES;
 }
 
 
 #pragma mark AutoComplete and UITextFieldDelegate methods
 
--(void)initialiseAutocomplete {
-    autocompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 45, 320, 120) style:UITableViewStylePlain];
+-(void)initialiseAutocomplete: (UITextField*) textField {
+    
+    if([textField tag] == 0){
+    autocompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, 320, 80) style:UITableViewStylePlain];
+    } else {
+    autocompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 140, 320, 80) style:UITableViewStylePlain];
+    [btnView setHidden:YES];
+    }
     autocompleteTableView.delegate = self;
     autocompleteTableView.dataSource = self;
     autocompleteTableView.scrollEnabled = YES;
     [autocompleteTableView setHidden:YES];
     [self.view addSubview:autocompleteTableView];
     
-    self.itemNames = [[NSMutableArray alloc] initWithObjects:@"lunch",@"train",@"bus", @"dorm", @"room",@"burger",@"breakfast", @"dinner",@"beers", @"drinks", nil];
+    
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:autocompleteTableView];
+    
+    //create the list of names with a method call
+    self.itemNames = [self createAutocompleteList: [textField tag]];
+    
     self.autocompleteNames = [[NSMutableArray alloc] init];
 }
 
@@ -253,7 +280,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    itemNameField.text = selectedCell.textLabel.text;
+    
+    if([itemNameField isEditing]) {
+        itemNameField.text = selectedCell.textLabel.text;
+    }
+    if([placeNameField isEditing]) {
+      placeNameField.text = selectedCell.textLabel.text;
+    }
+    
     autocompleteTableView.hidden = YES; 
 }
 
@@ -337,6 +371,44 @@
     
    [self dismissViewControllerAnimated:YES completion:nil];
  
+}
+
+-(NSMutableArray*) createAutocompleteList: (int) textFieldTag {
+    
+    NSMutableArray *autoList;
+    
+    NSArray *categoryNames = [[NSArray alloc] initWithObjects:@"Accommodation", @"Food", @"Travel", @"Entertainment", @"Shopping", nil];
+    
+    NSString *category = [[btnView categoryLabel]text];
+    
+    NSLog(@"%@", category);
+    
+    if(textFieldTag == 0) {
+        
+    if ([category isEqualToString:[categoryNames objectAtIndex:0]]) {
+        autoList = [[NSMutableArray alloc]initWithObjects:@"dorm",@"room", nil];
+        
+    }   else if ([category isEqualToString:[categoryNames objectAtIndex:1]]) {
+        autoList = [[NSMutableArray alloc]initWithObjects:@"burger", @"lunch",@"breakfast", @"dinner", nil];
+        
+    }   else if ([category isEqualToString:[categoryNames objectAtIndex:2]]) {
+        autoList = [[NSMutableArray alloc]initWithObjects:@"bus", @"train",nil];
+        
+    }   else if ([category isEqualToString:[categoryNames objectAtIndex:3]]) {
+        autoList = [[NSMutableArray alloc]initWithObjects:@"beers", @"drinks", nil];
+        
+    }   else {
+        autoList = [[NSMutableArray alloc]initWithObjects:@"groceries", nil];
+      }
+    } else if (textFieldTag == 1){
+        
+        //get the favourites and place in an NSMutableArray e.g
+        NSLog(@"%i", textFieldTag);
+          autoList = [[NSMutableArray alloc] initWithObjects:@"City Backpackers", @"Gerbanos", @"Zen coffee", @"YHA roma st", @"Coles Queen st Mall", nil];
+
+    }
+
+return autoList;
 }
 
 @end

@@ -33,6 +33,7 @@
 -(NSDate*) getTodaysDate;
 
 @property (weak, nonatomic) IBOutlet UIView *categoryView;
+@property CategoryButtons *btnView;
 
 @property (weak, nonatomic) IBOutlet StarRatingControl *starRatingControl;
 @property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
@@ -59,6 +60,7 @@
 @property (nonatomic, retain) UITableView *autocompleteTableView;
 @property (nonatomic, retain) NSMutableArray *itemNames;
 @property (nonatomic, retain) NSMutableArray *autocompleteNames;
+
 
 @end
 
