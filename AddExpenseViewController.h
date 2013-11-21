@@ -62,6 +62,8 @@
 @property (nonatomic, retain) NSMutableArray *autocompleteNames;
 
 
+-(NSMutableArray*) createAutocompleteList: (int) textFieldTag;
+
 @end
 
 

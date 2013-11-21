@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="13A598" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="mCr-fU-2cg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="12E3067" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="mCr-fU-2cg">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
@@ -369,14 +369,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="average period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFL-tn-wba">
-                                <rect key="frame" x="108" y="5" width="114" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="my average period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFL-tn-wba">
+                                <rect key="frame" x="96" y="5" width="128" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Sis-dt-Kkv"/>
-                                    <constraint firstAttribute="width" constant="114" id="wtH-kA-6Ou"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1 day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYv-W3-DDA">
@@ -422,7 +421,7 @@
                             <constraint firstItem="Gi2-Ye-mVn" firstAttribute="top" secondItem="Lrq-SD-nmY" secondAttribute="top" constant="26" id="l9s-0Q-gJL"/>
                             <constraint firstItem="J3q-m1-Gji" firstAttribute="top" secondItem="Lrq-SD-nmY" secondAttribute="top" constant="50" id="q4x-cE-Ewj"/>
                             <constraint firstItem="qFL-tn-wba" firstAttribute="top" secondItem="Lrq-SD-nmY" secondAttribute="top" constant="5" id="tGz-mr-JMI"/>
-                            <constraint firstItem="qFL-tn-wba" firstAttribute="leading" secondItem="Lrq-SD-nmY" secondAttribute="leading" constant="108" id="uax-6F-C2w"/>
+                            <constraint firstItem="qFL-tn-wba" firstAttribute="centerX" secondItem="J3q-m1-Gji" secondAttribute="centerX" type="default" id="tq8-1R-cic"/>
                             <constraint firstItem="J3q-m1-Gji" firstAttribute="centerX" secondItem="s7K-An-opO" secondAttribute="centerX" type="default" id="xEE-tG-ERN"/>
                             <constraint firstItem="kYv-W3-DDA" firstAttribute="top" secondItem="Lrq-SD-nmY" secondAttribute="top" constant="27" id="zbh-64-WGl"/>
                         </constraints>
@@ -496,14 +495,13 @@
                                     <action selector="periodChanged:" destination="86d-Iq-Kxi" eventType="valueChanged" id="Tw6-Am-6iA"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="average period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWG-Nq-NYh">
-                                <rect key="frame" x="112" y="6" width="114" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="my average period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWG-Nq-NYh">
+                                <rect key="frame" x="103" y="6" width="128" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="8Gy-3Z-cL1"/>
-                                    <constraint firstAttribute="width" constant="114" id="qRl-Fp-gaC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.1149049141740905" green="0.25715245040471318" blue="0.64113451086956519" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="30 days" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKk-eh-J1z">
@@ -567,6 +565,7 @@
                             <constraint firstAttribute="trailing" secondItem="Bw9-Ny-kx6" secondAttribute="trailing" type="default" id="Apb-eS-1lk"/>
                             <constraint firstItem="VaC-ay-Bm2" firstAttribute="top" secondItem="Iaz-B0-QsC" secondAttribute="top" constant="50" id="FEP-pm-ZhR"/>
                             <constraint firstItem="7iv-2x-ytM" firstAttribute="leading" secondItem="Iaz-B0-QsC" secondAttribute="leading" type="default" id="GaP-JE-7Ke"/>
+                            <constraint firstItem="cWG-Nq-NYh" firstAttribute="leading" secondItem="Dre-kG-85k" secondAttribute="leading" type="default" id="HrE-sz-y7R"/>
                             <constraint firstItem="nKk-eh-J1z" firstAttribute="top" secondItem="YAr-99-efX" secondAttribute="top" type="default" id="Laz-Gy-gpl"/>
                             <constraint firstItem="cWG-Nq-NYh" firstAttribute="top" secondItem="Iaz-B0-QsC" secondAttribute="top" constant="6" id="NhL-cp-u7J"/>
                             <constraint firstItem="VaC-ay-Bm2" firstAttribute="centerX" secondItem="7iv-2x-ytM" secondAttribute="centerX" type="default" id="Ofg-C4-4wC"/>
@@ -578,7 +577,6 @@
                             <constraint firstItem="Dre-kG-85k" firstAttribute="top" secondItem="Iaz-B0-QsC" secondAttribute="top" constant="28" id="bD9-wm-eaO"/>
                             <constraint firstItem="Bw9-Ny-kx6" firstAttribute="bottom" secondItem="Iaz-B0-QsC" secondAttribute="bottom" type="user" id="ckU-OD-tIF"/>
                             <constraint firstItem="YAr-99-efX" firstAttribute="top" secondItem="Iaz-B0-QsC" secondAttribute="top" constant="29" id="dUs-vk-5Um"/>
-                            <constraint firstItem="cWG-Nq-NYh" firstAttribute="leading" secondItem="Iaz-B0-QsC" secondAttribute="leading" constant="112" id="e9G-bt-M5p"/>
                             <constraint firstItem="3c7-Pk-IeF" firstAttribute="top" secondItem="Lqb-ij-Mik" secondAttribute="top" type="default" id="fpc-Nf-Fhe"/>
                             <constraint firstItem="YAr-99-efX" firstAttribute="baseline" secondItem="nKk-eh-J1z" secondAttribute="baseline" type="default" id="iwX-5S-hoC"/>
                             <constraint firstItem="Lqb-ij-Mik" firstAttribute="top" secondItem="Iaz-B0-QsC" secondAttribute="top" constant="55" id="k8u-5I-VJl"/>

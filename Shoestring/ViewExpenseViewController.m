@@ -77,8 +77,8 @@
     [amountField setDelegate:self];
     [savingTipField setDelegate:self];
     
-    //StarRating
-    _ratingLabels = [NSArray arrayWithObjects:@"Unrated", @"Hate it", @"Don't like it", @"It's OK", @"It's good", @"It's great", nil];
+    //starRatings
+    _ratingLabels = [NSArray arrayWithObjects:@"Unrated", @"not great", @"Ok", @"not bad", @"really good", @"great deal!", nil];
 	
     [itemNameField setEnabled:NO];
     [placeNameField setEnabled:NO];
@@ -252,15 +252,28 @@
 
 #pragma mark AutoComplete and UITextFieldDelegate methods
 
--(void)initialiseAutocomplete {
-    autocompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, 320, 120) style:UITableViewStylePlain];
+
+-(void)initialiseAutocomplete: (UITextField*) textField {
+    
+
+    if([textField tag] == 0){
+        autocompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, 320, 80) style:UITableViewStylePlain];
+    } else {
+        autocompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 140, 320, 80) style:UITableViewStylePlain];
+        //[btnView setHidden:YES];
+    }
     autocompleteTableView.delegate = self;
     autocompleteTableView.dataSource = self;
     autocompleteTableView.scrollEnabled = YES;
     [autocompleteTableView setHidden:YES];
     [self.view addSubview:autocompleteTableView];
     
-    self.itemNames = [[NSMutableArray alloc] initWithObjects:@"lunch",@"train",@"bus", @"dorm", @"rooom",@"burger",@"breakfast", @"dinner",@"beers", @"drinks", nil];
+    
+    AddExpenseViewController *aevc = [[AddExpenseViewController alloc]init];
+    
+    //create the list of names with a method call
+    self.itemNames = [aevc createAutocompleteList:[textField tag]];
+    
     self.autocompleteNames = [[NSMutableArray alloc] init];
 }
 

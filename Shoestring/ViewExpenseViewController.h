@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "StarRatingControl.h"
 #import "AddMapViewController.h"
+#import "AddExpenseViewController.h"
 
 @interface ViewExpenseViewController : UIViewController
 <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, CategoryButtonsDelegate, StarRatingDelegate, AddMapViewControllerDelegate>

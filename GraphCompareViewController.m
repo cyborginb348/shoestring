@@ -326,6 +326,7 @@
     if ([plot.identifier isEqual:@"my"] && idx < 5)
     {
         textStyle.fontName = @"Helvetica-Bold";
+        textStyle.color = [CPTColor blueColor];
         
         value = _averageDailyValues[idx];
     }
