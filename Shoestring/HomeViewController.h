@@ -22,4 +22,6 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *homeMapView;
 
+-(NSMutableArray*) getFavourites;
+
 @end

@@ -201,22 +201,6 @@
     [self updateFavInMapView];
     
     
-    /*****************************************************************/
-    
-    // Get the favourites
-    
-    /*NSArray *fetchedData = [_fetchedResultsController fetchedObjects];
-     NSLog(@"count fetched data: %i", [fetchedData count]);
-     
-     
-     for (Favourite *currentFavourite in fetchedData ) {
-     NSLog(@"place: %@", [currentFavourite favouritePlace]);
-     NSLog(@"latitude: %@", [currentFavourite latitude]);
-     NSLog(@"longitude: %@", [currentFavourite longitude]);
-     NSLog(@"category: %@", [currentFavourite category]);
-     }*/
-    
-    /*****************************************************************/
 }
 
 - (void)didReceiveMemoryWarning
@@ -434,5 +418,32 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+
+/*****************************************************************/
+
+// Get the favourites
+
+-(NSMutableArray*) getFavourites {
+    
+    NSMutableArray *favouritesList = [[NSMutableArray alloc] init];
+
+NSArray *fetchedData = [_favouritesResultsController fetchedObjects];
+NSLog(@"count fetched data: %i", [fetchedData count]);
+
+
+for (Favourite *currentFavourite in fetchedData ) {
+    
+    [favouritesList addObject:[currentFavourite favouritePlace]];
+    NSLog(@"place: %@", [currentFavourite favouritePlace]);
+    NSLog(@"category: %@", [currentFavourite category]);
+}
+    
+    return favouritesList;
+    
+}
+
+/*****************************************************************/
 
 @end

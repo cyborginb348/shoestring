@@ -381,30 +381,27 @@
     
     NSString *category = [[btnView categoryLabel]text];
     
-    NSLog(@"%@", category);
-    
     if(textFieldTag == 0) {
         
     if ([category isEqualToString:[categoryNames objectAtIndex:0]]) {
-        autoList = [[NSMutableArray alloc]initWithObjects:@"dorm",@"room", nil];
+        autoList = [[NSMutableArray alloc]initWithObjects:@"dorm",@"room", @"hotel", nil];
         
     }   else if ([category isEqualToString:[categoryNames objectAtIndex:1]]) {
         autoList = [[NSMutableArray alloc]initWithObjects:@"burger", @"lunch",@"breakfast", @"dinner", nil];
         
     }   else if ([category isEqualToString:[categoryNames objectAtIndex:2]]) {
-        autoList = [[NSMutableArray alloc]initWithObjects:@"bus", @"train",nil];
+        autoList = [[NSMutableArray alloc]initWithObjects:@"bus", @"train",@"ferry", nil];
         
     }   else if ([category isEqualToString:[categoryNames objectAtIndex:3]]) {
-        autoList = [[NSMutableArray alloc]initWithObjects:@"beers", @"drinks", nil];
+        autoList = [[NSMutableArray alloc]initWithObjects:@"beers", @"drinks", @"party", @"cover charge", nil];
         
     }   else {
-        autoList = [[NSMutableArray alloc]initWithObjects:@"groceries", nil];
+        autoList = [[NSMutableArray alloc]initWithObjects:@"groceries", @"personal items", @"gifts", @"souvenirs", nil];
       }
     } else if (textFieldTag == 1){
-        
+
         //get the favourites and place in an NSMutableArray e.g
-        NSLog(@"%i", textFieldTag);
-          autoList = [[NSMutableArray alloc] initWithObjects:@"City Backpackers", @"Gerbanos", @"Zen coffee", @"YHA roma st", @"Coles Queen st Mall", nil];
+         autoList = [[NSMutableArray alloc] initWithObjects:@"Aromas", @"City Backpackers", @"Gerbanos", @"Zen coffee", @"YHA roma st", @"Coles Queen st Mall", nil];
 
     }
 
